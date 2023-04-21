@@ -14,10 +14,20 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from HirePilot import views
+from rest_framework import routers
 from django.urls import path, include
+
+
+# creating a router object
+router = routers.DefaultRouter()
+
+# registering the router
+router.register(r'jobseeker', views.JobsSeekerview, 'jobseeker')
 
 
 urlpatterns = [
     # path('HirePilot/', include('HirePolot.urls')),
     path('admin/', admin.site.urls),
+    path('api/', include(router.urls))
 ]
