@@ -21,46 +21,65 @@ function App() {
       
       <body>
       <div class="grid-container">
-  <div class="grid-item">
-    
-    <form className='filerRadio'>
-      <p>Filter</p>
-  <input type='radio' id='all' name='all' value={'all'}/>
-  <label for='all'> All Jobs</label> <br></br>
-  <input type='radio' id='relevant' name='relevant' value={'relevant'}/>
-  <label for='relevant'> Most Relevant</label><br></br>
-  <input type='radio' id='recommend' name='recommend' value={'recommend'}/>
-  <label for='recommend'> Recommended Jobs</label><br></br>
-  <input type='radio' id='recent' name='recent' value={'recent'}/>
-  <label for='all'> Most Recent</label>
+  <div class="grid-item sidebar">
+ 
+  <div>
+  <p className='sideheading1'>Filter</p>
+
+  <label class="rad-label">
+    <input type="radio" class="rad-input" checked name="rad"/>
+    <div class="rad-design"></div>
+    <div class="rad-text">All Jobs</div>
+  </label>
+
+  <label class="rad-label">
+    <input type="radio" class="rad-input" name="rad"/>
+    <div class="rad-design"></div>
+    <div class="rad-text">Most Relevant</div>
+  </label>
+
+  <label class="rad-label">
+    <input type="radio" class="rad-input" name="rad"/>
+    <div class="rad-design"></div>
+    <div class="rad-text">Recommended</div>
+  </label>
+
+  <label class="rad-label">
+    <input type="radio" class="rad-input" name="rad"/>
+    <div class="rad-design"></div>
+    <div class="rad-text">Most Recent</div>
+  </label>
+
+  </div>
+
+<form>
+  <p className='sideheading2'>Select Location</p>
+  <input className='searchL' type='search' placeholder='Location...'/>
 </form>
 
 <form>
-  <p>Select Location</p>
-  <input type='search' placeholder='Location...'/>
-</form>
-
-<form>
-  <p>Type of Job</p>
+  <p className='sideheading3'>Type of Job</p>
   <select name='jobType' id='jobType'>
     <option value={'Full Time'}>Full Time</option>
     <option value={'Part Time'}>Part Time</option>
     
   </select>
 
-  <p>Type of Inustries</p>
+  <p className='sideheading4'>Type of Inustries</p>
   <select name='allIndustries' id='allIndustries'>
     <option value={'All Industries'}>All Industries</option>
     <option value={'Tech Startup'}>Tech Startup</option>
     
   </select>
 </form>
+<div className='switchbox'>
 <label class="switch">
   <input type="checkbox"/>
   <span class="slider round"></span>
 </label> <span>Full Remote</span>
+</div>
   </div> 
-  <div class="grid-item">2</div>
+  <div class="grid-item main" >2</div>
   <div class="grid-item">3</div>  
     
 </div>
