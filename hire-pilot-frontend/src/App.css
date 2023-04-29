@@ -1,38 +1,66 @@
-.App {
-  text-align: center;
+* {
+  font-family: Arial, Helvetica, sans-serif;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.topnav {
+	overflow: hidden;
+	background-color: #3AC6EA;
+	padding-left: 30px;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  
+  .topnav a {
+	float: left;
+	color: #f2f2f2;
+	text-align: center;
+	padding: 15px 16px;
+	text-decoration: none;
+	font-size: 17px;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .topnav a:hover {
+	background-color: #ddd;
+	color: black;
   }
-}
+  
+  .topnav a.active {
+	background-color: #0A2543;
+	color: white;
+  }
+  
+  .topnav-right {
+	float: right;
+	padding-right: 30px;
+  }
+
+  .search{
+	padding: 5px;
+	margin: 0.9em;
+	border-radius: 10px;
+	border: 1px solid white;
+	outline: none;
+	background: #3AC6EA;
+  }
+
+  .search:focus{
+	color: #3AC6EA;
+  }
+  
+  .search::placeholder{
+	color: white;
+  }
+
+/* Grid */
+
+.grid-container {
+	display: grid;
+	grid-template-columns: 18% auto 25%;
+	background-color: #2196F3;
+	padding: 10px;
+  }
+  .grid-item {
+	background-color: rgba(255, 255, 255, 0.8);
+	border: 1px solid rgba(0, 0, 0, 0.8);
+	padding: 20px;
+	font-size: 30px;
+	text-align: center;
+  }
+  
