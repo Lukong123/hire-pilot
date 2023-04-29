@@ -22,14 +22,44 @@ function App() {
       <body>
       <div class="grid-container">
   <div class="grid-item">
-    {/* <form className='radioFilter'>
+    
+    <form className='filerRadio'>
       <p>Filter</p>
-      <input type='radio' id='all' name='all' value={'all'}><label for='all'>All Jobs</label></input>
-      <input type='radio' id='relevant' name='relevant' value={'relevant'}><label for='relevant'>Most Relevant</label></input>
-      <input type='radio' id='reccomend' name='reccomend' value={'reccomend'}><label for='reccomend'>Recommended Jobs</label></input>
-      <input type='radio' id='recent' name='recent' value={'recent'}><label for='recent'>Most Recent</label></input>
-    </form> */}
-  </div>
+  <input type='radio' id='all' name='all' value={'all'}/>
+  <label for='all'> All Jobs</label> <br></br>
+  <input type='radio' id='relevant' name='relevant' value={'relevant'}/>
+  <label for='relevant'> Most Relevant</label><br></br>
+  <input type='radio' id='recommend' name='recommend' value={'recommend'}/>
+  <label for='recommend'> Recommended Jobs</label><br></br>
+  <input type='radio' id='recent' name='recent' value={'recent'}/>
+  <label for='all'> Most Recent</label>
+</form>
+
+<form>
+  <p>Select Location</p>
+  <input type='search' placeholder='Location...'/>
+</form>
+
+<form>
+  <p>Type of Job</p>
+  <select name='jobType' id='jobType'>
+    <option value={'Full Time'}>Full Time</option>
+    <option value={'Part Time'}>Part Time</option>
+    
+  </select>
+
+  <p>Type of Inustries</p>
+  <select name='allIndustries' id='allIndustries'>
+    <option value={'All Industries'}>All Industries</option>
+    <option value={'Tech Startup'}>Tech Startup</option>
+    
+  </select>
+</form>
+<label class="switch">
+  <input type="checkbox"/>
+  <span class="slider round"></span>
+</label> <span>Full Remote</span>
+  </div> 
   <div class="grid-item">2</div>
   <div class="grid-item">3</div>  
     
