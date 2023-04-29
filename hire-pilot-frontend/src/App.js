@@ -79,7 +79,17 @@ function App() {
 </label> <span>Full Remote</span>
 </div>
   </div> 
-  <div class="grid-item main" >2</div>
+  <div class="grid-item main" >
+    <div class='main-top'>
+      <div class='main-top-left'>
+      <p>CAREER</p>
+
+      </div>
+      <div class='main-top-right'>
+        <p>Filter</p>
+      </div>
+    </div>
+  </div>
   <div class="grid-item">3</div>  
     
 </div>

@@ -275,3 +275,18 @@ input:checked + .slider {
 .main{
 	background-color: #fafafa;
 }
+
+.main-top{
+	color: gray;
+	overflow: hidden;
+	font-size: 15px;
+}
+.main-top-left{
+	float: left;
+	padding-left: 30px;
+}
+.main-top-right{
+	float: right;
+	padding-right: 30px;
+	padding-top: 10px;
+}
