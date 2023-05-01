@@ -1,7 +1,5 @@
 import './App.css';
-// import searchSvg from './search-outline.svg';
-// import {ReactComponent as searchLogo} from './search-outline.svg';
-
+import { getFooterCopy, getFullYear } from './utils/utils';
 
 
 function App() {
@@ -317,7 +315,7 @@ function App() {
       </body>
       <footer className="footer">
         <div class='rights'>
-          c 2023
+          {getFooterCopy(true)} - {getFullYear()}
         </div>
         <div class='social'> 
           <a href='#ig'>Instagram</a>
