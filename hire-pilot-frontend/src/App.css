@@ -71,7 +71,7 @@
 
 .sideheading1{
 	font-weight: bold;
-	margin-left: -135px;
+	margin-left: -5px;
 	font-size: 17px;
 	letter-spacing: 0.5px;
 	color: #0A2543;
@@ -79,14 +79,14 @@
 
 .sideheading2{
 	font-weight: bold;
-	margin-left: -50px;
+	margin-left: -5px;
 	font-size: 17px;
 	letter-spacing: 0.5px;
 	color: #0A2543;
 }
 .sideheading3{
 	font-weight: bold;
-	margin-left: -90px;
+	margin-left: -5px;
 	font-size: 17px;
 	letter-spacing: 0.5px;
 	color: #0A2543;
@@ -94,7 +94,7 @@
 
 .sideheading4{
 	font-weight: bold;
-	margin-left: -50px;
+	margin-left: -5px;
 	font-size: 17px;
 	letter-spacing: 0.5px;
 	color: #0A2543;
@@ -473,4 +473,145 @@ input:checked + .slider {
 	color: #3AC6EA;
 	font-weight: bold;
 	margin-left: 50%;
+  }
+
+  /* ==================== right sidebar============== */
+
+  .thirdt-right{
+	font-weight: bold;
+	margin-top: 20px;
+
+  }
+
+  .thirdt-right .dot{
+	margin-left: 100px;
+  }
+
+  .right-bar .contut{
+	border: 1px solid gray;
+	width: 70%;
+	display: flex;
+	flex-direction: row;
+	padding: 5px;
+
+  }
+
+
+  .two-box{
+	display: grid;
+	grid-template-columns: 50% 50%;
+	width: fit-content;
+	margin-top: 20px;
+
+  }
+
+  .one{
+	margin-left: -5px;
+	border: 1px solid gray;
+	border-radius: 5px;
+
+	/* float: left; */
+
+  }
+  .two{
+	margin-left: 5px;
+	border: 1px solid gray;
+	border-radius: 5px;
+
+
+  }
+
+ 
+
+  .two-box .dot{
+	float: right;
+  }
+
+  
+
+  .category{
+	color: gray;
+	font-size: smaller;
+	font-weight: bold;
+	margin-top: 30px;
+	padding-left: 10px ;
+  }
+
+  .number{
+	font-size: small;
+	margin-top: 0px;
+	/* margin-right: 90px; */
+	float: left;
+	padding-left: 10px;
+  }
+
+  .see-all-t{
+	float: right;
+	color: #3AC6EA;
+  }
+
+  .hr{
+	margin-top: 60px;
+  }
+
+  .top-comp{
+	font-weight: bold;
+	color: #0A2543;
+  }
+
+  .top-com .companyName{
+	font-size: 15px;
+	font-weight: 300;
+  }
+
+  .top-com .cont{
+	background-color: #0A2543;
+	color: white;
+	padding-top: 20px;
+	padding-left: 15px;
+	margin-top: 30px;
+	border-radius: 5px;
+  }
+
+  .top-com .cont p{
+	font-size: 15px;
+  }
+
+  .top-com .cont p:first-of-type{
+	font-size: 30px;
+
+  }
+
+  .top-com .cont input[type=email]{
+	width: 230px;
+	height: 30px;
+	border: 1px solid white;
+	border-radius: 5px;
+	margin-bottom: 50px;
+  }
+
+  /* ===================Footer====== */
+  footer{
+	display: grid;
+	grid-template-columns: 20% 50% 30%;
+  }
+
+  .rights{
+	float: right;
+	margin-left: 150px;                                                   
+  }
+
+  .social a{
+	text-decoration: none;
+	color: gray;
+	text-align: center;
+	padding: 10px;
+	margin-left: 100px;
+
+  }
+
+  .foot-nav a{
+	text-decoration: none;
+	color: gray;
+	padding: 10px;
   }
