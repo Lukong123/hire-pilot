@@ -23,7 +23,7 @@ from django.urls import path, include
 router = routers.DefaultRouter()
 
 # registering the router
-router.register(r'jobseeker', views.JobsSeekerview, 'jobseeker')
+# router.register(r'jobseeker', views.JobsSeekerview, 'jobseeker')
 
 
 urlpatterns = [

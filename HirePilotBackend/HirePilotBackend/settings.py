@@ -40,7 +40,18 @@ INSTALLED_APPS = [
     'HirePilot',
     'corsheaders',
     'rest_framework',
+    'crispy_forms',
+    'rest_framework_simplejwt',
+    # 'HirePilot.apps.'
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# Rest framework
+REST_FRAMEWORK = {
+'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
+'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework_simplejwt.authentication.JWTAuthentication',)
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -131,3 +142,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
 )
+
+AUTH_USER_MODEL = 'HirePilot.UserProfile' # using auth_user_model = 'HirePilotBackend.User' gives wrong

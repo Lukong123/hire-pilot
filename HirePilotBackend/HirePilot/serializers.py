@@ -2,6 +2,8 @@ from rest_framework import serializers
 
 from .models import *
 
+
+
 class JobSeekerSerializer(serializers.ModelSerializer):
 
     class Meta:
