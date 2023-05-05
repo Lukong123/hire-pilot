@@ -1,0 +1,25 @@
+/* ===================Footer====== */
+footer{
+	display: grid;
+	grid-template-columns: 20% 50% 30%;
+  }
+
+  .rights{
+	float: right;
+	margin-left: 50px;                                                   
+  }
+
+  .social a{
+	text-decoration: none;
+	color: gray;
+	text-align: center;
+	padding: 10px;
+	margin-left: 100px;
+
+  }
+
+  .foot-nav a{
+	text-decoration: none;
+	color: gray;
+	padding: 10px;
+  }

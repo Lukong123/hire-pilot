@@ -1,0 +1,46 @@
+.topnav {
+	overflow: hidden;
+	background-color: #3AC6EA;
+	padding-left: 30px;
+  }
+  
+  .topnav a {
+	float: left;
+	color: #f2f2f2;
+	text-align: center;
+	padding: 15px 16px;
+	text-decoration: none;
+	font-size: 17px;
+  }
+  
+  .topnav a:hover {
+	background-color: #ddd;
+	color: black;
+  }
+  
+  .topnav a.active {
+	background-color: #0A2543;
+	color: white;
+  }
+  
+  .topnav-right {
+	float: right;
+	padding-right: 30px;
+  }
+
+  .search{
+	padding: 5px;
+	margin: 0.9em;
+	border-radius: 10px;
+	border: 1px solid white;
+	outline: none;
+	background: #3AC6EA;
+  }
+
+  .search:focus{
+	color: #3AC6EA;
+  }
+  
+  .search::placeholder{
+	color: white;
+  }
