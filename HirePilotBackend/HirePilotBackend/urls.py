@@ -17,10 +17,11 @@ from django.contrib import admin
 from HirePilot import views
 from rest_framework import routers
 from django.urls import path, include
-
+# from authentication imp
+import authentication
 
 # creating a router object
-router = routers.DefaultRouter()
+# router = routers.DefaultRouter()
 
 # registering the router
 # router.register(r'jobseeker', views.JobsSeekerview, 'jobseeker')
@@ -29,5 +30,7 @@ router = routers.DefaultRouter()
 urlpatterns = [
     # path('HirePilot/', include('HirePolot.urls')),
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls))
+    path('auth/', include('authentication.urls',
+              namespace='authentication'))
+    # path('api/', include(router.urls))
 ]

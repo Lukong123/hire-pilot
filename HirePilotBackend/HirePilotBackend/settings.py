@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+import datetime
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'crispy_forms',
+    'authentication',
     'rest_framework_simplejwt',
     # 'HirePilot.apps.'
 ]
@@ -51,6 +53,12 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 REST_FRAMEWORK = {
 'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
 'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework_simplejwt.authentication.JWTAuthentication',)
+}
+
+# JWT
+SIMPLE_JWT = {
+     'ACCESS_TOKEN_LIFETIME': datetime.timedelta(minutes=30),
+     'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=1),
 }
 
 MIDDLEWARE = [
