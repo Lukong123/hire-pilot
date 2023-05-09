@@ -10,7 +10,7 @@ function Header() {
   <input className='search' type='search' placeholder='Search'/> 
   <div class="topnav-right">
     <a class='active' href="#search">My Jobs</a>
-    <a href="#about">Login</a>
+    <a href="/login">Login</a>
     <a href="#about">SignUp</a>
 
   </div>
