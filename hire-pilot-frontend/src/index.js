@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import Login from './Login/Login';
-import reportWebVitals from './reportWebVitals';
+// import reportWebVitals from './reportWebVitals';
 import Layout from './Layout/layout';
 
 // const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -26,7 +26,7 @@ export default function Appp() {
     <BrowserRouter>
     <Routes>
       <Route path='/' element={<Layout />}>
-        <Route index element={<App />}/>
+        <Route index element={<App />} />
         <Route path='login' element={<Login />} />
       </Route>
     </Routes>

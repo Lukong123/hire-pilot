@@ -5,19 +5,29 @@ import Footer from './Footer/Footer';
 import Sidebar from './Sidebar/Sidebar';
 import Rightbar  from './Right-Sidebar/Rightbar';
 import Jobs from './Jobs/Jobs';
+import SignupChoice from './Modal/SignupChoice';
 
 
 function App() {
   return (
     <React.Fragment>
       <div className="App">
-        <Header/>
+        {/* <Header/> */}
       
       <body>
       <div class="grid-container">
         <Sidebar/>
         <Jobs/>
+
         <Rightbar/>
+        <div>From here the Modal
+
+          <button onClick={e => {
+            this.showModal();
+          }}>Show Modal</button>
+
+         
+        </div>
    
   
   

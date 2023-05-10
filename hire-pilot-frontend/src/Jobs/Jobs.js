@@ -1,11 +1,16 @@
 import React from "react";
 import './Jobs.css';
+// import SignupChoice from '../Modal/SignupChoice';
+
 
 function Jobs() {
+  // const [openModal, setOpenModal] = useState(false);
     return(
         <div class="grid-item main" >
     <div class='main-top'>
       <div class='main-top-left'>
+      {/* <SignupChoice/> */}
+
       <p>CAREER</p>
 
       </div>
