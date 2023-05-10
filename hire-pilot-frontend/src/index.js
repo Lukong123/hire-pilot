@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import Login from './Login/Login';
+import DashboardEmployer from './DashboardEmployer/DashboardEmployer';
 // import reportWebVitals from './reportWebVitals';
 import Layout from './Layout/layout';
 
@@ -28,6 +29,8 @@ export default function Appp() {
       <Route path='/' element={<Layout />}>
         <Route index element={<App />} />
         <Route path='login' element={<Login />} />
+        <Route path='dashboardemployer' element={<DashboardEmployer />} />
+
       </Route>
     </Routes>
     </BrowserRouter>
