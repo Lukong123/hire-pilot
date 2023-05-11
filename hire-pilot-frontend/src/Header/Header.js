@@ -13,7 +13,7 @@ function Header() {
   <a href="#news">Hire Pilot</a>
   <input className='search' type='search' placeholder='Search'/> 
   <div class="topnav-right">
-    <a class='active' href="/App">My Jobs</a>
+    <a class='active' href="/main">My Jobs</a>
     <a href="/login">Login</a>
     <a href="/dashboardemployer">Login emp</a>
 

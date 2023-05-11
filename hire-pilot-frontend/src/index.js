@@ -29,6 +29,7 @@ export default function Appp() {
       <Route path='/' element={<Layout />}>
         <Route index element={<App />} />
         <Route path='login' element={<Login />} />
+        <Route path='main' element={<App />} />
         <Route path='dashboardemployer' element={<DashboardEmployer />} />
 
       </Route>

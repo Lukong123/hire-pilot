@@ -6,7 +6,7 @@
 
 .grid-container {
 	display: grid;
-	grid-template-columns: 18% auto 25%;
+	grid-template-columns: 18% 30% 15%;
 	/* background-color: #2196F3; */
 	padding: 10px;
   }
