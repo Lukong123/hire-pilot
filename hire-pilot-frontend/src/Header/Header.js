@@ -3,10 +3,13 @@ import React, { useState } from "react";
 import './Header.css';
 import '../Jobs/Jobs';
 import SignupChoice from '../Modal/SignupChoice';
+import Login from '../Login/Login';
 
 
 function Header() {
   const [openModal, setOpenModal] = useState(false);
+  const [openLogin, setOpenLogin] = useState(false);
+
     return(
         <div class="topnav">
   <a  href="/khome">Logo</a>
@@ -15,7 +18,12 @@ function Header() {
   <div class="topnav-right">
     <a class='active' href="/">My Jobs</a>
     <a href="/dashboardemployer">Login Emp</a>
-    <a href="/login">Login</a>
+    <div><button className="openLoginBtn" onClick={() => {
+      setOpenLogin(true);
+    }}> Login</button>
+    {openLogin && <Login closeLogin={setOpenLogin}/>}
+    </div>
+
     <div><button className="openModalBtn" onClick={() => {
       setOpenModal(true);
     }}> Signup</button>
