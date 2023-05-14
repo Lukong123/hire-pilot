@@ -1,46 +1,36 @@
-// import React from 'react';
-import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import React from 'react';
+// import './Login.css';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+import Sidebar from '../Sidebar/Sidebar';
+import Rightbar  from '../Right-Sidebar/Rightbar';
+import Jobs from '../Jobs/Jobs';
+import SignupChoice from '../Modal/SignupChoice';
 
 
+function Login() {
+  return (
+    <React.Fragment>
+      <div className="Login">
+        {/* <Header/> */}
+      
+      <body>
+      <div class="grid-container">
+        {/* <Sidebar/>
+        <Jobs/>
+        <Rightbar/>     */}
+        <div>one</div>
+        <div>one</div>
+        <div>one</div>
 
-function Login(){
-    return(
-        <div>
-            Login
-        </div>
-    )
+</div>
+      </body>
+      <Footer/>
+     
+    </div>
+    </React.Fragment>
+    
+  );
 }
-// function Login() {
-//     const [show, setShow] = useState(false);
-
-//     const handleClose = () => setShow(false);
-//     const handleShow = () => setShow(true);
-//     return (
-      
-      
-//           <>
-//             <Button variant="primary" onClick={handleShow}>
-//               Launch demo modal
-//             </Button>
-      
-//             <Modal show={show} onHide={handleClose}>
-//               <Modal.Header closeButton>
-//                 <Modal.Title>Modal heading</Modal.Title>
-//               </Modal.Header>
-//               <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-//               <Modal.Footer>
-//                 <Button variant="secondary" onClick={handleClose}>
-//                   Close
-//                 </Button>
-//                 <Button variant="primary" onClick={handleClose}>
-//                   Save Changes
-//                 </Button>
-//               </Modal.Footer>
-//             </Modal>
-//           </>
-//     );
-// }
 
 export default Login;

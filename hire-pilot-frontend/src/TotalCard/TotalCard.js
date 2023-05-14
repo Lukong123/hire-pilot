@@ -1,5 +1,5 @@
 import React from "react";
-import './TotalCard.css';
+// import './TotalCard.css';
 
 
 function TotalCard() {

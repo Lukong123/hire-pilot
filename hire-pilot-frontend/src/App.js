@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+// import './App.css';
 import Header from './Header/Header';
 import Footer from './Footer/Footer';
 import Sidebar from './Sidebar/Sidebar';
@@ -18,14 +18,7 @@ function App() {
       <div class="grid-container">
         <Sidebar/>
         <Jobs/>
-        <Rightbar/>
-
-
-      
-   
-  
-  
-    
+        <Rightbar/>    
 </div>
       </body>
       <Footer/>

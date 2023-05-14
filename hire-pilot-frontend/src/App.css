@@ -4,18 +4,16 @@
 
 /* Grid */
 
-.grid-container {
+/* .grid-container {
 	display: grid;
-	grid-template-columns: 18% 30% 15%;
-	/* background-color: #2196F3; */
+	grid-template-columns: auto auto auto;
 	padding: 10px;
   }
   .grid-item {
 	background-color: rgba(255, 255, 255, 0.8);
-	/* border: 1px solid rgba(0, 0, 0, 0.8); */
 	padding: 10px;
 	font-size: 18px;
-  }
+  } */
   
 /* Sidebar */
 

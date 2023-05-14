@@ -1,5 +1,5 @@
 import React from "react";
-import './Footer.css';
+// import './Footer.css';
 // import { getFooterCopy, getFullYear } from './utils/utils';
 import {getFooterCopy, getFullYear } from '../utils/utils';
 
