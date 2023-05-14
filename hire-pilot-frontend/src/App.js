@@ -20,17 +20,6 @@ function App() {
         <Jobs/>
 
         <Rightbar/>
-        <div>From here the Modal
-
-          <button onClick={e => {
-            this.showModal();
-          }}>Show Modal</button>
-
-         
-        </div>
-   
-  
-  
     
 </div>
       </body>
