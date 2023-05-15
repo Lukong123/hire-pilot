@@ -28,7 +28,7 @@ import authentication
 
 
 urlpatterns = [
-    # path('HirePilot/', include('HirePolot.urls')),
+    path('HirePilot/', include('HirePilot.urls')),
     path('admin/', admin.site.urls),
     # path('auth/', include('authentication.urls',
     #           namespace='authentication')), #this could be causing me problems
