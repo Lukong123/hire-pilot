@@ -32,6 +32,7 @@ function AddJob({closeModal}) {
                 </div>
                 <div className="body">
                 </div>
+
             </div>
         </div>
     )

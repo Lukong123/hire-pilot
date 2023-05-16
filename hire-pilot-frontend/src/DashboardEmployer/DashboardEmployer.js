@@ -38,18 +38,19 @@ function DashboardEmployer() {
     </div>
 </div>
 
+        
       <div class="grid-container">
         <Sidebar/>
         <Jobs/>
-
-
+  
+    
 </div>
       </body>
       <Footer/>
-
+     
     </div>
     </React.Fragment>
-
+    
   );
 }
 
