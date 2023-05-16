@@ -18,7 +18,7 @@ from HirePilot import views
 # from rest_framework import routers
 from django.urls import path, include
 # from authentication imp
-import authentication
+# import authentication
 
 # creating a router object
 # router = routers.DefaultRouter()
