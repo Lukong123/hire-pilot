@@ -1,45 +1,8 @@
-<<<<<<< HEAD
-import React from 'react';
-// import './Login.css';
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
-import Sidebar from '../Sidebar/Sidebar';
-import Rightbar  from '../Right-Sidebar/Rightbar';
-import Jobs from '../Jobs/Jobs';
-import SignupChoice from '../Modal/SignupChoice';
-=======
 // import React from 'react';
 import React from 'react';
 import './Login.css';
->>>>>>> 35e729ac1e491b98424d97155050d3adb765a428
 
 
-function Login() {
-  return (
-    <React.Fragment>
-      <div className="Login">
-        {/* <Header/> */}
-      
-      <body>
-      <div class="grid-container">
-        {/* <Sidebar/>
-        <Jobs/>
-        <Rightbar/>     */}
-        <div>one</div>
-        <div>one</div>
-        <div>one</div>
-
-<<<<<<< HEAD
-</div>
-      </body>
-      <Footer/>
-     
-    </div>
-    </React.Fragment>
-    
-  );
-}
-=======
 function Login({closeLogin}){
     return(
         <div className="modalBackground">
@@ -70,6 +33,5 @@ function Login({closeLogin}){
     )
 }
 
->>>>>>> 35e729ac1e491b98424d97155050d3adb765a428
 
 export default Login;

@@ -1,5 +1,5 @@
 import React from "react";
-// import './Rightbar.css';
+import './Rightbar.css';
 
 function Rightbar() {
     return(

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-// import './Header.css';
+import './Header.css';
 import '../Jobs/Jobs';
 import SignupChoice from '../Modal/SignupChoice';
 import Login from '../Login/Login';

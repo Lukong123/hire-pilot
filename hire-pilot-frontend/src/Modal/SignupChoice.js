@@ -1,10 +1,5 @@
 import React from "react";
-<<<<<<< HEAD
-// import './SignupChoice.css';
-
-=======
 import './SignupChoice.css';
->>>>>>> 35e729ac1e491b98424d97155050d3adb765a428
 
 
 function SignupChoice({closeModal}) {
