@@ -13,7 +13,7 @@ function DashboardEmployer() {
     <React.Fragment>
       <div className="App">
         {/* <Header/> */}
-      
+
       <body>
 
 
@@ -24,6 +24,7 @@ function DashboardEmployer() {
     {openModal && <AddJob closeModal={setOpenModal}/>}
     </div>
 </div>
+
         
       <div class="grid-container">
         <Sidebar/>

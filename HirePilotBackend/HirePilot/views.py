@@ -1,56 +1,67 @@
-# from django.shortcuts import render
-# from rest_framework import viewsets
-# from .serializers import JobSeekerSerializer
-# from .models import JobSeeker
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .models import Jobs
+from .serializers import JobsSerializer
+from rest_framework import serializers
+from rest_framework import status
+from django.shortcuts import get_object_or_404
 
-# # Create your views here
+@api_view(['GET'])
+def ApiOverview(request):
+    api_urls = {
+        'all_jobs': '/alljobs',
+        'Search by Category': '/?category=category_name',
+        'Add': '/create',
+        'Update': '/update/pk',
+        'Delete': '/item/pk/delete'
+    }
 
-# from django.shortcuts import render
+    return Response(api_urls)
 
-# from django.shortcuts import render, redirect
-# from django.contrib.auth import authenticate, login as auth_login, logout
-# from django.contrib import messages
-# from django.contrib.auth.forms import AuthenticationForm
-# from django.shortcuts import render
+@api_view(['POST'])
+def add_jobs(request):
+    job = JobsSerializer(data=request.data)
 
-# from django.contrib.auth.mixins import LoginRequiredMixin
-# from django.views.generic import ListView
-# from django.views.generic.edit import CreateView, UpdateView
-# from django.urls import reverse
-
-# from .models import User
-# from .forms import RegistrationForm
-
-
-# class RegistrationView(CreateView):
-#     template_name = 'registration/register.html'
-#     form_class = RegistrationForm
-
-#     def get_context_data(self, *args, **kwargs):
-#         context = super(RegistrationView, self).get_context_data(*args, **kwargs)
-#         context['next'] = self.request.GET.get('next')
-#         return context
-
-#     def get_success_url(self):
-#         next_url = self.request.POST.get('next')
-#         success_url = reverse('login')
-#         if next_url:
-#             success_url += '?next={}'.format(next_url)
-
-#         return success_url
-
-
-# class ProfileView(UpdateView):
-#     model = User
-#     fields = ['name', 'location','picture']
-#     template_name = 'registration/profile.html'
-
-#     def get_success_url(self):
-#         return reverse('index')
-
-#     def get_object(self):
-#         return self.request.user
+    if Jobs.objects.filter(**request.data).exists():
+        raise serializers.ValidationError('This data already exists')
     
-# class JobsSeekerview(viewsets.ModelViewSet):
-#     serializer_class = JobSeekerSerializer
-#     queryset = JobSeeker.objects.all()
+    if job.is_valid():
+        job.save()
+        return Response(job.data)
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+
+@api_view(['GET'])
+def view_jobs(request):
+    if request.query_params:
+        jobs = Jobs.objects.filter(**request.query_params.dict())
+    else:
+        jobs = Jobs.objects.all()
+    
+
+    if jobs:
+        serializer = JobsSerializer(jobs, many=True)
+        return Response(serializer.data)
+    
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+
+@api_view(['POST'])
+def update_jobs(request, pk):
+    job = Jobs.objects.get(pk=pk)
+    data = JobsSerializer(instance=job, data=request.data)
+
+    if data.is_valid():
+        data.save()
+        return Response(data.data)
+    
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+@api_view(['DELETE'])
+def delete_jobs(request, pk):
+    job = get_object_or_404(Jobs, pk=pk)
+    job.delete()
+    return Response(status=status.HTTP_202_ACCEPTED)

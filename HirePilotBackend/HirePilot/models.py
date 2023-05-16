@@ -143,3 +143,38 @@ class UserProfile(AbstractBaseUser):
      
      def has_module_perms(self, app_label):
           return True
+
+
+class Jobs(models.Model):
+
+    Full_time= 'Full Time'
+    Part_time = 'Part Time'
+
+    fulltime_parttime = [
+        (Full_time, 'Full Time'),
+        (Part_time, 'Part Time'),
+       ]
+
+    Offline= 'Offline'
+    Remote = 'Remote'
+
+    offlineorremote = [
+        (Offline, 'Offline'),
+        (Remote, 'Remote'),
+       ]
+
+
+
+    title = models.CharField(max_length=30)
+    category = models.CharField(max_length=30)
+    location = models.CharField(max_length=30)
+    fulltime_partime = models.CharField(max_length=10, choices=fulltime_parttime, default=Full_time)
+    offline_remote = models.CharField(max_length=7, choices=offlineorremote, default=Offline)
+    submission_deadline = models.DateField(max_length=30)
+    selection_step = models.PositiveIntegerField()
+    salary_range = models.CharField(max_length=30)
+    description = models.CharField(max_length=100)
+    date_created = models.DateField('date created', default=timezone.now)
+
+    def __str__(self):
+        return self.title

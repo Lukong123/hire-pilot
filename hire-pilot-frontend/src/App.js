@@ -18,7 +18,9 @@ function App() {
       <div class="grid-container">
         <Sidebar/>
         <Jobs/>
-        <Rightbar/>    
+
+        <Rightbar/>
+    
 </div>
       </body>
       <Footer/>
