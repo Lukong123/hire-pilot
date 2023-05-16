@@ -1,46 +1,38 @@
 // import React from 'react';
-import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import React from 'react';
+import './Login.css';
 
 
 
-function Login(){
+function Login({closeLogin}){
     return(
-        <div>
-            Login
+        <div className="modalBackground">
+            <div className="modalContainer">
+                <div className="titleClosedBtn">
+                <button onClick={() => closeLogin(false)}>X</button>
+                </div>
+                <div className="title">
+                <p>Logo</p>
+                <h2>Welcome to Hire Pilot</h2>
+                </div>
+                <div className="body-login">
+                    <p className='bodytitle'>LOGIN</p>
+
+                    <input type='email' placeholder='Enter Your Email'/> <br></br>
+                    <input type='password' placeholder='Enter Your Password'/>
+
+                    <p><a href='#pass'className='forgotPass'>Forgot Password?</a></p>
+                    <button className="loginbtn"><a href='#login'>Login</a></button> <br></br>
+
+                </div>
+                <div className="footer">
+                    <p className='donthaveaccount'>Don't yet have an account? <span> <a href='#create' className='create'>Create Account</a></span></p>
+                </div>
+
+            </div>
         </div>
     )
 }
-// function Login() {
-//     const [show, setShow] = useState(false);
 
-//     const handleClose = () => setShow(false);
-//     const handleShow = () => setShow(true);
-//     return (
-      
-      
-//           <>
-//             <Button variant="primary" onClick={handleShow}>
-//               Launch demo modal
-//             </Button>
-      
-//             <Modal show={show} onHide={handleClose}>
-//               <Modal.Header closeButton>
-//                 <Modal.Title>Modal heading</Modal.Title>
-//               </Modal.Header>
-//               <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-//               <Modal.Footer>
-//                 <Button variant="secondary" onClick={handleClose}>
-//                   Close
-//                 </Button>
-//                 <Button variant="primary" onClick={handleClose}>
-//                   Save Changes
-//                 </Button>
-//               </Modal.Footer>
-//             </Modal>
-//           </>
-//     );
-// }
 
 export default Login;

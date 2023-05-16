@@ -1,30 +1,24 @@
-* {
-    font-family: Arial, Helvetica, sans-serif;
-  }
+signup choice.css
 
-  /* Grid */
 
-  .grid-container {
-      display: grid;
-      /* grid-template-columns: 18% auto; */
+.modalBackground{
+    position: absolute;
+}
 
-      /* background-color: #2196F3; */
-      padding: 10px;
-    }
-    .grid-item {
-      background-color: rgba(255, 255, 255, 0.8);
-      /* border: 1px solid rgba(0, 0, 0, 0.8); */
-      padding: 10px;
-      font-size: 18px;
-    }
 
-  /* Flex Container */
-  .flex-container {
+/* .modalContainer{
+    position: absolute;
+} */
+
+
+TotalCard.css
+/* Flex Container */
+.flex-container {
     display: flex;
     flex-wrap: nowrap;
     background-color: wheat;
   }
-
+  
   .flex-container > div {
     width: 250px;
     margin: 10px;
@@ -71,3 +65,30 @@
       color: white;
       font-weight: bold;
     }
+
+
+
+//Total Card.jsimport React from "react";
+// import './TotalCard.css';
+
+
+function TotalCard() {
+    return(
+        <div class="flex-container">
+  <div className='card blue'>
+    <p><a href='#totaljobs'>Total Jobs</a></p>
+    <p>40</p>
+  </div>
+  <div className='card blueblack '>
+  <p><a href='#totaljobs'>Total Applicants</a></p>
+    <p>20</p>
+  </div>
+  <div className='card yellow'>
+  <p><a href='#totaljobs'>Interviews</a></p>
+    <p>10</p></div>  
+
+</div>
+    )
+}
+
+export default TotalCard;

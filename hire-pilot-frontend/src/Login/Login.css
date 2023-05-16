@@ -1,0 +1,118 @@
+.modalBackground{
+    position: absolute;
+    
+    z-index: 1;/* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); 
+
+
+}
+
+.modalContainer{
+    width: 55%;
+    height: 500px;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: rgba(0,0,0,0.35) 0px 5px 15px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 25%;
+}
+
+.modalContainer .title{
+    display: inline-block;
+    text-align: center;
+}
+
+.titleClosedBtn{
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+.titleClosedBtn button{
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.modalContainer .body-login{
+    /* flex: 50%; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    font-size: 1.7rem;
+    padding-left: 20%;
+    /* text-align: center; */
+
+
+}
+
+
+.body-login .bodytitle{
+    font-size: 15px;
+}
+
+input[type=email], input[type=password], input[type=text], select{
+    width: 400px;
+    height: 35px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    margin-bottom: 15px;
+
+}
+
+.body-login .forgotPass{ /* =================not working*/
+    float: right;
+    color: #3AC6EA;
+    font-size: 14px;
+    padding-right: 100px;
+    padding-bottom: -80px;
+}
+
+
+
+.body-login button{
+    width: 400px;
+    height: 40px;
+    margin: 10px;
+    border-radius: 5px;
+    background-color: #3AC6EA;
+    border: 1px solid #3AC6EA;
+}
+
+.body-login button:hover{
+    background-color: #0A2543;
+    border: 1px solid #0A2543;
+    color: white;
+}
+
+.body-login button a{
+    color: white;
+    cursor: pointer;
+    text-align: center;
+}
+
+
+
+
+
+
+.modalContainer .footer p span a{
+    color: #3AC6EA;
+    text-decoration: none;
+}
+
+.donthaveaccount{
+    /* flex: 20%;
+    display: flex; */
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+}
