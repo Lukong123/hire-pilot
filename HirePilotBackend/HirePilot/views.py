@@ -9,7 +9,7 @@ from django.shortcuts import get_object_or_404
 @api_view(['GET'])
 def ApiOverview(request):
     api_urls = {
-        'all_jobs': '/',
+        'all_jobs': '/alljobs',
         'Search by Category': '/?category=category_name',
         'Add': '/create',
         'Update': '/update/pk',
@@ -50,7 +50,7 @@ def view_jobs(request):
 
 @api_view(['POST'])
 def update_jobs(request, pk):
-    job = Jobs.objects.get(pk)
+    job = Jobs.objects.get(pk=pk)
     data = JobsSerializer(instance=job, data=request.data)
 
     if data.is_valid():
