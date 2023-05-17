@@ -9,6 +9,7 @@ class JobsSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Jobs
 		fields = ( 
+			'pk',
 			'title',
 			'category',
 			'location',
@@ -19,10 +20,3 @@ class JobsSerializer(serializers.ModelSerializer):
 			'salary_range','description',
 			'date_created' )
 
-
-
-# class JobSeekerSerializer(serializers.ModelSerializer):
-
-#     class Meta:
-#         model = JobSeeker
-#         fields = ('first_name', 'last_name', 'email', 'location', 'phone')
