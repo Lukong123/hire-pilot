@@ -186,3 +186,17 @@ class Resume(models.Model):
     name = models.CharField(max_length= 20)
     resume = models.FileField(upload_to='Candidates/Documents')
     uploaded_at = models.DateTimeField(auto_now=True)
+
+
+class Criteria(models.Modle):
+    job_name = models.ForeignKey(Jobs)
+    skill = models.CharField(max_length=200)
+    degree = models.CharField(max_length=200)
+    experience = models.CharField(max_length=200)
+    language = models.CharField(max_length=200)
+    age = models.CharField(max_length=200)
+
+
+
+    
+    
