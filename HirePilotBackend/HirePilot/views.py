@@ -1,10 +1,13 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import Jobs
-from .serializers import JobsSerializer
+from rest_framework.viewsets import ViewSet
+
+from .forms import ResumeForm
+from .models import Jobs, Res
+from .serializers import JobsSerializer, UploadSerializer, NewUploadSerializer
 from rest_framework import serializers
 from rest_framework import status
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect, render
 
 @api_view(['GET'])
 def ApiOverview(request):
@@ -65,3 +68,41 @@ def delete_jobs(request, pk):
     job = get_object_or_404(Jobs, pk=pk)
     job.delete()
     return Response(status=status.HTTP_202_ACCEPTED)
+
+# uploading resume
+def model_form_upload(request):
+    if request.method == 'POST':
+        form = ResumeForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = ResumeForm()
+    return render(request, 'model_form_upload.html', {
+        'form': form
+    })
+
+# ViewSets define the view behavior.
+class UploadViewSet(ViewSet):
+    serializer_class = UploadSerializer
+
+    def list(self, request):
+        return Response("GET API")
+
+    def create(self, request):
+        file_uploaded = request.FILES.get('file_uploaded')
+        content_type = file_uploaded.content_type
+        response = "POST API and you have uploaded a {} file".format(content_type)
+        return Response(response)
+    
+class NewUploadViewSet(ViewSet):
+    serializer_class = NewUploadSerializer
+
+    def list(self, request):
+        return Response("GET API")
+
+    def create(self, request):
+        file_uploaded = request.FILES.get('file_uploaded')
+        content_type = file_uploaded.content_type
+        response = "POST API and you have uploaded a {} file".format(content_type)
+        return Response(response)

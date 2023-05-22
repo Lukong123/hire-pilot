@@ -9,5 +9,7 @@ from .models import *
 UserProfile = get_user_model()
 admin.site.register(UserProfile)
 admin.site.register(Jobs)
+admin.site.register(Resume)
+
 
 

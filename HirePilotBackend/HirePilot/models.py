@@ -180,3 +180,9 @@ class Jobs(models.Model):
         return self.title
     
  
+
+
+class Resume(models.Model):
+    name = models.CharField(max_length= 20)
+    resume = models.FileField(upload_to='Candidates/Documents')
+    uploaded_at = models.DateTimeField(auto_now=True)

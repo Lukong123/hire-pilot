@@ -1,9 +1,8 @@
 from rest_framework import serializers
-
+from rest_framework.serializers import FileField 
 from .models import *
 from django.db.models import fields
-from rest_framework import serializers
-from .models import Jobs
+from .models import Jobs, Resume
 
 class JobsSerializer(serializers.ModelSerializer):
 	class Meta:
@@ -19,4 +18,27 @@ class JobsSerializer(serializers.ModelSerializer):
 			'selection_step',
 			'salary_range','description',
 			'date_created' )
+
+
+class UploadSerializer(serializers.Serializer):
+    model = Resume
+    file_uploaded = FileField()
+    class Meta:
+        fields = [
+             'name',
+             'resume',
+             'file_uploaded'
+                ]
+
+class NewUploadSerializer(serializers.Serializer):
+    model = Resume
+    file_uploaded = FileField()
+    class Meta:
+        fields = [
+             'name',
+             'resume',
+             'file_uploaded'
+                ]
+
+
 

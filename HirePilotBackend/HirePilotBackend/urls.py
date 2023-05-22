@@ -15,22 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from HirePilot import views
-# from rest_framework import routers
 from django.urls import path, include
-# from authentication imp
-# import authentication
 
-# creating a router object
-# router = routers.DefaultRouter()
-
-# registering the router
-# routers.register(r'jobseeker', views.JobsSeekerview, 'jobseeker')
 
 
 urlpatterns = [
     path('HirePilot/', include('HirePilot.urls')),
     path('admin/', admin.site.urls),
-    # path('auth/', include('authentication.urls',
-    #           namespace='authentication')), #this could be causing me problems
-    # path('api/', include(router.urls))
 ]
