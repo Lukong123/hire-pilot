@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import './DashboardEmployer.css';
 import Footer from '../Footer/Footer';
-import Sidebar from '../Sidebar/Sidebar';
+import Sidebar from '../Sidebar/SidebarEmployer';
 import Jobs from '../Jobs/Jobs';
 import { Button } from 'bootstrap';
 import AddJob from '../Modal/AddJob';
+import SidebarEmployer from '../Sidebar/SidebarEmployer';
 
 
 function DashboardEmployer() {
@@ -27,7 +28,7 @@ function DashboardEmployer() {
 
         
       <div class="grid-container">
-        <Sidebar/>
+        <SidebarEmployer/>
         <Jobs/>
   
     

@@ -135,6 +135,12 @@
 
   }
 
+  .selectSidebar, .selectJob{
+	width: 200px;
+	padding: 5px;
+	margin: 0.9em;
+  }
+
 /* Slider */
 
 .switchbox{
