@@ -20,22 +20,18 @@ function Header() {
 
     <a class='active' href="/">My Jobs</a>
     <a href="/dashboardemployer">Login Emp</a>
+    <div><button className="openModalBtn" onClick={() => {
+      setOpenModal(true);
+    }}> Signup</button>
+    {openModal && <SignupChoice closeModal={setOpenModal}/>}
+    </div>
     <div><button className="openLoginBtn" onClick={() => {
       setOpenLogin(true);
     }}> Login</button>
     {openLogin && <Login closeLogin={setOpenLogin}/>}
     </div>
 
-
-    <div><button className="openModalBtn" onClick={() => {
-      setOpenModal(true);
-    }}> Signup</button>
-    {openModal && <SignupChoice closeModal={setOpenModal}/>}
-    </div>
-    {/* <a href="#about" onClick={"document.getElementById('id01').style.display='block'"}>SignUp</a> */}
-
   </div>
-  {/* <SignupChoice /> */}
   
   
 </div>
