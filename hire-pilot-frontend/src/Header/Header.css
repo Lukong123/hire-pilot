@@ -28,19 +28,42 @@
 	padding-right: 30px;
   }
 
+
   .search{
-	padding: 5px;
-	margin: 0.9em;
-	border-radius: 10px;
-	border: 1px solid white;
 	outline: none;
-	background: #3AC6EA;
+	border-radius:  10px;
+	border: 1px solid white;
+	background-color: transparent;
+	padding: 5px ;
+	margin: 0.9em;
+	width: 350px;
   }
 
   .search:focus{
-	color: #3AC6EA;
+	color: black
   }
   
   .search::placeholder{
 	color: white;
+	padding-left: 5px;
+  }
+
+  .searchone{
+	width: 400px;
+	padding: 5px;
+	margin: 0.9em;
+	border: 1px solid gray;
+	border-top: none;
+	border-right: none;
+	border-left: none;
+	outline: none;
+  }
+
+  .searchone:focus{
+	color: #0A2543;
+  }
+  
+  .searchone::placeholder{
+	color: gray;
+	padding-left: 5px;
   }
