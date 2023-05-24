@@ -4,65 +4,26 @@
 
   /* Grid */
 
-  /* .grid-container {
+  .item1 { grid-area: menuright; }
+    .item2 { grid-area: totalcard; }
+
+    .item3 { 
+      grid-area: addjob;
+      float: right;
+     }
+    .item4 { grid-area: jobs; }
+
+    
+    .gridd-container {
       display: grid;
-
+      grid-template-areas:
+      'menuright totalcard totalcard totalcard  totalcard totalcard'
+      'menuright addjob addjob addjob addjob addjob'
+      'menuright jobs jobs jobs jobs jobs';
+      /* grid-gap: 10px; */
+      /* background-color: #2196F3; */
       padding: 10px;
-    }
-    .grid-item {
-      background-color: rgba(255, 255, 255, 0.8);
-      padding: 10px;
-      font-size: 18px;
-    } */
-
-  /* Flex Container */
-  .flex-container {
-    display: flex;
-    flex-wrap: nowrap;
-    background-color: wheat;
-  }
-
-  .flex-container > div {
-    width: 250px;
-    margin: 10px;
-    text-align: center;
-    line-height: 20px;
-    font-size: 20px;
-    color: white;
-
-  }
-  
-  
-
-  /* Card */
-  /* .card {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    height: 100px;
-    border-radius: 5px;
     }
     
-    .card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    }
-     */
-
-    .flex-container .blue{
-      background-color: #3AC6EA;
-
-    }
-
-    .flex-container .blueblack{
-      background-color: #0A2543;
-
-    }
-
-    .flex-container .yellow{
-      background-color: #FECF26;
-    }
-
-    .card a{
-      text-decoration: none;
-      color: white;
-      font-weight: bold;
-    }
+   
+  

@@ -6,7 +6,7 @@ import './Jobs.css';
 function Jobs() {
   // const [openModal, setOpenModal] = useState(false);
     return(
-        <div class="grid-item main" >
+        <div class="grid-item main " >
     <div class='main-top'>
       <div class='main-top-left'>
       {/* <SignupChoice/> */}

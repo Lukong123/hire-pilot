@@ -3,7 +3,7 @@ import './Sidebar.css';
 
 function SidebarEmployer() {
     return(
-        <div class="grid-item sidebar">
+        <div class="grid-item sidebar leftbar">
  
    <div>
   <p className='sideheading1'>Filter</p>

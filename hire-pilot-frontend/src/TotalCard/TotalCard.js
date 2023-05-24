@@ -1,10 +1,11 @@
 import React from "react";
-// import './TotalCard.css';
+import './TotalCard.css';
 
 
 function TotalCard() {
     return(
-        <div class="flex-container">
+        <div class="flex-container ">
+          
   <div className='card blue'>
     <p><a href='#totaljobs'>Total Jobs</a></p>
     <p>40</p>
