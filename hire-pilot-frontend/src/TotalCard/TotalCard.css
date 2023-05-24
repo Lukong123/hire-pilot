@@ -1,7 +1,8 @@
 /* Flex Container */
 .flex-container {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
+    justify-content: space-around;
   }
   
   .flex-container > div {
