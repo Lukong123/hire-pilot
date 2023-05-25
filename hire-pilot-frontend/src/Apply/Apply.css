@@ -1,0 +1,168 @@
+*{
+    margin: 0;
+    padding: 0;
+    
+}
+
+.bodyapply{
+    background-color: rgba(0, 0, 0, 0.8);
+    
+}
+
+.formapplycontainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+.containerapply{
+    width: 360px;
+    height: 400px;
+    margin: 8% auto;
+    background-color: #fff;
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+
+}
+
+h3{
+    text-align: center;
+    margin-bottom: 4px;
+    color: #777;
+
+}
+
+.containerapply > form{
+    width: 280px;
+    position: absolute;
+    top: 100px;
+    left: 40px;
+    transition: 0.5s;
+}
+
+/* form input, input[text], .newst{
+    width: 100%;
+    height: 300px;
+    padding: 10px 5px;
+    margin: 5px 0;
+    border: 0;
+    border-bottom: 1px solid green;
+    outline: none;
+} */
+
+.containerapply > form > input {
+    width: 100%;
+    padding: 10px 5px;
+    margin: 5px 0;
+    border: 0;
+    border-bottom: 1px solid green;
+    outline: none;
+}
+
+::placeholder{
+    color: #777;
+}
+
+.btn-box{
+    width: 100%;
+    margin: 30px auto;
+    text-align: center;
+}
+
+.formApply .footer  button{
+    width: 110px;
+    height: 35px;
+    margin: 30px 10px;
+    background: linear-gradient(to right, #0A2543, #3AC6EA);
+    border: 0;
+    border-radius: 18px;
+    outline: none;
+    color: #fff;
+    cursor: pointer;
+    margin-top: -100px;
+}
+
+.progressbar {
+    width: 360px;
+    height: 40px;
+    /* margin: 0 auto; */
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 -1px 5px -1px #000;
+    position: relative;
+  }
+  
+  /* .progressbar div {
+    width: 33.3%;
+    height: 100%;
+    background-color: rgb(98, 0, 255);
+    
+  } */
+
+  .step-row{
+    width: 360px;
+    height: 40px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 -1px 5px -1px #000;
+    position: relative;
+}
+
+.step-col{
+    width: 120px;
+    text-align: center;
+    color: #333;
+    position: relative;
+}
+
+#progress{
+    position: absolute;
+    height: 100%;
+    width: 120px;
+    background: linear-gradient(to right, #0A2543, #3AC6EA);
+    transition: 1s;
+
+}
+
+#progress::after{
+    content: '';
+    height: 0;
+    width: 0;
+    border-top: 20px solid transparent;
+    border-bottom:  20px solid transparent;
+    position: absolute;
+    right: -20px;
+    top: 0;
+    border-left: 20px solid #3AC6EA;
+}
+
+/* .formApply .footer {
+    flex: 20%;
+    display: flex;
+    justify-content: center;
+    margin-top: -0px;
+  } */
+  
+  /* .formApply .footer button {
+    border-radius: 7px;
+    width: 100px;
+    height: 40px;
+
+     background: linear-gradient(to right, #0A2543, #3AC6EA);
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 1px;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 5px;
+    margin: 5px;
+  } */
+
+
