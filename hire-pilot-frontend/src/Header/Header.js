@@ -20,6 +20,8 @@ function Header() {
 
     <a class='active' href="/">My Jobs</a>
     <a href="/dashboardemployer">Login Emp</a>
+    <a href="/status">Status</a>
+
     <div><button className="openModalBtn" onClick={() => {
       setOpenModal(true);
     }}> Signup</button>
