@@ -21,6 +21,11 @@ function Header() {
     <a class='active' href="/">My Jobs</a>
     <a href="/dashboardemployer">Login Emp</a>
     <a href="/status">Status</a>
+    <a href="/applicants">All Apllicants</a>
+    <a href="/alljobs">All Jobs</a>
+    <a href="/interview">Interviews</a>
+    <a href="viewjob">view job</a>
+    <a href="/myinterviews">My Interviews</a>
 
     <div><button className="openModalBtn" onClick={() => {
       setOpenModal(true);

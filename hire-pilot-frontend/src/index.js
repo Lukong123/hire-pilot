@@ -7,6 +7,7 @@ import DashboardEmployer from './DashboardEmployer/DashboardEmployer';
 import Layout from './Layout/layout';
 import ApplyForm from './Apply/ApplyForm';
 import Status from './Status/Status';
+import AllJobs  from './Tables/AllJobs';
 
 
 export default function Appp() {
@@ -18,6 +19,7 @@ export default function Appp() {
         <Route path='dashboardemployer' element={<DashboardEmployer />} />
         <Route path='apply' element={<ApplyForm />} />
         <Route path='status' element={<Status />} />
+        <Route path='alljobs' element={<AllJobs />} />
 
 
 

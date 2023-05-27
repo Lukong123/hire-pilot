@@ -1,0 +1,10 @@
+.alljobs-grid-container {
+	display: grid;
+	grid-template-columns: 20% 80%;
+	padding: 10px;
+  }
+  .alljobs-grid-item {
+	background-color: rgba(255, 255, 255, 0.8);
+	padding: 10px;
+	font-size: 18px;
+  }
