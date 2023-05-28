@@ -145,6 +145,7 @@ class UserProfile(AbstractBaseUser):
           return True
 
 
+
 class Jobs(models.Model):
 
     Full_time= 'Full Time'
