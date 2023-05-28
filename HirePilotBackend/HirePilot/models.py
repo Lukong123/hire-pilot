@@ -188,8 +188,8 @@ class Resume(models.Model):
     uploaded_at = models.DateTimeField(auto_now=True)
 
 
-class Criteria(models.Modle):
-    job_name = models.ForeignKey(Jobs)
+class Criteria(models.Model):
+    job_name = models.ForeignKey(Jobs, on_delete=models.CASCADE)
     skill = models.CharField(max_length=200)
     degree = models.CharField(max_length=200)
     experience = models.CharField(max_length=200)

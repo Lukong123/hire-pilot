@@ -1,17 +1,18 @@
 from django.urls import path, include
 from rest_framework import routers
 from . import views
-from .views import UploadViewSet
+from .views import UploadViewSet, UploadViews
 
 router = routers.DefaultRouter()
 router.register(r'upload', UploadViewSet, basename="upload")
+router.register('resume', UploadViews, basename='resume')
 
 
 urlpatterns = [
     path('', include(router.urls)),
     path('newupload', views.NewUploadViewSet.as_view, name='newupload'),
-    path('newcreate', views.add_resume, name='newcreate'),
-    path('newlist', views.view_resume, name='newlist'),
+    # path('newcreate', views., name='newcreate'),
+    # path('newlist', views.view_resume, name='newlist'),
 
 
     path('apinew', views.ApiOverview, name='home'),

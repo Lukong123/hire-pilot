@@ -20,15 +20,10 @@ class JobsSerializer(serializers.ModelSerializer):
 			'date_created' )
 
 
-class UploadSerializer(serializers.Serializer):
-    model = Resume
-    file_uploaded = FileField()
+class UploadSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = [
-             'name',
-             'resume',
-             'file_uploaded'
-                ]
+        model = Resume
+        fields = "__all__"
 
 class NewUploadSerializer(serializers.Serializer):
     model = Resume

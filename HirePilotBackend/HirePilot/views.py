@@ -1,9 +1,10 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
+from rest_framework import viewsets
 
 from .forms import ResumeForm
-from .models import Jobs, Res
+from .models import Jobs, Resume
 from .serializers import JobsSerializer, UploadSerializer, NewUploadSerializer
 from rest_framework import serializers
 from rest_framework import status
@@ -106,3 +107,7 @@ class NewUploadViewSet(ViewSet):
         content_type = file_uploaded.content_type
         response = "POST API and you have uploaded a {} file".format(content_type)
         return Response(response)
+
+class UploadViews(viewsets.ModelViewSet):
+    serializer_class = UploadSerializer
+    queryset = Resume.objects.all()
