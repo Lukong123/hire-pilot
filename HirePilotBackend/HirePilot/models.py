@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin, AbstractUser
 from django.contrib.auth import get_user_model
 from django.utils import timezone
 # # Create your models here.
@@ -197,6 +197,16 @@ class Criteria(models.Model):
     age = models.CharField(max_length=200)
 
 
-
+class User(AbstractUser):
+    class Role(models.TextChoices):
+        ADMIN = "ADMIN", 'Admin'
+        EMPLOYER = "EMPLOYER", 'Employer'
+        CANDIDATE = "CANDIDATE", 'Candidate'
     
+    base_role = Role.ADMIN
+    role = models.CharField(max_length=50, choices=Role.choices)
     
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.role = self.base_role
+            return super().save(*args, **kwargs)
