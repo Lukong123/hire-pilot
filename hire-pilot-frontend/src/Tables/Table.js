@@ -24,7 +24,10 @@ export default function Table({ columns, data }) {
     */
     return (
       <table {...getTableProps()}>
+        <button className='allapplicantbtn'>All Applicants</button>
         <thead>
+        {/* <button>All Applicants</button> */}
+
           {headerGroups.map(headerGroup => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map(column => (
