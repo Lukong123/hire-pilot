@@ -10,7 +10,7 @@ UserProfile = get_user_model()
 # models = hire.get_models()
 # for model in models:
 #     admin.site.register(model)
-admin.site.register(UserProfile)
+# admin.site.register(UserProfile)
 admin.site.register(Jobs)
 admin.site.register(Resume)
 admin.site.register(Criteria)
