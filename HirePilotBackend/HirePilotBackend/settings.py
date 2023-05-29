@@ -50,14 +50,14 @@ INSTALLED_APPS = [
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Rest framework
-REST_FRAMEWORK = {
-'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
-'DEFAULT_AUTHENTICATION_CLASSES': (
-    'rest_framework_simplejwt.authentication.JWTAuthentication',
-                                    'rest_framework.authentication.SessionAuthentication',
-    'rest_framework.authentication.BasicAuthentication',
-    'rest_framework_simplejwt.authentication.JWTAuthentication', )
-}
+# REST_FRAMEWORK = {
+# 'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
+# 'DEFAULT_AUTHENTICATION_CLASSES': (
+#     'rest_framework_simplejwt.authentication.JWTAuthentication',
+#                                     'rest_framework.authentication.SessionAuthentication',
+#     'rest_framework.authentication.BasicAuthentication',
+#     'rest_framework_simplejwt.authentication.JWTAuthentication', )
+# }
 
 # JWT
 SIMPLE_JWT = {
@@ -155,4 +155,5 @@ CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
 )
 
-AUTH_USER_MODEL = 'HirePilot.UserProfile' # using auth_user_model = 'HirePilotBackend.User' gives wrong
+AUTH_USER_MODEL = 'HirePilot.UserProfile'
+ # using auth_user_model = 'HirePilotBackend.User' gives wrong
