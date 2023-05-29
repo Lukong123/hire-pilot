@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.contrib.auth import get_user_model
 from django.utils import timezone
+
+# from HirePilotBackend.HirePilot.serializers import EmployerSerializer
 # # Create your models here.
 
 # class JobSeeker(models.Model):
@@ -164,7 +166,7 @@ class Jobs(models.Model):
        ]
 
 
-
+    # company_name = models.ForeignKey(Employer, on_delete=models.CASCADE)
     title = models.CharField(max_length=30)
     category = models.CharField(max_length=30)
     location = models.CharField(max_length=30)
@@ -174,6 +176,7 @@ class Jobs(models.Model):
     selection_step = models.PositiveIntegerField()
     salary_range = models.CharField(max_length=30)
     description = models.CharField(max_length=100)
+    skills = models.CharField(max_length=100, null=True)
     date_created = models.DateField('date created', default=timezone.now)
 
     def __str__(self):
@@ -197,6 +200,60 @@ class Criteria(models.Model):
     age = models.CharField(max_length=200)
 
 
+class Candidate(models.Model):
+    first_name = models.CharField(max_length=20)
+    last_name = models.CharField(max_length=20)
+    email = models.EmailField(max_length=20)
+    date_created = models.DateField('date created', default=timezone.now)
+
+
+    def __str__(self):
+        return self.first_name
+    
+
+class Employer(models.Model):
+
+    Agriculture = 'Agriculture'
+    Engineering = 'Engineering'
+    Health_Care = 'Health Care'
+    Hospitality_and_Tourism = 'Hospitality and Tourism'
+    Aerospace = 'Aerospace'
+    Transport_and_Logistics = 'Transport and Logistics'
+    Banking_and_Finance = 'Banking and Finance'
+    Media_and_Entertainement = 'Media and Entertainment'
+    Professional_Services = 'Professional Services'
+    Others = 'Others'
+
+    industry_category = [
+        (Agriculture, 'Agriculture'),
+    (Engineering, 'Engineering'),
+    (Health_Care , 'Health Care'),
+   ( Hospitality_and_Tourism , 'Hospitality and Tourism'),
+   ( Aerospace, 'Aerospace'),
+  (  Transport_and_Logistics, 'Transport and Logistics'),
+   ( Banking_and_Finance , 'Banking and Finance'),
+    (Media_and_Entertainement ,'Media and Entertainment'),
+(    Professional_Services, 'Professional Services'),
+   ( Others , 'Others')
+    ]
+
+    company_name = models.CharField(max_length=20)
+    email = models.EmailField(max_length=55)
+    location = models.CharField(max_length=20)
+    phone = models.PositiveIntegerField()
+    industry_type = models.CharField(max_length=25, choices=industry_category, default=Others)
+    date_created = models.DateField('date created', default=timezone.now)
+
+
+    def __str__(self):
+        return self.company_name
+
+
+
 
     
-    
+class Application(models.Model):
+    job_name = models.ForeignKey(Jobs, on_delete=models.CASCADE)
+    candidate_name = models.ForeignKey(Candidate, on_delete=models.CASCADE)
+    resume = models.FileField(upload_to='Candidates/Documents')
+    apply_date = models.DateField('apply date', default=timezone.now)

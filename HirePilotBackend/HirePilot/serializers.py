@@ -2,7 +2,7 @@ from rest_framework import serializers
 from rest_framework.serializers import FileField 
 from .models import *
 from django.db.models import fields
-from .models import Jobs, Resume
+from .models import Jobs, Resume, Candidate, Employer, Criteria, Application
 
 class JobsSerializer(serializers.ModelSerializer):
 	class Meta:
@@ -16,7 +16,7 @@ class JobsSerializer(serializers.ModelSerializer):
 			'offline_remote',
 			'submission_deadline',
 			'selection_step',
-			'salary_range','description',
+			'salary_range','description','skills','latest_date'
 			'date_created' )
 
 
@@ -37,3 +37,47 @@ class NewUploadSerializer(serializers.Serializer):
 
 
 
+class CandidateSerializer(serializers.ModelSerializer):
+     class Meta:
+          model = Candidate
+          fields = (
+               'pk',
+               'first_name',
+               'last_name',
+               'email'
+		  )
+
+
+class EmployerSerializer(serializers.ModelSerializer):
+      class Meta:
+            model = Employer
+            fields = (
+                  'pk',
+                  'company_name',
+              	  'email',
+                  'location',
+                  'phone',
+                  'industry_type',
+			)
+
+
+class CriteriaSerializer(serializers.ModelSerializer):
+     class Meta:
+          model = Criteria
+          fields = (
+               'job_name',
+               'skill',
+               'degree',
+               'experience',
+               'language',
+               'age'
+          )
+
+class ApplicationSerializer(serializers.ModelSerializer):
+     class Meta:
+          model = Application
+          fields =(
+               'job_name',
+               'candidate_name',
+               'resume'
+          )

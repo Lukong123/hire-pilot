@@ -4,8 +4,8 @@ from rest_framework.viewsets import ViewSet
 from rest_framework import viewsets
 
 from .forms import ResumeForm
-from .models import Jobs, Resume
-from .serializers import JobsSerializer, UploadSerializer, NewUploadSerializer
+from .models import Jobs, Resume, Candidate, Employer, Criteria, Application
+from .serializers import *
 from rest_framework import serializers
 from rest_framework import status
 from django.shortcuts import get_object_or_404, redirect, render
@@ -111,3 +111,206 @@ class NewUploadViewSet(ViewSet):
 class UploadViews(viewsets.ModelViewSet):
     serializer_class = UploadSerializer
     queryset = Resume.objects.all()
+
+
+# Canidate
+
+@api_view(['POST'])
+def add_candidate(request):
+    candidate = CandidateSerializer(data=request.data)
+
+    if Candidate.objects.filter(**request.data).exists():
+        raise serializers.ValidationError('This data already exists')
+    
+    if candidate.is_valid():
+        candidate.save()
+        return Response(candidate.data)
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+
+@api_view(['GET'])
+def view_candidate(request):
+    if request.query_params:
+        candidate = Candidate.objects.filter(**request.query_params.dict())
+    else:
+        candidate = Candidate.objects.all()
+    
+
+    if candidate:
+        serializer = CandidateSerializer(candidate, many=True)
+        return Response(serializer.data)
+    
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+
+@api_view(['POST'])
+def update_candidate(request, pk):
+    candidate = Candidate.objects.get(pk=pk)
+    data = CandidateSerializer(instance=candidate, data=request.data)
+
+    if data.is_valid():
+        data.save()
+        return Response(data.data)
+    
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+@api_view(['DELETE'])
+def delete_candidate(request, pk):
+    candidate = get_object_or_404(Jobs, pk=pk)
+    candidate.delete()
+    return Response(status=status.HTTP_202_ACCEPTED)
+
+
+# Employer
+@api_view(['POST'])
+def add_employer(request):
+    employer = EmployerSerializer(data=request.data)
+
+    if Employer.objects.filter(**request.data).exists():
+        raise serializers.ValidationError('This data already exists')
+    
+    if employer.is_valid():
+        employer.save()
+        return Response(employer.data)
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+
+@api_view(['GET'])
+def view_employer(request):
+    if request.query_params:
+        employer = Employer.objects.filter(**request.query_params.dict())
+    else:
+        employer = Employer.objects.all()
+    
+
+    if employer:
+        serializer = EmployerSerializer(employer, many=True)
+        return Response(serializer.data)
+    
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+
+@api_view(['POST'])
+def update_employer(request, pk):
+    employer = Employer.objects.get(pk=pk)
+    data = EmployerSerializer(instance=employer, data=request.data)
+
+    if data.is_valid():
+        data.save()
+        return Response(data.data)
+    
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+@api_view(['DELETE'])
+def delete_employer(request, pk):
+    employer = get_object_or_404(Employer, pk=pk)
+    employer.delete()
+    return Response(status=status.HTTP_202_ACCEPTED)
+
+# Criteria
+
+@api_view(['POST'])
+def add_criteria(request):
+    criteria = CriteriaSerializer(data=request.data)
+
+    if Criteria.objects.filter(**request.data).exists():
+        raise serializers.ValidationError('This data already exists')
+    
+    if criteria.is_valid():
+        criteria.save()
+        return Response(criteria.data)
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+
+@api_view(['GET'])
+def view_criteria(request):
+    if request.query_params:
+        criteria = Criteria.objects.filter(**request.query_params.dict())
+    else:
+        criteria = Criteria.objects.all()
+    
+
+    if criteria:
+        serializer = CriteriaSerializer(criteria, many=True)
+        return Response(serializer.data)
+    
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+
+@api_view(['POST'])
+def update_criteria(request, pk):
+    criteria = Criteria.objects.get(pk=pk)
+    data = CriteriaSerializer(instance=criteria, data=request.data)
+
+    if data.is_valid():
+        data.save()
+        return Response(data.data)
+    
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+@api_view(['DELETE'])
+def delete_criteria(request, pk):
+    criteria = get_object_or_404(Criteria, pk=pk)
+    criteria.delete()
+    return Response(status=status.HTTP_202_ACCEPTED)
+
+# Application View
+@api_view(['POST'])
+def add_application(request):
+    application = ApplicationSerializer(data=request.data)
+
+    if application.objects.filter(**request.data).exists():
+        raise serializers.ValidationError('This data already exists')
+    
+    if application.is_valid():
+        application.save()
+        return Response(application.data)
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+
+@api_view(['GET'])
+def view_application(request):
+    if request.query_params:
+        application = Application.objects.filter(**request.query_params.dict())
+    else:
+        application = Application.objects.all()
+    
+
+    if application:
+        serializer = ApplicationSerializer(application, many=True)
+        return Response(serializer.data)
+    
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+
+@api_view(['POST'])
+def update_application(request, pk):
+    application = Application.objects.get(pk=pk)
+    data = ApplicationSerializer(instance=application, data=request.data)
+
+    if data.is_valid():
+        data.save()
+        return Response(data.data)
+    
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+@api_view(['DELETE'])
+def delete_application(request, pk):
+    application = get_object_or_404(Application, pk=pk)
+    application.delete()
+    return Response(status=status.HTTP_202_ACCEPTED)
+
+
+
