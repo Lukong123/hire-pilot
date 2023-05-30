@@ -11,14 +11,12 @@ UserProfile = get_user_model()
 # for model in models:
 #     admin.site.register(model)
 # admin.site.register(UserProfile)
-admin.site.register(Jobs)
 admin.site.register(Resume)
-admin.site.register(Criteria)
 admin.site.register(Candidate)
 admin.site.register(Employer)
-admin.site.register(Application)
 admin.site.register(Job)
 admin.site.register(Apply)
+admin.site.register(Selection)
 
 
 

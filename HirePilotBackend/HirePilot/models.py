@@ -147,59 +147,14 @@ from django.utils import timezone
 #           return True
 
 
-
-class Jobs(models.Model):
-
-    Full_time= 'Full Time'
-    Part_time = 'Part Time'
-
-    fulltime_parttime = [
-        (Full_time, 'Full Time'),
-        (Part_time, 'Part Time'),
-       ]
-
-    Offline= 'Offline'
-    Remote = 'Remote'
-
-    offlineorremote = [
-        (Offline, 'Offline'),
-        (Remote, 'Remote'),
-       ]
-
-
-    # company_name = models.ForeignKey(Employer, on_delete=models.CASCADE)
-    title = models.CharField(max_length=30)
-    category = models.CharField(max_length=30)
-    location = models.CharField(max_length=30)
-    fulltime_partime = models.CharField(max_length=10, choices=fulltime_parttime, default=Full_time)
-    offline_remote = models.CharField(max_length=7, choices=offlineorremote, default=Offline)
-    submission_deadline = models.DateField(max_length=30)
-    selection_step = models.PositiveIntegerField()
-    salary_range = models.CharField(max_length=30)
-    description = models.CharField(max_length=100)
-    skills = models.CharField(max_length=100, null=True)
-    date_created = models.DateField('date created', default=timezone.now)
-
-    def __str__(self):
-        return self.title
-    
- 
-
+# Resume Model
 
 class Resume(models.Model):
     name = models.CharField(max_length= 20)
     resume = models.FileField(upload_to='Candidates/Documents')
     uploaded_at = models.DateTimeField(auto_now=True)
 
-
-class Criteria(models.Model):
-    job_name = models.ForeignKey(Jobs, on_delete=models.CASCADE)
-    skill = models.CharField(max_length=200)
-    degree = models.CharField(max_length=200)
-    experience = models.CharField(max_length=200)
-    language = models.CharField(max_length=200)
-    age = models.CharField(max_length=200)
-
+# Candidate model
 
 class Candidate(models.Model):
     first_name = models.CharField(max_length=20)
@@ -211,6 +166,7 @@ class Candidate(models.Model):
     def __str__(self):
         return self.first_name
     
+# Employer Model
 
 class Employer(models.Model):
 
@@ -252,12 +208,6 @@ class Employer(models.Model):
 
 
 
-    # Application Model
-class Application(models.Model):
-    # job_name = models.ForeignKey(Job, on_delete=models.CASCADE)
-    candidate_name = models.ForeignKey(Candidate, on_delete=models.CASCADE)
-    resume = models.FileField(upload_to='Candidates/Documents')
-    apply_date = models.DateField('apply date', default=timezone.now)
 
 
 #  Job model
@@ -295,8 +245,19 @@ class Job(models.Model):
         return self.title
 
 
+# Application model
 class Apply(models.Model):
     candidate_name = models.ForeignKey(Candidate, on_delete=models.CASCADE)
     job_name = models. ForeignKey(Job, on_delete=models.CASCADE)
     resume = models.FileField(upload_to='Candidates/Documents')
     apply_date = models.DateField('apply date', default=timezone.now)
+
+
+# Selection
+class Selection(models.Model):
+    name_job = models.ForeignKey(Job, on_delete=models.CASCADE)
+    skill = models.CharField(max_length=200)
+    degree = models.CharField(max_length=200)
+    experience = models.CharField(max_length=200)
+    language = models.CharField(max_length=200)
+    age = models.CharField(max_length=200)

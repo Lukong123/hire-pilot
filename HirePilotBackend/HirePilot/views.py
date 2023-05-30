@@ -4,7 +4,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework import viewsets
 
 from .forms import ResumeForm
-from .models import Jobs, Resume, Candidate, Employer, Criteria, Application
+from .models import Job, Resume, Candidate, Employer, Selection, Apply
 from .serializers import *
 from rest_framework import serializers
 from rest_framework import status
@@ -26,7 +26,7 @@ def ApiOverview(request):
 def add_jobs(request):
     job = JobsSerializer(data=request.data)
 
-    if Jobs.objects.filter(**request.data).exists():
+    if Job.objects.filter(**request.data).exists():
         raise serializers.ValidationError('This data already exists')
     
     if job.is_valid():
@@ -39,9 +39,9 @@ def add_jobs(request):
 @api_view(['GET'])
 def view_jobs(request):
     if request.query_params:
-        jobs = Jobs.objects.filter(**request.query_params.dict())
+        jobs = Job.objects.filter(**request.query_params.dict())
     else:
-        jobs = Jobs.objects.all()
+        jobs = Job.objects.all()
     
 
     if jobs:
@@ -54,7 +54,7 @@ def view_jobs(request):
 
 @api_view(['POST'])
 def update_jobs(request, pk):
-    job = Jobs.objects.get(pk=pk)
+    job = Job.objects.get(pk=pk)
     data = JobsSerializer(instance=job, data=request.data)
 
     if data.is_valid():
@@ -66,7 +66,7 @@ def update_jobs(request, pk):
     
 @api_view(['DELETE'])
 def delete_jobs(request, pk):
-    job = get_object_or_404(Jobs, pk=pk)
+    job = get_object_or_404(Job, pk=pk)
     job.delete()
     return Response(status=status.HTTP_202_ACCEPTED)
 
@@ -159,7 +159,7 @@ def update_candidate(request, pk):
     
 @api_view(['DELETE'])
 def delete_candidate(request, pk):
-    candidate = get_object_or_404(Jobs, pk=pk)
+    candidate = get_object_or_404(Candidate, pk=pk)
     candidate.delete()
     return Response(status=status.HTTP_202_ACCEPTED)
 
@@ -219,7 +219,7 @@ def delete_employer(request, pk):
 def add_criteria(request):
     criteria = CriteriaSerializer(data=request.data)
 
-    if Criteria.objects.filter(**request.data).exists():
+    if Selection.objects.filter(**request.data).exists():
         raise serializers.ValidationError('This data already exists')
     
     if criteria.is_valid():
@@ -232,9 +232,9 @@ def add_criteria(request):
 @api_view(['GET'])
 def view_criteria(request):
     if request.query_params:
-        criteria = Criteria.objects.filter(**request.query_params.dict())
+        criteria = Selection.objects.filter(**request.query_params.dict())
     else:
-        criteria = Criteria.objects.all()
+        criteria = Selection.objects.all()
     
 
     if criteria:
@@ -247,7 +247,7 @@ def view_criteria(request):
 
 @api_view(['POST'])
 def update_criteria(request, pk):
-    criteria = Criteria.objects.get(pk=pk)
+    criteria = Selection.objects.get(pk=pk)
     data = CriteriaSerializer(instance=criteria, data=request.data)
 
     if data.is_valid():
@@ -259,7 +259,7 @@ def update_criteria(request, pk):
     
 @api_view(['DELETE'])
 def delete_criteria(request, pk):
-    criteria = get_object_or_404(Criteria, pk=pk)
+    criteria = get_object_or_404(Selection, pk=pk)
     criteria.delete()
     return Response(status=status.HTTP_202_ACCEPTED)
 
