@@ -17,6 +17,8 @@ admin.site.register(Criteria)
 admin.site.register(Candidate)
 admin.site.register(Employer)
 admin.site.register(Application)
+admin.site.register(Job)
+admin.site.register(Apply)
 
 
 

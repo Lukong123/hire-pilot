@@ -2,7 +2,7 @@ from rest_framework import serializers
 from rest_framework.serializers import FileField 
 from .models import *
 from django.db.models import fields
-from .models import Jobs, Resume, Candidate, Employer, Criteria, Application
+from .models import Jobs, Resume, Candidate, Employer, Criteria, Apply
 
 class JobsSerializer(serializers.ModelSerializer):
 	class Meta:
@@ -75,9 +75,10 @@ class CriteriaSerializer(serializers.ModelSerializer):
 
 class ApplicationSerializer(serializers.ModelSerializer):
      class Meta:
-          model = Application
+          model = Apply
           fields =(
-               'job_name',
+               
                'candidate_name',
+               'job_name',
                'resume'
           )

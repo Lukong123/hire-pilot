@@ -281,9 +281,9 @@ def add_application(request):
 @api_view(['GET'])
 def view_application(request):
     if request.query_params:
-        application = Application.objects.filter(**request.query_params.dict())
+        application = Apply.objects.filter(**request.query_params.dict())
     else:
-        application = Application.objects.all()
+        application = Apply.objects.all()
     
 
     if application:
@@ -296,7 +296,7 @@ def view_application(request):
 
 @api_view(['POST'])
 def update_application(request, pk):
-    application = Application.objects.get(pk=pk)
+    application = Apply.objects.get(pk=pk)
     data = ApplicationSerializer(instance=application, data=request.data)
 
     if data.is_valid():
@@ -308,7 +308,7 @@ def update_application(request, pk):
     
 @api_view(['DELETE'])
 def delete_application(request, pk):
-    application = get_object_or_404(Application, pk=pk)
+    application = get_object_or_404(Apply, pk=pk)
     application.delete()
     return Response(status=status.HTTP_202_ACCEPTED)
 
