@@ -5,6 +5,7 @@ import Jobs from '../Jobs/Jobs';
 import AddJob from '../Modal/AddJob';
 import SidebarEmployer from '../Sidebar/SidebarEmployer';
 import TotalCard from '../TotalCard/TotalCard'
+import HeaderEmployer from '../Header/HeaderEmployer';
 
 
 function DashboardEmployer() {
@@ -12,7 +13,7 @@ function DashboardEmployer() {
   return (
     <React.Fragment>
       <div className="App">
-        {/* <Header/> */}
+        {/* <HeaderEmployer/> */}
 
       <body>
 
@@ -37,43 +38,6 @@ function DashboardEmployer() {
   {/* <div class="item4">Right</div> */}
   <div class="item4"><Jobs/></div>
 </div>
-        
-      {/* <div class="grid-container">
-        <div className='rightbar'>
-          <div>one</div>
-          <div>one</div>
-          <div>one</div>
-          <div>one</div>
-          <div>one</div>
-        </div>
-        <div className='totalcard'>
-          <div>two</div>
-          <div>two</div>
-
-          <div>two</div>
-
-          <div>two</div>
-
-        </div>
-        <div className='jobs'>
-          <div>three</div>
-          <div>three</div>
-          <div>three</div>
-          <div>three</div>
-
-        </div> */}
-
-        {/* <SidebarEmployer/>
-        <TotalCard/>
-        <Jobs/>
-         */}
-
-        
-    
-        
-  
-    
-{/* </div> */}
       </body>
       <Footer/>
      
