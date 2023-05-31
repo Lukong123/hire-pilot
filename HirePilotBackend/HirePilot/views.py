@@ -2,14 +2,15 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
 from rest_framework import viewsets
-
+from django.http import JsonResponse
+from rest_framework.views import APIView
 from .forms import ResumeForm
 from .models import Job, Resume, Candidate, Employer, Selection, Apply
 from .serializers import *
 from rest_framework import serializers
 from rest_framework import status
 from django.shortcuts import get_object_or_404, redirect, render
-
+from pdfminer.high_level import extract_text
 @api_view(['GET'])
 def ApiOverview(request):
     api_urls = {
@@ -266,6 +267,7 @@ def delete_criteria(request, pk):
 # Application View
 @api_view(['POST'])
 def add_application(request):
+    
     application = ApplicationSerializer(data=request.data)
 
     if application.objects.filter(**request.data).exists():
@@ -311,6 +313,20 @@ def delete_application(request, pk):
     application = get_object_or_404(Apply, pk=pk)
     application.delete()
     return Response(status=status.HTTP_202_ACCEPTED)
+
+
+class ExtractSkillsView(APIView):
+    def post(self, request):
+        pdf_file = request.FILES.get('file')
+        if pdf_file:
+            resume_text = extract_text(pdf_file)
+            EMAIL_REG = re.compile(r'[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.[a-z]+')
+            mymails= re.findall(EMAIL_REG, resume_text )
+            # skills_list = extract_emails(resume_text)a
+            
+            return JsonResponse({'mails': mymails})
+        else:
+            return JsonResponse({'error': 'No PDF file provided.'}, status=400)
 
 
 

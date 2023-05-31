@@ -2,6 +2,9 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin, AbstractUser
 from django.contrib.auth import get_user_model
 from django.utils import timezone
+from pdfminer.high_level import extract_text
+import re
+import nltk
 
 # from HirePilotBackend.HirePilot.serializers import EmployerSerializer
 # # Create your models here.
@@ -252,6 +255,7 @@ class Apply(models.Model):
     resume = models.FileField(upload_to='Candidates/Documents')
     apply_date = models.DateField('apply date', default=timezone.now)
 
+    
 
 # Selection
 class Selection(models.Model):
@@ -261,3 +265,5 @@ class Selection(models.Model):
     experience = models.CharField(max_length=200)
     language = models.CharField(max_length=200)
     age = models.CharField(max_length=200)
+ 
+#  adding number of people needed in job to be nullable
