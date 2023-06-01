@@ -4,8 +4,8 @@ import Header from './Header/Header';
 import Footer from './Footer/Footer';
 import Sidebar from './Sidebar/Sidebar';
 import Rightbar  from './Right-Sidebar/Rightbar';
-import Jobs from './Jobs/Jobs';
 import SignupChoice from './Modal/SignupChoice';
+import Jobcontext from './Jobs/Jobcontext';
 
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
       <body>
       <div class="grid-container">
         <Sidebar/>
-        <Jobs/>
+        <Jobcontext/>
 
         <Rightbar/>
     

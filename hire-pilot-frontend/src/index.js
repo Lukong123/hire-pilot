@@ -12,6 +12,7 @@ import CandidateSignupForm from './Form/CandidateSignupForm';
 import EmployerSignupForm from './Form/EmployerSignup';
 import LoginEmployer from './Login/LoginEmployer';
 import LoginCandidate from './Login/LoginCandidate';
+import TableJxobs from './Jobs/JobDisplay';
 
 
 export default function Appp() {
@@ -28,6 +29,9 @@ export default function Appp() {
         <Route path='signupemployer' element={<EmployerSignupForm />} />
         <Route path='loginemployer' element={<LoginEmployer/>} />
         <Route path='logincandidate' element={<LoginCandidate/>} />
+        <Route path='test' element={<TableJxobs/>} />
+
+
 
 
 

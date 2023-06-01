@@ -23,21 +23,20 @@ function TableJobs() {
   const columns = useMemo(
     () => [
       {
-        Header: "User Id",
-        accessor: 'userId'
+        Header: "Candidate Name",
+        accessor: 'candidate_name'
+      },
+      // {
+      //   Header: "Id",
+      //   accessor: 'id',
+      // },
+      {
+        Header: "Job Title",
+        accessor: 'job_name'
       },
       {
-        Header: "Id",
-        accessor: 'id',
-        // Cell: ({cell: {value}}) => <Id values={value}/>
-      },
-      {
-        Header: "Title",
-        accessor: 'title'
-      },
-      {
-        Header: "Description",
-        accessor: 'body'
+        Header: "Resume",
+        accessor: 'resume'
       },
     ],
     []
@@ -50,7 +49,7 @@ function TableJobs() {
 
    useEffect(() => {
     (async () => {
-      const result = await axios("https://jsonplaceholder.typicode.com/posts");
+      const result = await axios("http://127.0.0.1:8000/HirePilot/application/view/");
       setData(result.data);
     })();
    }, []);

@@ -26,7 +26,7 @@ function Header() {
     {/* <a href="/alljobs">All Jobs</a> */}
     {/* <a href="/interview">Interviews</a> */}
     {/* <a href="viewjob">view job</a> */}
-    {/* <a href="/myinterviews">My Interviews</a> */}
+    <a href="/test">My Interviews</a>
 
     <div><button className="openModalBtn" onClick={() => {
       setOpenModal(true);

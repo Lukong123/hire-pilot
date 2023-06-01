@@ -6,6 +6,7 @@ import AddJob from '../Modal/AddJob';
 import SidebarEmployer from '../Sidebar/SidebarEmployer';
 import TotalCard from '../TotalCard/TotalCard'
 import HeaderEmployer from '../Header/HeaderEmployer';
+import Jobcontext from '../Jobs/Jobcontext';
 
 
 function DashboardEmployer() {
@@ -36,7 +37,7 @@ function DashboardEmployer() {
   
  
   {/* <div class="item4">Right</div> */}
-  <div class="item4"><Jobs/></div>
+  <div class="item4"><Jobcontext/></div>
 </div>
       </body>
       <Footer/>
