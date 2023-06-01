@@ -1,0 +1,67 @@
+.candidatesignform {
+	text-align: center;
+	margin-top: 50px;
+	/* background-color: green; */
+}
+
+.label {
+	display: block;
+	font-size: larger;
+	color: #0A2543;
+	padding: 5px;
+	margin-left: 40px;
+}
+
+.candidatesignform h1{
+	color: #0A2543;
+	margin-bottom: 20px;
+	font-size: 25px;
+}
+
+.input {
+	font-size: larger;
+	padding: 5px;
+	margin: 10px;
+
+}
+
+.btn {
+	color: white;
+	background-color: #0A2543;
+	border: 1px solid #0A2543;
+	border-radius: 5px;
+	font-size: larger;
+	display: block;
+	padding: 5px;
+	margin: 10px auto;
+}
+
+.messages {
+	display: flex;
+	justify-content: center;
+}
+
+.error {
+	display: block;
+	color: red;
+	/* color: white; */
+	width: fit-content;
+	height: 50px;
+	padding: 5px;
+}
+
+.error h3{
+	color: red;
+}
+
+.success {
+	display: block;
+	width: fit-content;
+	height: 50px;
+	padding: 5px;
+}
+
+
+.success h3{
+	color: green;
+}

@@ -8,6 +8,10 @@ import Layout from './Layout/layout';
 import ApplyForm from './Apply/ApplyForm';
 import Status from './Status/Status';
 import AllJobs  from './Tables/AllJobs';
+import CandidateSignupForm from './Form/CandidateSignupForm';
+import EmployerSignupForm from './Form/EmployerSignup';
+import LoginEmployer from './Login/LoginEmployer';
+import LoginCandidate from './Login/LoginCandidate';
 
 
 export default function Appp() {
@@ -20,6 +24,14 @@ export default function Appp() {
         <Route path='apply' element={<ApplyForm />} />
         <Route path='status' element={<Status />} />
         <Route path='alljobs' element={<AllJobs />} />
+        <Route path='signupcandidate' element={<CandidateSignupForm />} />
+        <Route path='signupemployer' element={<EmployerSignupForm />} />
+        <Route path='loginemployer' element={<LoginEmployer/>} />
+        <Route path='logincandidate' element={<LoginCandidate/>} />
+
+
+
+
 
 
 

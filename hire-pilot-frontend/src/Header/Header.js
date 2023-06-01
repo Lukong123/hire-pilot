@@ -4,6 +4,7 @@ import './Header.css';
 import '../Jobs/Jobs';
 import SignupChoice from '../Modal/SignupChoice';
 import Login from '../Login/Login';
+import LoginChoice from "../Modal/LoginChoice";
 
 
 function Header() {
@@ -35,7 +36,7 @@ function Header() {
     <div><button className="openLoginBtn" onClick={() => {
       setOpenLogin(true);
     }}> Login</button>
-    {openLogin && <Login closeLogin={setOpenLogin}/>}
+    {openLogin && <LoginChoice closeLogin={setOpenLogin}/>}
     </div>
 
   </div>

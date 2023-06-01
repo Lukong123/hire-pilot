@@ -2,7 +2,7 @@ import React from "react";
 import './SignupChoice.css';
 
 
-function SignupChoice({closeModal}) {
+function LoginChoice({closeModal}) {
     return(
         <div className="modalBackground">
             <div className="modalContainer">
@@ -14,9 +14,9 @@ function SignupChoice({closeModal}) {
                     <p>Create Your Account</p>
                 </div>
                 <div className="body-button">
-                    <button className="btnSeeker"><a href="/signupcandidate">SignUp as Jobseeker</a></button> <br></br>
+                    <button className="btnSeeker"><a href="/logincandidate">Login as Jobseeker</a></button> <br></br>
                     
-                    <button className="btnEmployer"><a>SignUp as Employer</a></button>
+                    <button className="btnEmployer"><a href="/loginemployer">Login as Employer</a></button>
 
 
                 </div>
@@ -29,4 +29,4 @@ function SignupChoice({closeModal}) {
     )
 }
 
-export default SignupChoice;
+export default LoginChoice;

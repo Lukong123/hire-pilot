@@ -3,7 +3,7 @@ import React from 'react';
 import './Login.css';
 
 
-function Login({closeLogin}){
+function LoginCandidate({closeLogin}){
     return(
         <div className="modalBackground">
             <div className="modalContainer">
@@ -34,4 +34,4 @@ function Login({closeLogin}){
 }
 
 
-export default Login;
+export default LoginCandidate;

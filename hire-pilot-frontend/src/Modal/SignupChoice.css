@@ -15,7 +15,8 @@
 }
 
 .modalContainer{
-    width: 55%;
+    position: absolute;
+    width: 50%;
     height: 400px;
     border-radius: 12px;
     background-color: white;
@@ -79,30 +80,35 @@
     width: 300px;
     margin: 10px;
     border-radius: 5px;
+}
+
+.body-button button a{
     text-align: center;
 }
 
-.body-button button:hover{
-    background-color: #0A2543;
-    border: 1px solid #0A2543;
+/* .body-button button a:hover{
     color: white;
-}
-
-.body-button button a:hover{
-    color: white;
-    background-color: #0A2543;
+    width: 500px;
     cursor: pointer;
-}
+} */
 
 .body-button .btnSeeker{
+    width: 500px;
+    margin-bottom: 30px;
+    margin-top: 30px;
     background-color: #3AC6EA;
     border: 1px solid #3AC6EA;
 
 }
 
+
+
 .body-button .btnEmployer{
+    width: 500px;
     background-color: #FECF26;
     border: 1px solid #FECF26;
     
+    
 
 }
+

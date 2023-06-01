@@ -3,7 +3,7 @@ import React from 'react';
 import './Login.css';
 
 
-function Login({closeLogin}){
+function LoginEmployer({closeLogin}){
     return(
         <div className="modalBackground">
             <div className="modalContainer">
@@ -17,11 +17,11 @@ function Login({closeLogin}){
                 <div className="body-login">
                     <p className='bodytitle'>LOGIN</p>
 
-                    <input type='email' placeholder='Enter Your Email'/> <br></br>
-                    <input type='password' placeholder='Enter Yourgg Password'/>
+                    <input type='email' placeholder="Enter Your Company's Email"/> <br></br>
+                    <input type='password' placeholder='Enter Password'/>
 
                     <p><a href='#pass'className='forgotPass'>Forgot Password?</a></p>
-                    <button className="loginbtn"><a href='#login'>Login</a></button> <br></br>
+                    <button className="loginbtn"><a href='/dashboardemployer'>Login</a></button> <br></br>
 
                 </div>
                 <div className="footer">
@@ -34,4 +34,4 @@ function Login({closeLogin}){
 }
 
 
-export default Login;
+export default LoginEmployer;
