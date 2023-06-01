@@ -9,6 +9,7 @@ class JobsSerializer(serializers.ModelSerializer):
 		model = Job
 		fields = ( 
 			'pk',
+               'company_name',
 			'title',
 			'category',
 			'location',
@@ -16,7 +17,7 @@ class JobsSerializer(serializers.ModelSerializer):
 			'offline_remote',
 			'submission_deadline',
 			'selection_step',
-			'salary_range','description','skills','latest_date'
+			'salary_range','description','skills',
 			'date_created' )
 
 

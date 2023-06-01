@@ -160,7 +160,7 @@ class Resume(models.Model):
 # Candidate model
 
 class Candidate(models.Model):
-    first_name = models.CharField(max_length=20)
+    first_name = models.CharField(max_length=20, primary_key=True)
     last_name = models.CharField(max_length=20)
     email = models.EmailField(max_length=55)
     date_created = models.DateField('date created', default=timezone.now)
@@ -197,7 +197,7 @@ class Employer(models.Model):
    ( Others , 'Others')
     ]
 
-    company_name = models.CharField(max_length=20)
+    company_name = models.CharField(max_length=20, primary_key=True)
     email = models.EmailField(max_length=55)
     location = models.CharField(max_length=20)
     phone = models.PositiveIntegerField()
@@ -231,8 +231,8 @@ class Job(models.Model):
         (Offline, 'Offline'),
         (Remote, 'Remote'),
        ]
-    company = models.ForeignKey(Employer, on_delete=models.CASCADE)
-    title = models.CharField(max_length=30)
+    company_name = models.ForeignKey(Employer, on_delete=models.CASCADE)
+    title = models.CharField(max_length=30, primary_key=True)
     category = models.CharField(max_length=30)
     location = models.CharField(max_length=30)
     fulltime_partime = models.CharField(max_length=10, choices=fulltime_parttime, default=Full_time)
