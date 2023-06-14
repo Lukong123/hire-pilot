@@ -2,12 +2,12 @@ import React from "react";
 import './SignupChoice.css';
 
 
-function LoginChoice({closeModal}) {
+function LoginChoice({closeLogin}) {
     return(
         <div className="modalBackground">
             <div className="modalContainer">
                 <div className="titleClosedBtn">
-                <button onClick={() => closeModal(false)}>X</button>
+                <button onClick={() => closeLogin(false)}>X</button>
                 </div>
                 <div className="title">
                     <h2>Welcome to Hire Pilot</h2>
@@ -21,7 +21,7 @@ function LoginChoice({closeModal}) {
 
                 </div>
                 <div className="footer">
-                    <button onClick={() => closeModal(false)}>Cancel</button>
+                    <button onClick={() => closeLogin(false)}>Cancel</button>
                 </div>
 
             </div>
