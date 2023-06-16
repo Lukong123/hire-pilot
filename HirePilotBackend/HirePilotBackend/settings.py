@@ -44,6 +44,14 @@ INSTALLED_APPS = [
     'crispy_forms',
     'authentication',
     'rest_framework_simplejwt',
+    # 'rest_auth',
+    # 'all_auth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',
+    # 'rest_auth.registration',
+    'rest_framework.authtoken',
+    'djoser',
+    'users',
     # 'HirePilot.apps.'
 ]
 
@@ -157,3 +165,9 @@ CORS_ORIGIN_WHITELIST = (
 
 # AUTH_USER_MODEL = 'HirePilot.UserProfile'
  # using auth_user_model = 'HirePilotBackend.User' gives wrong
+
+DJOSER = {
+    'SERIALIZERS': {
+        'user_create': 'users.serializers.UserCreateSerializer'
+    }
+}
