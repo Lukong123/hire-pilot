@@ -81,5 +81,6 @@ class ApplicationSerializer(serializers.ModelSerializer):
                
                'candidate_name',
                'job_name',
-               'resume'
+               'resume',
+               'candidate_extracted_data'
           )

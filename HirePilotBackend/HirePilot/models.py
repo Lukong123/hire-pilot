@@ -252,7 +252,8 @@ class Job(models.Model):
 class Apply(models.Model):
     candidate_name = models.ForeignKey(Candidate, on_delete=models.CASCADE)
     job_name = models. ForeignKey(Job, on_delete=models.CASCADE)
-    resume = models.FileField(upload_to='Candidates/Documents')
+    resume = models.FileField(upload_to='Candidates/Documents', null=True, blank=True)
+    candidate_extracted_data = models.JSONField(null=True, blank=True)
     apply_date = models.DateField('apply date', default=timezone.now)
 
     

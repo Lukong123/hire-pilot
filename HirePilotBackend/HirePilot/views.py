@@ -4,6 +4,8 @@ from rest_framework.viewsets import ViewSet
 from rest_framework import viewsets
 from django.http import JsonResponse
 from rest_framework.views import APIView
+
+from HirePilot.utils.skill_extraction import extract_skills, extract_text_from_pdf
 from .forms import ResumeForm
 from .models import Job, Resume, Candidate, Employer, Selection, Apply
 from .serializers import *
@@ -11,6 +13,9 @@ from rest_framework import serializers
 from rest_framework import status
 from django.shortcuts import get_object_or_404, redirect, render
 from pdfminer.high_level import extract_text
+from rest_framework.viewsets import ModelViewSet
+from django.conf import settings
+import json
 @api_view(['GET'])
 def ApiOverview(request):
     api_urls = {
@@ -267,17 +272,20 @@ def delete_criteria(request, pk):
 # Application View
 @api_view(['POST'])
 def add_application(request):
+
+    print(request.data)
     
     application = ApplicationSerializer(data=request.data)
 
-    if application.objects.filter(**request.data).exists():
-        raise serializers.ValidationError('This data already exists')
     
     if application.is_valid():
         application.save()
+        text = extract_text_from_pdf(request.data.get('resume'))
+        skills = extract_skills(text)
+        print(skills)
         return Response(application.data)
     else:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+        return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
     
 
 @api_view(['GET'])
@@ -330,3 +338,34 @@ class ExtractSkillsView(APIView):
 
 
 
+class ApplyViewset(ModelViewSet):
+    queryset = Apply.objects.all()
+    serializer_class = ApplicationSerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        # print(request.data)
+        # file = request.data.get('resume')
+        
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        data = serializer.data
+        filename = data.get('resume').split('/')[-1]
+        # print(filename)
+        file_path = f'{settings.MEDIA_ROOT}Candidates/Documents/{filename}'
+        text = extract_text_from_pdf(file_path)
+        # if text:
+        #     print('text has been extracted')
+        # else:    
+        #     print('text not ')
+        skills = extract_skills(text)
+        # print(skills)
+        data = data.pop('resume')
+        objs = Apply.objects.filter(candidate_name= request.data.get('candidate_name'), job_name = request.data.get('job_name')) 
+        if objs.exists():
+            obj = objs.first()
+            obj.candidate_extracted_data = json.dumps({'skills': list(skills), 'language': None, 'degree': None, 'location': None})
+            obj.save()
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+    
