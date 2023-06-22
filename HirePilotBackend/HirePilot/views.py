@@ -6,6 +6,8 @@ from django.http import JsonResponse
 from rest_framework.views import APIView
 
 from HirePilot.utils.skill_extraction import extract_skills, extract_text_from_pdf
+from HirePilot.utils.language_extraction import extract_language
+from HirePilot.utils.degree_extraction import extract_degree
 from .forms import ResumeForm
 from .models import Job, Resume, Candidate, Employer, Selection, Apply
 from .serializers import *
@@ -359,12 +361,14 @@ class ApplyViewset(ModelViewSet):
         # else:    
         #     print('text not ')
         skills = extract_skills(text)
+        languages = extract_language(text)
+        degree = extract_degree(text)
         # print(skills)
         data = data.pop('resume')
         objs = Apply.objects.filter(candidate_name= request.data.get('candidate_name'), job_name = request.data.get('job_name')) 
         if objs.exists():
             obj = objs.first()
-            obj.candidate_extracted_data = json.dumps({'skills': list(skills), 'language': None, 'degree': None, 'location': None})
+            obj.candidate_extracted_data = json.dumps({'skills': list(skills), 'language': list(languages), 'degree': list(degree), 'location': None})
             obj.save()
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
