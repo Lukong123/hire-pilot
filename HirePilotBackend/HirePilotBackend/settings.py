@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     # 'allauth.socialaccount',
     # 'rest_auth.registration',
     'rest_framework.authtoken',
-    'djoser',
+    # 'djoser',
     'users',
     # 'HirePilot.apps.'
 ]
