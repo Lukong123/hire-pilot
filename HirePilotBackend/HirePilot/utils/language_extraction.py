@@ -9,7 +9,7 @@ def extract_text_from_pdf(pdf_path):
 
 def extract_language(text):
   nlp = spacy.load("en_core_web_sm")
-  known_languages = ["French", "Spanish", "German", "Italian", "Pidgin", "Lamso"]
+  known_languages = ["Lamso","French", "Spanish", "German", "Italian", "Pidgin"]
   lang_pattern = re.compile("|".join(known_languages), re.IGNORECASE)
   doc = nlp(text)
   languages = set()

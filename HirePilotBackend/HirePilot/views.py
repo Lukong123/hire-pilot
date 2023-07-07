@@ -373,3 +373,75 @@ class ApplyViewset(ModelViewSet):
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
     
+# Status that works
+class StatusViewset(ModelViewSet):
+    queryset = Status.objects.all()
+    serializer_class = StatusSerializer
+
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        
+        
+        objs = Status.objects.filter(candidates_name= request.data.get('candidates_name'), 
+                                     companys_name = request.data.get('companys_name'), 
+                                     jobs_name = request.data.get('jobs_name'),
+                                     status = request.data.get('status')) 
+        if objs.exists():
+            obj = objs.first()
+            obj.save()
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+
+# Status
+@api_view(['POST'])
+def add_status(request):
+    status= StatusSerializer(data=request.data)
+
+    if Status.objects.filter(**request.data).exists():
+        raise serializers.ValidationError('This data already exists')
+    
+    if status.is_valid():
+        status.save()
+        return Response(status.data)
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+
+@api_view(['GET'])
+def view_status(request):
+    if request.query_params:
+        status = Status.objects.filter(**request.query_params.dict())
+    else:
+        status = Status.objects.all()
+    
+
+    if status:
+        serializer = StatusSerializer(status, many=True)
+        return Response(serializer.data)
+    
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+
+@api_view(['POST'])
+def update_status(request, pk):
+    status = Status.objects.get(pk=pk)
+    data = StatusSerializer(instance=status, data=request.data)
+
+    if data.is_valid():
+        data.save()
+        return Response(data.data)
+    
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+@api_view(['DELETE'])
+def delete_status(request, pk):
+    status= get_object_or_404(Status, pk=pk)
+    status.delete()
+    return Response(status=status.HTTP_202_ACCEPTED)
+

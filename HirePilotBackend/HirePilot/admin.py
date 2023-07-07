@@ -17,6 +17,7 @@ admin.site.register(Employer)
 admin.site.register(Job)
 admin.site.register(Apply)
 admin.site.register(Selection)
+admin.site.register(Status)
 
 
 

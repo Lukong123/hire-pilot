@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin, AbstractUser
 from django.contrib.auth import get_user_model
 from django.utils import timezone
 from pdfminer.high_level import extract_text
@@ -107,10 +106,23 @@ class Job(models.Model):
 
 # Application model
 class Apply(models.Model):
+    Pending = 'Pending'
+    Interview = 'Interview'
+    Approved = 'Approved'
+    Declined = 'Decline'
+
+    status = [
+        (Pending, 'Pending'),
+        (Interview, 'Interview'),
+        (Approved, 'Approved'),
+        (Declined, 'Declined')
+    ]
     candidate_name = models.ForeignKey(Candidate, on_delete=models.CASCADE)
     job_name = models. ForeignKey(Job, on_delete=models.CASCADE)
     resume = models.FileField(upload_to='Candidates/Documents', null=True, blank=True)
     candidate_extracted_data = models.JSONField(null=True, blank=True)
+    status = models.CharField(max_length=9
+                              , choices=status, default='Pending', blank=True, null=True)
     apply_date = models.DateField('apply date', default=timezone.now)
 
     
@@ -125,3 +137,24 @@ class Selection(models.Model):
     age = models.CharField(max_length=200)
  
 #  adding number of people needed in job to be nullable
+
+class Status(models.Model):
+    Pending = 'Pending'
+    Interview = 'Interview'
+    Approved = 'Approved'
+    Declined = 'Decline'
+
+    status = [
+        (Pending, 'Pending'),
+        (Interview, 'Interview'),
+        (Approved, 'Approved'),
+        (Declined, 'Declined')
+    ]
+
+    candidates_name = models.ForeignKey(Candidate, on_delete=models.CASCADE)
+    companys_name = models.ForeignKey(Employer, on_delete=models.CASCADE)
+    jobs_name = models.ForeignKey(Job, on_delete=models.CASCADE)
+    status = models.CharField(max_length=9
+                              , choices=status, default='Pending')
+
+    

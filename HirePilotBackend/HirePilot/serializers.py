@@ -82,5 +82,18 @@ class ApplicationSerializer(serializers.ModelSerializer):
                'candidate_name',
                'job_name',
                'resume',
-               'candidate_extracted_data'
+               'candidate_extracted_data',
+               'status'
+          )
+
+class StatusSerializer(serializers.ModelSerializer):
+     class Meta:
+          model = Status
+          fields =(
+               
+               'candidates_name',
+               'companys_name',
+               'jobs_name',
+               'status'
+               
           )

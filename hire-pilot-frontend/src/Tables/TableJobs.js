@@ -6,7 +6,8 @@ import Table from './Table';
 
 
 
-function TableJobs() {
+function TablesJobs() {
+    // const candidateData = JSON.parse(jsonData.candidate_extracted_data);
 
   const columns = useMemo(
     () => [
@@ -14,18 +15,20 @@ function TableJobs() {
         Header: "Candidate Name",
         accessor: 'candidate_name'
       },
-      
+
       {
         Header: "Job Title",
         accessor: 'job_name'
       },
       {
-        Header: "Resume",
-        accessor: 'resume'
+        Header: "Extracts",
+        accessor: 'candidate_extracted_data'
       },
     ],
     []
   );
+
+//   const { skills, language, degree } = candidateData;
    // Data state to store the ApI. it is initially an empty array
 
    const [data, setData] = useState([]);
@@ -34,8 +37,7 @@ function TableJobs() {
 
    useEffect(() => {
     (async () => {
-      const result = await axios("http://127.0.0.1:8000/HirePilot/application/view/");
-      
+      const result = await axios("http://127.0.0.1:8000/api/v1/apply/?limit=10&offset=10");
       setData(result.data);
     })();
    }, []);
@@ -57,13 +59,13 @@ const handleFilterChange = e => {
 /> */}
 
   return (
-   
+
     <div className='test'>
         {/* <SidebarEmployer/> */}
         <Table columns={columns} data={data} />
-     
+
     </div>
   )
 }
 
-export default TableJobs;
+export default TablesJobs;

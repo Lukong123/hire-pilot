@@ -4,19 +4,15 @@ import nltk
  
 # nltk.download('stopwords')
  
-# you may read the database from a csv file or some other database
 skills_database = [
-    'machine learning',
-    'data science',
-    'python',
-    'word',
-    # 'higher',
-    'excel',
-    # 'English',
-    # 'French',
-    'mysql',
-    'mentor',
-    'networking',
+    'machine learning','data science','python','word','excel',
+    'mysql','mentor','networking','microsoft word','sales', 'customer service',
+    'communication', 'critical thinking', 'problem solving', 'teamwork', 'leadership',
+    'adaptability', 'creativity', 'integrity', 'dependability','work ethic', 'attention to detail',
+    'time management', 'organisation', 'conflict resolution', 'negotiation', 'persuasion',
+    'technical skills', 'passion', 'math', 'medical knowledge', 'empathy', 'patience', 'drilling',
+    'carpentary', 'welding', 'molding', 'automation', 'engineering maintenance', 'solid works', 'reactjs',
+    'react', 'django', 'django rest framework', 'arduino','microcontrollers', 'interpersonal skills'
 ]
  
  

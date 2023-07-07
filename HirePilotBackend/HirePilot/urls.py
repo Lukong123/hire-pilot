@@ -1,7 +1,7 @@
 from django.urls import path, include
 from rest_framework import routers
 from . import views
-from .views import UploadViewSet, UploadViews
+from .views import UploadViewSet, UploadViews, StatusViewset
 
 router = routers.DefaultRouter()
 router.register(r'upload', UploadViewSet, basename="upload")
@@ -48,6 +48,14 @@ urlpatterns = [
     path('application/view/', views.view_application, name='view-application'),
     path('application/update/<int:pk>/',views.update_application, name='update-application'),
     path('application/<int:pk>/delete/', views.delete_application, name='delete-application'),
+
+    # Status
+
+    path('status/', views.StatusViewset.as_view({'get': 'list', 'post': 'create'}), name='status'),
+    path('status/create/', views.add_status, name='new-status'),
+    path('status/view/', views.view_status, name='view-status'),
+    path('status/update/<int:pk>/',views.update_status, name='update-status'),
+    path('status/<int:pk>/delete/', views.delete_status, name='delete-status'),
 
 
 
