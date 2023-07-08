@@ -166,7 +166,7 @@ CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
 )
 
-# AUTH_USER_MODEL = 'HirePilot.UserProfile'
+# AUTH_USER_MODEL = 'HirePilot.Account'
  # using auth_user_model = 'HirePilotBackend.User' gives wrong
 
 DJOSER = {

@@ -18,6 +18,7 @@ from pdfminer.high_level import extract_text
 from rest_framework.viewsets import ModelViewSet
 from django.conf import settings
 import json
+
 @api_view(['GET'])
 def ApiOverview(request):
     api_urls = {
