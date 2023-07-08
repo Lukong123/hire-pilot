@@ -1,24 +1,28 @@
 from rest_framework import serializers
-from rest_framework.serializers import FileField 
+from rest_framework.serializers import FileField
 from .models import *
 from django.db.models import fields
 from .models import Job, Resume, Candidate, Employer, Apply
 
+
 class JobsSerializer(serializers.ModelSerializer):
-	class Meta:
-		model = Job
-		fields = ( 
-			'pk',
-               'company_name',
-			'title',
-			'category',
-			'location',
-			'fulltime_partime',
-			'offline_remote',
-			'submission_deadline',
-			'selection_step',
-			'salary_range','description','skills',
-			'date_created' )
+    class Meta:
+        model = Job
+        fields = (
+            "pk",
+            "company_name",
+            "title",
+            "category",
+            "location",
+            "fulltime_partime",
+            "offline_remote",
+            "submission_deadline",
+            "selection_step",
+            "salary_range",
+            "description",
+            "skills",
+            "date_created",
+        )
 
 
 class UploadSerializer(serializers.ModelSerializer):
@@ -26,74 +30,53 @@ class UploadSerializer(serializers.ModelSerializer):
         model = Resume
         fields = "__all__"
 
+
 class NewUploadSerializer(serializers.Serializer):
     model = Resume
     file_uploaded = FileField()
-    class Meta:
-        fields = [
-             'name',
-             'resume',
-             'file_uploaded'
-                ]
 
+    class Meta:
+        fields = ["name", "resume", "file_uploaded"]
 
 
 class CandidateSerializer(serializers.ModelSerializer):
-     class Meta:
-          model = Candidate
-          fields = (
-               'pk',
-               'first_name',
-               'last_name',
-               'email'
-		  )
+    class Meta:
+        model = Candidate
+        fields = ("pk", "first_name", "last_name", "email")
 
 
 class EmployerSerializer(serializers.ModelSerializer):
-      class Meta:
-            model = Employer
-            fields = (
-                  'pk',
-                  'company_name',
-              	  'email',
-                  'location',
-                  'phone',
-                  'industry_type',
-			)
+    class Meta:
+        model = Employer
+        fields = (
+            "pk",
+            "company_name",
+            "email",
+            "location",
+            "phone",
+            "industry_type",
+        )
 
 
 class CriteriaSerializer(serializers.ModelSerializer):
-     class Meta:
-          model = Selection
-          fields = (
-               'job_name',
-               'skill',
-               'degree',
-               'experience',
-               'language',
-               'age'
-          )
+    class Meta:
+        model = Selection
+        fields = ("job_name", "skill", "degree", "experience", "language", "age")
+
 
 class ApplicationSerializer(serializers.ModelSerializer):
-     class Meta:
-          model = Apply
-          fields =(
-               
-               'candidate_name',
-               'job_name',
-               'resume',
-               'candidate_extracted_data',
-               'status'
-          )
+    class Meta:
+        model = Apply
+        fields = (
+            "candidate_name",
+            "job_name",
+            "resume",
+            "candidate_extracted_data",
+            "status",
+        )
+
 
 class StatusSerializer(serializers.ModelSerializer):
-     class Meta:
-          model = Status
-          fields =(
-               
-               'candidates_name',
-               'companys_name',
-               'jobs_name',
-               'status'
-               
-          )
+    class Meta:
+        model = Status
+        fields = ("candidates_name", "companys_name", "jobs_name", "status")
