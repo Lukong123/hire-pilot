@@ -3,7 +3,7 @@ import FirstSlide from './FirstSlide';
 import SecondSlide from './SecondSlide';
 import ThirdSlide from './ThirdSlide';
 
-function ApplyForm() {
+function CreateJobForm() {
     const [page, setPage] = useState(0);
     const [formData, setFormData] = useState({
         title: "",
@@ -89,4 +89,4 @@ function ApplyForm() {
   )
 }
 
-export default ApplyForm;
+export default CreateJobForm;

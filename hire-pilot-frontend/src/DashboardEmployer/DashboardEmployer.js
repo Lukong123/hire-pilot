@@ -31,7 +31,7 @@ function DashboardEmployer() {
     }}> Add Job</button>
     {openModal && <AddJob closeModal={setOpenModal}/>}
     </div>
-    <div><button className="openModalBtn" ><a href='/apply'> Add Jobs</a></button>
+    <div><button className="openModalBtn" ><a href='/createjob'> Add Jobs</a></button>
     </div>
 </div>
 

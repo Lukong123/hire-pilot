@@ -142,6 +142,15 @@ h3{
     border-left: 20px solid #3AC6EA;
 }
 
+select{
+    /* width: 100%; */
+    padding: 10px 50px;
+    margin: 5px 0;
+    border: 0;
+    border-bottom: 1px solid green;
+    outline: none;
+}
+
 /* .formApply .footer {
     flex: 20%;
     display: flex;

@@ -1,5 +1,5 @@
 import React from 'react';
-import './Apply.css'
+import './CreateJob.css'
 
 
 function FirstSlide({formData, setFormData}) {
