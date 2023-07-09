@@ -31,6 +31,7 @@ class Employer(models.Model):
     Banking_and_Finance = "Banking and Finance"
     Media_and_Entertainement = "Media and Entertainment"
     Professional_Services = "Professional Services"
+    Technology = "Technology"
     Others = "Others"
 
     industry_category = [
@@ -43,6 +44,7 @@ class Employer(models.Model):
         (Banking_and_Finance, "Banking and Finance"),
         (Media_and_Entertainement, "Media and Entertainment"),
         (Professional_Services, "Professional Services"),
+        (Technology, "Technology"),
         (Others, "Others"),
     ]
     owner = models.OneToOneField(User, on_delete=models.CASCADE)

@@ -4,14 +4,22 @@ import './CandidateSignupForm.css';
 export default function CandidateSignupForm() {
 
 	// States for registration
+	const [uname, setuName] = useState('');
 	const [name, setName] = useState('');
 	const [lname, setlName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [confirmPassword, setConfirmPassword] = useState('');
 
 	// States for checking the errors
 	const [submitted, setSubmitted] = useState(false);
 	const [error, setError] = useState(false);
+
+	// Handling the name change
+	const handleuName = (e) => {
+		setuName(e.target.value);
+		setSubmitted(false);
+	};
 
 	// Handling the name change
 	const handleName = (e) => {
@@ -37,16 +45,19 @@ export default function CandidateSignupForm() {
 		setSubmitted(false);
 	};
 
-	// Handling the form submission
-	const handleSubmit = (e) => {
+	
+	const handleSubmit = e => {
 		e.preventDefault();
-		if (name === '' || lname === ''|| email === '' || password === '') {
-			setError(true);
+	  
+		if (uname === '' || name === '' || lname === '' || email === '' || password === '' || confirmPassword === '') {
+		  setError(true);
+		} else if (password !== confirmPassword) {
+		  setError(true);
 		} else {
-			setSubmitted(true);
-			setError(false);
+		  setSubmitted(true);
+		  setError(false);
 		}
-	};
+	  };
 
 	// Showing success message
 	const successMessage = () => {
@@ -90,6 +101,11 @@ export default function CandidateSignupForm() {
 			<form>
 				{/* Labels and inputs for form data */}
 				{/* <label className="label">Name</label> */}
+
+				{/* username */}
+				<input onChange={handleuName} className="input" placeholder='Enter User Name'
+					value={uname} type="text" /> <br></br>
+
 				<input onChange={handleName} className="input" placeholder='Enter First Name'
 					value={name} type="text" /> <br></br>
 
@@ -103,6 +119,15 @@ export default function CandidateSignupForm() {
 				{/* <label className="label">Password</label> */}
 				<input onChange={handlePassword} className="input" placeholder='Enter Password'
 					value={password} type="password" /> <br></br>
+
+
+<input
+  onChange={e => setConfirmPassword(e.target.value)}
+  className="input"
+  placeholder="Confirm Password"
+  value={confirmPassword}
+  type="password"
+/>
 
 				<button onClick={handleSubmit} className="btn"
 						type="submit">

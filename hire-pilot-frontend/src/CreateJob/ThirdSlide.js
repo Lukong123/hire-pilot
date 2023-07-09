@@ -6,7 +6,7 @@ function ThirdSlide({formData, setFormData}) {
   return (
     <div className='containerapply thirdd'>
         <form id="Form3">
-                <h5>System Information</h5>
+                <h3>System Information</h3>
 
                 <select className="selectJob" name='jobType' id='jobType'
                   value={formData.selection_step}

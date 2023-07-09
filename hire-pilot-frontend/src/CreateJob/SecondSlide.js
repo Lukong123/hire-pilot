@@ -42,7 +42,7 @@ function SecondSlide({formData, setFormData}) {
                      setFormData({...formData, salary_range: event.target.value
                 })}/>
                    <input className="newst" 
-                type="text" 
+                type="date" 
                 placeholder="Submission Deadline" 
                 value={formData.submission_deadline}
                 onChange={(event) =>

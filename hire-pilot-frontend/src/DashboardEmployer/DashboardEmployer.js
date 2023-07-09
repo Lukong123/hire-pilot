@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import './DashboardEmployer.css';
 import Footer from '../Footer/Footer';
 import Jobs from '../Jobs/Jobs';
-import AddJob from '../Modal/AddJob';
+import AddJob from '../Modal/ApplyJob';
 import SidebarEmployer from '../Sidebar/SidebarEmployer';
 import TotalCard from '../TotalCard/TotalCard'
 import HeaderEmployer from '../Header/HeaderEmployer';
@@ -26,12 +26,8 @@ function DashboardEmployer() {
   <div class="item2"><TotalCard/></div> 
   <div class="item3">
   <div className='addJob'>
-<div><button className="openModalBtn" onClick={() => {
-      setOpenModal(true);
-    }}> Add Job</button>
-    {openModal && <AddJob closeModal={setOpenModal}/>}
-    </div>
-    <div><button className="openModalBtn" ><a href='/createjob'> Add Jobs</a></button>
+
+    <div><button className="openModalBtn" ><a href='/createjob'> Add Job</a></button>
     </div>
 </div>
 

@@ -1,9 +1,13 @@
 import React, {useState, useEffect} from "react";
 import axios from 'axios';
+import ApplyJob from '../Modal/ApplyJob';
+
 
 
 function Jobcontext() {
   const [name, setName] = useState([]);
+  const [openModal, setOpenModal] = useState(false);
+
 
   useEffect(() => {
     fetchData();
@@ -24,7 +28,12 @@ return (
      <div className='jobcontext'>
      <div> <p> Img </p> <p class='companyname'> {data.company_name}</p> </div>
 
-<button  class ='applybtnn' href='/apply'><a href='/apply'>Apply</a></button>
+{/* <button  class ='applybtnn' href='/apply'><a href='/apply'>Apply</a></button> */}
+<div><button className="openModalBtn applybtn" onClick={() => {
+      setOpenModal(true);
+    }}> Apply</button>
+    {openModal && <ApplyJob closeModal={setOpenModal}/>}
+    </div>
 
 <div class='jobtitle'> {data.title} <span class='dot'>.</span> <span class='location'>{data.location}</span> </div> 
 

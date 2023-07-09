@@ -31,7 +31,9 @@ export default function Appp() {
         <Route path='status' element={<Status />} />
         <Route path='alljobs' element={<AllJobs />} />
         <Route path='signupcandidate' element={<CandidateSignupForm />} />
+        {/* <Route path='signupemployers' element={<EmployerSignupForm />} /> */}
         <Route path='signupemployer' element={<EmployerSignupForm />} />
+
         <Route path='loginemployer' element={<LoginEmployer/>} />
         <Route path='logincandidate' element={<LoginCandidate/>} />
         <Route path='test' element={<TableJxobs/>} />
@@ -39,16 +41,6 @@ export default function Appp() {
         <Route path='ohh' element={<MyComponent/>}/>
         <Route paht='manytest' element= {<MyTest/>}/>
         <Route path='test2' element={<Test2 />}/>
-        
-
-
-
-
-
-
-
-
-
       </Route>
     </Routes>
     </BrowserRouter>

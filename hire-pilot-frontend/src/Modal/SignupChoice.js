@@ -16,7 +16,7 @@ function SignupChoice({closeModal}) {
                 <div className="body-button">
                     <button className="btnSeeker"><a href="/signupcandidate">SignUp as Jobseeker</a></button> <br></br>
                     
-                    <button className="btnEmployer"><a>SignUp as Employer</a></button>
+                    <button className="btnEmployer"><a href="/signupemployer">SignUp as Employer</a></button>
 
 
                 </div>
