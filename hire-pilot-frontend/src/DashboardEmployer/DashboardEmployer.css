@@ -24,4 +24,12 @@
     }
     
    
-  
+  .openModalBtn a:hover{
+    color: #0A2543;
+    text-decoration: none;
+  }
+
+  .openModalBtn a{
+    color: white;
+    text-decoration: none;
+  }
