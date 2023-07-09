@@ -2,7 +2,7 @@ from rest_framework import serializers
 from rest_framework.serializers import FileField
 from .models import *
 from django.db.models import fields
-from .models import Job, Resume, Candidate, Employer, Apply
+from .models import Job, Resume, Employer, Apply
 
 
 class JobsSerializer(serializers.ModelSerializer):
@@ -39,23 +39,32 @@ class NewUploadSerializer(serializers.Serializer):
         fields = ["name", "resume", "file_uploaded"]
 
 
-class CandidateSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Candidate
-        fields = ("pk", "first_name", "last_name", "email")
 
 
 class EmployerSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(max_length = 10, write_only=True)
+    password = serializers.CharField(max_length=30, write_only=True)
     class Meta:
         model = Employer
         fields = (
             "pk",
+            "username",
+            "password",
+            "owner",
             "company_name",
             "email",
             "location",
             "phone",
             "industry_type",
         )
+        read_only_fields = ["owner"]
+    
+    def create(self, validated_data):
+        username = validated_data.pop("username")
+        password = validated_data.pop("password")
+        owner = User.objects.create_user(username=username, password=password, is_employer = True)
+        validated_data["owner"]=owner
+        return super().create(validated_data)
 
 
 class CriteriaSerializer(serializers.ModelSerializer):
@@ -74,9 +83,3 @@ class ApplicationSerializer(serializers.ModelSerializer):
             "candidate_extracted_data",
             "status",
         )
-
-
-class StatusSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Status
-        fields = ("candidates_name", "companys_name", "jobs_name", "status")

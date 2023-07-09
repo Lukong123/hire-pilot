@@ -4,6 +4,7 @@ from django.utils import timezone
 from pdfminer.high_level import extract_text
 import re
 import nltk
+from account.models import User
 
 
 # Resume Model
@@ -15,15 +16,6 @@ class Resume(models.Model):
 
 # Candidate model
 
-
-class Candidate(models.Model):
-    first_name = models.CharField(max_length=20, primary_key=True)
-    last_name = models.CharField(max_length=20)
-    email = models.EmailField(max_length=55)
-    date_created = models.DateField("date created", default=timezone.now)
-
-    def __str__(self):
-        return self.first_name
 
 
 # Employer Model
@@ -53,11 +45,11 @@ class Employer(models.Model):
         (Professional_Services, "Professional Services"),
         (Others, "Others"),
     ]
-
-    company_name = models.CharField(max_length=20, primary_key=True)
+    owner = models.OneToOneField(User, on_delete=models.CASCADE)
+    company_name = models.CharField(max_length=20)
     email = models.EmailField(max_length=55)
     location = models.CharField(max_length=20)
-    phone = models.PositiveIntegerField()
+    phone = models.CharField(max_length=13)
     industry_type = models.CharField(
         max_length=25, choices=industry_category, default=Others
     )
@@ -120,7 +112,7 @@ class Apply(models.Model):
         (Approved, "Approved"),
         (Declined, "Declined"),
     ]
-    candidate_name = models.ForeignKey(Candidate, on_delete=models.CASCADE)
+    candidate_name = models.ForeignKey(User, on_delete=models.CASCADE)
     job_name = models.ForeignKey(Job, on_delete=models.CASCADE)
     resume = models.FileField(upload_to="Candidates/Documents", null=True, blank=True)
     candidate_extracted_data = models.JSONField(null=True, blank=True)
@@ -143,20 +135,3 @@ class Selection(models.Model):
 #  adding number of people needed in job to be nullable
 
 
-class Status(models.Model):
-    Pending = "Pending"
-    Interview = "Interview"
-    Approved = "Approved"
-    Declined = "Decline"
-
-    status = [
-        (Pending, "Pending"),
-        (Interview, "Interview"),
-        (Approved, "Approved"),
-        (Declined, "Declined"),
-    ]
-
-    candidates_name = models.ForeignKey(Candidate, on_delete=models.CASCADE)
-    companys_name = models.ForeignKey(Employer, on_delete=models.CASCADE)
-    jobs_name = models.ForeignKey(Job, on_delete=models.CASCADE)
-    status = models.CharField(max_length=9, choices=status, default="Pending")

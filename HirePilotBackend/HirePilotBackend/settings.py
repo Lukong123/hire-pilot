@@ -42,26 +42,31 @@ INSTALLED_APPS = [
     # 'djoser',
     # "users",
     # 'HirePilot.apps.'
+    'account',
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 # Rest framework
 REST_FRAMEWORK = {
-    "DEFAULT_RENDERER_CLASSES": [
-        "rest_framework.renderers.JSONRenderer",
-        "rest_framework.renderers.BrowsableAPIRenderer",
+    "DEFAULT_AUTHENTICATION_CLASSES":[
+        "rest_framework.authentication.SessionAuthentication",
+        "account.authentication.TokenAuthentication",
+       
+        
     ],
-    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
-    "PAGE_SIZE": 10
-    # 'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
-    # 'DEFAULT_AUTHENTICATION_CLASSES': (
-    #     'rest_framework_simplejwt.authentication.JWTAuthentication',
-    #                                     'rest_framework.authentication.SessionAuthentication',
-    #     'rest_framework.authentication.BasicAuthentication',
-    #     'rest_framework_simplejwt.authentication.JWTAuthentication', )
-}
+    'DEFAULT_RENDERER_CLASSES':[
+    'rest_framework.renderers.JSONRenderer',
+    'rest_framework.renderers.BrowsableAPIRenderer',
+    ],
 
+
+    "DEFAULT_PERMISSION_CLASSES":[
+        "rest_framework.permissions.IsAuthenticatedOrReadOnly",
+    ],
+    "DEFAULT_PAGINATION_CLASS":"rest_framework.pagination.LimitOffsetPagination",
+    "PAGE_SIZE": 5
+}
 # JWT
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": datetime.timedelta(minutes=30),
@@ -161,7 +166,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 CORS_ORIGIN_WHITELIST = ("http://localhost:3000",)
 
-# AUTH_USER_MODEL = "users.User"
+AUTH_USER_MODEL = "account.User"
 # using auth_user_model = 'HirePilotBackend.User' gives wrong
 
 DJOSER = {"SERIALIZERS": {"user_create": "users.serializers.UserCreateSerializer"}}
