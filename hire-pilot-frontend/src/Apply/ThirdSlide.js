@@ -2,14 +2,45 @@ import React from 'react';
 import './Apply.css';
 
 
-function ThirdSlide() {
+function ThirdSlide({formData, setFormData}) {
   return (
     <div className='containerapply thirdd'>
         <form id="Form3">
-                <h3>Third</h3>
-                <input className="newst" type="text" placeholder="ume"/>
-                <input className="newst" type="text" placeholder="Rcl"/>
-                <input  className="newst" type="text" placeholder="Submit final"/>
+                <h5>System Information</h5>
+
+                <select className="selectJob" name='jobType' id='jobType'
+                  value={formData.selection_step}
+                  onChange={(event) =>
+                       setFormData({...formData, selection_step: event.target.value
+                  })}>
+                <option value="" disabled selected>Selection Step</option>
+
+    <option value={'1'}>One (if only resume is considered)</option>
+    <option value={'2'}>Two(if interview follows)</option>
+  
+    
+  </select>
+                <input className="newst" 
+                type="text" 
+                placeholder="Required Skills" 
+                value={formData.skills}
+                onChange={(event) =>
+                     setFormData({...formData, skills: event.target.value
+                })}/>
+                   <input className="newst" 
+                type="text" 
+                placeholder="Required Degree" 
+                value={formData.degree}
+                onChange={(event) =>
+                     setFormData({...formData, degree: event.target.value
+                })}/>
+                  <input className="newst" 
+                type="text" 
+                placeholder="Required Language" 
+                value={formData.language}
+                onChange={(event) =>
+                     setFormData({...formData, language: event.target.value
+                })}/>
                 <div className="btn-box">
             </div>
             </form>

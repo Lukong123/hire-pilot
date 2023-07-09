@@ -6,20 +6,26 @@ import ThirdSlide from './ThirdSlide';
 function ApplyForm() {
     const [page, setPage] = useState(0);
     const [formData, setFormData] = useState({
-        resume: "",
-        resume1: "",
-        resume2: "",
-        resume3: "",
+        title: "",
+        category: "",
+        location: "",
+        description: "",
 
-        resume4: "",
+        fulltime_partime: "",
 
-        resume5: "",
+        offline_remote: "",
+        salary_range: "",
 
-        resume6: "",
+        submission_deadline: "",
 
-        resume7: "",
 
-        resume8: "",
+        selection_step: "",
+        
+
+
+        skills:"",
+        language:"",
+        degree:""
 
     });
 
