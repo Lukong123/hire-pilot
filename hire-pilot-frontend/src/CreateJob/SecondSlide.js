@@ -29,8 +29,8 @@ function SecondSlide({formData, setFormData}) {
                 })}>
                 <option value="" disabled selected>Offline or Remote</option>
 
-    <option value={'Full Time'}>Offline</option>
-    <option value={'Part Time'}>Remote</option>
+    <option value={'Offline'}>Offline</option>
+    <option value={'Remote'}>Remote</option>
     
     
   </select>

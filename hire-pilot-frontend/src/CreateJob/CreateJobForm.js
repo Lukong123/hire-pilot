@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import FirstSlide from './FirstSlide';
 import SecondSlide from './SecondSlide';
 import ThirdSlide from './ThirdSlide';
+import axios from 'axios';
 
 function CreateJobForm() {
     const [page, setPage] = useState(0);
@@ -69,7 +70,7 @@ function CreateJobForm() {
         onClick={() => {setPage((currentPage) => currentPage
              - 1)}}
         >Previous</button>
-        <button
+        {/* <button
         onClick={() => {
             if (page === FormTitles.length -1) {
                 alert("form sumbitted")
@@ -80,7 +81,24 @@ function CreateJobForm() {
             else {
             setPage((currentPage) => currentPage +1 );}
         }}>
-       {page=== FormTitles.length -1 ? "Submit": "Next"}</button>
+       {page=== FormTitles.length -1 ? "Submit": "Next"}</button> */}
+       <button onClick={() => {
+    if (page === FormTitles.length -1) {
+        axios.post('http://127.0.0.1:8000/api/v1/job/', formData)
+            .then((response) => {
+                alert('Form submitted successfully!');
+                console.log(response);
+            })
+            .catch((error) => {
+                alert('Error submitting form: ' + error.message);
+                console.error(error);
+            });
+    } else {
+        setPage((currentPage) => currentPage +1 );
+    }
+}}>
+    {page=== FormTitles.length -1 ? "Submit": "Next"}
+</button>
 
         </div>
         

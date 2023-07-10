@@ -6,6 +6,8 @@ router = DefaultRouter()
 
 router.register("apply", views.ApplyViewset)
 router.register("employer", views.EmployerViewset)
+router.register("job", views.JobViewset)
+
 
 
 

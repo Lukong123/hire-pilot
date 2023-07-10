@@ -15,8 +15,8 @@ function ThirdSlide({formData, setFormData}) {
                   })}>
                 <option value="" disabled selected>Selection Step</option>
 
-    <option value={'1'}>One (if only resume is considered)</option>
-    <option value={'2'}>Two(if interview follows)</option>
+    <option value={'One'}>One</option>
+    <option value={'Two'}>Two</option>
   
     
   </select>

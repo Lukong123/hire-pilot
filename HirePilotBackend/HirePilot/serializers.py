@@ -20,6 +20,8 @@ class JobsSerializer(serializers.ModelSerializer):
             "selection_step",
             "salary_range",
             "description",
+            "language",
+            "degree",
             "skills",
             "date_created",
         )

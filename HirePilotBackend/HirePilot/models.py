@@ -1,3 +1,4 @@
+import datetime
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.utils import timezone
@@ -80,6 +81,14 @@ class Job(models.Model):
         (Offline, "Offline"),
         (Remote, "Remote"),
     ]
+
+    One = 'One'
+    Two = 'Two'
+
+    selectionstep = [
+        (One, "One"),
+        (Two, "Two")
+    ]
     company_name = models.ForeignKey(Employer, on_delete=models.CASCADE)
     title = models.CharField(max_length=30, primary_key=True)
     category = models.CharField(max_length=30)
@@ -91,11 +100,13 @@ class Job(models.Model):
         max_length=7, choices=offlineorremote, default=Offline
     )
     submission_deadline = models.DateField(max_length=30)
-    selection_step = models.PositiveIntegerField()
+    selection_step = models.CharField(choices=selectionstep, default=One, max_length=15)
     salary_range = models.CharField(max_length=30)
-    description = models.CharField(max_length=100)
+    description = models.CharField(max_length=256)
+    degree = models.CharField(max_length=100, null=True)
+    language = models.CharField(max_length=100, null=True)
     skills = models.CharField(max_length=100, null=True)
-    date_created = models.DateField("date created", default=timezone.now)
+    date_created = models.DateField("date created", default=datetime.date.today)
 
     def __str__(self):
         return self.title
