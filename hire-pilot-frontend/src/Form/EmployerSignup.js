@@ -6,8 +6,13 @@ export default function EmployerSignupForm() {
 	// States for registration
 	const [uname, setuName] = useState('');
 	const [name, setName] = useState('');
-	const [lname, setlName] = useState('');
 	const [email, setEmail] = useState('');
+	const [location, setLocation] = useState('');
+	const [phone, setPhone] = useState('');
+	const [category, setCategory] = useState('');
+
+
+
 	const [password, setPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -28,16 +33,33 @@ export default function EmployerSignupForm() {
 	};
 
 	// Handling last name change
-	const handlelName = (e) => {
-		setlName(e.target.value);
-		setSubmitted(false);
-	};
+	
 
 	// Handling the email change
 	const handleEmail = (e) => {
 		setEmail(e.target.value);
 		setSubmitted(false);
 	};
+
+		// Handling the phone change
+	const handlePhone = (e) => {
+		setPhone(e.target.value);
+		setSubmitted(false);
+	};
+
+			// Handling the location change
+	const handleLocation = (e) => {
+		setLocation(e.target.value);
+		setSubmitted(false);
+	};
+
+			// Handling the category change
+	const handleCategory = (e) => {
+		setCategory(e.target.value);
+		setSubmitted(false);
+	};
+
+
 
 	// Handling the password change
 	const handlePassword = (e) => {
@@ -49,7 +71,7 @@ export default function EmployerSignupForm() {
 	const handleSubmit = e => {
 		e.preventDefault();
 	  
-		if (uname === '' || name === '' || lname === '' || email === '' || password === '' || confirmPassword === '') {
+		if (uname === '' || name === '' ||  location === '' || email === '' || phone === ''|| category=== '' || password === '' || confirmPassword === '') {
 		  setError(true);
 		} else if (password !== confirmPassword) {
 		  setError(true);
@@ -109,23 +131,23 @@ export default function EmployerSignupForm() {
 				<input onChange={handleName} className="input" placeholder='Enter Company Name'
 					value={name} type="text" /> <br></br>
 
-<input onChange={handlelName} className="input" placeholder='Enter Location'
-					value={lname} type="text" /> <br></br>
+<input onChange={handleLocation} className="input" placeholder='Enter Location'
+					value={location} type="text" /> <br></br>
 
 				{/* <label className="label">Email</label> */}
 				<input onChange={handleEmail} className="input" placeholder='Enter Email'
 					value={email} type="email" /> <br></br>
 
 				{/* <label className="label">Phone</label> */}
-				<input onChange={handleEmail} className="input" placeholder='Enter Phone Number'
-					value={email} type="email" /> <br></br>
+				<input onChange={handlePhone} className="input" placeholder='Enter Phone Number'
+					value={phone} type="email" /> <br></br>
 				
 				{/* <label className="label">Industry Type</label> */}
-				<input onChange={handleEmail} className="input" placeholder='Enter Email'
-					value={email} type="email" /> <br></br>
+				{/* <input onChange={handleCategory} className="input" placeholder='Enter Email'
+					value={email} type="email" /> <br></br> */}
 
 				{/* Select */}
-				<select className="" name='allIndustries' id='allIndustries'>
+				<select className="" name='allIndustries' id='allIndustries' onChange={handleCategory} value={category}>
     <option value={'Agriculture'}>Agriculture</option>
     <option value={'Health Care'}>Health Care</option>
     <option value={'Hospitality and Tourism'}>Hospitality and Tourism</option>
@@ -168,3 +190,4 @@ export default function EmployerSignupForm() {
 }
 
 // export default CandidateSignupForm;
+
