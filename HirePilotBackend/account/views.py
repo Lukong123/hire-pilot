@@ -4,8 +4,11 @@ from rest_framework.authtoken.models import Token
 from .serializers import UserSerializer
 from .models import User
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated, AllowAny
+
 
 class UserRegistrationView(generics.CreateAPIView):
+    permission_classes = [AllowAny]
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
