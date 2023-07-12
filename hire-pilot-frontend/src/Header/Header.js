@@ -5,11 +5,13 @@ import '../Jobs/Jobs';
 import SignupChoice from '../Modal/SignupChoice';
 import Login from '../Login/Login';
 import LoginChoice from "../Modal/LoginChoice";
+import LoginCandidate from "../Login/LoginCandidate";
 
 
 function Header() {
   const [openModal, setOpenModal] = useState(false);
   const [openLogin, setOpenLogin] = useState(false);
+
 
     return(
         <div class="topnav">
@@ -38,6 +40,8 @@ function Header() {
     }}> Login</button>
     {openLogin && <LoginChoice closeLogin={setOpenLogin}/>}
     </div>
+
+   
 
   </div>
   

@@ -5,12 +5,16 @@ from django.db.models import fields
 from .models import Job, Resume, Employer, Apply
 
 
+
 class JobsSerializer(serializers.ModelSerializer):
+    company_name_id = serializers.PrimaryKeyRelatedField(
+        queryset=Employer.objects.all(),
+    )
+
     class Meta:
         model = Job
         fields = (
-            "pk",
-            "company_name",
+            "company_name_id",
             "title",
             "category",
             "location",
@@ -25,8 +29,6 @@ class JobsSerializer(serializers.ModelSerializer):
             "skills",
             "date_created",
         )
-
-
 class UploadSerializer(serializers.ModelSerializer):
     class Meta:
         model = Resume

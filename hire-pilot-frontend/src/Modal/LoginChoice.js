@@ -14,9 +14,9 @@ function LoginChoice({closeLogin}) {
                     <p>Create Your Account</p>
                 </div>
                 <div className="body-button">
-                    <button className="btnSeeker"><a href="/logincandidate">Login as Jobseeker</a></button> <br></br>
+                    <a href="/logincandidate" className="btnSeeker">Login as Jobseeker</a><br></br>
                     
-                    <button className="btnEmployer"><a href="/loginemployer">Login as Employer</a></button>
+                    <a href="/loginemployer" className="btnEmployer">Login as Employer</a>
 
 
                 </div>

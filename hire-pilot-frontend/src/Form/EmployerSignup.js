@@ -76,8 +76,41 @@ export default function EmployerSignupForm() {
 		} else if (password !== confirmPassword) {
 		  setError(true);
 		} else {
-		  setSubmitted(true);
-		  setError(false);
+			const data = {
+				username: uname,
+				company_name: name,
+				email: email,
+				location: location,
+				phone:phone,
+				industry_type:category,
+				password: password,
+				confirm_password: confirmPassword
+			  };
+		
+			  console.log(data)
+			  fetch('http://127.0.0.1:8000/api/v1/employer/', {
+				method: 'POST',
+				headers: {
+				  'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(data)
+			  })
+				.then(response => {
+				  if (!response.ok) {
+					// throw new Error('Network response was not ok');
+					console.error(error)
+				  }
+				  return response.json();
+				})
+				.then(data => {
+				  console.log('Success:', data);
+				  setSubmitted(true);
+				  setError(false);
+				})
+				.catch(error => {
+				  console.error('Error:', error);
+				  setError(true);
+				});
 		}
 	  };
 

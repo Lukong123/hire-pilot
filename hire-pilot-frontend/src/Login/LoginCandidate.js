@@ -1,37 +1,77 @@
-// import React from 'react';
-import React from 'react';
+import React, { useState } from 'react';
 import './Login.css';
 
+function LoginCandidate(props) {
+  const [uname, setuName] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
+  const [showModal, setShowModal] = useState(true);
 
-function LoginCandidate({closeLogin}){
-    return(
-        <div className="modalBackground">
-            <div className="modalContainer">
-                <div className="titleClosedBtn">
-                <button onClick={() => closeLogin(false)}>X</button>
-                </div>
-                <div className="title">
-                <p>Logo</p>
-                <h2>Welcome to Hire Pilot</h2>
-                </div>
-                <div className="body-login">
-                    <p className='bodytitle'>LOGIN</p>
+  const handleuNameChange = (event) => {
+    setuName(event.target.value);
+  };
 
-                    <input type='email' placeholder='Enter Your Email'/> <br></br>
-                    <input type='password' placeholder='Enter Yourgg Password'/>
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
 
-                    <p><a href='#pass'className='forgotPass'>Forgot Password?</a></p>
-                    <button className="loginbtn"><a href='#login'>Login</a></button> <br></br>
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const data1 = {
+      username: uname,
+      password: password
+    };
+    const response = await fetch('http://127.0.0.1:8000/Account/api/login/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data1),
+    });
+    const data = await response.json();
+    if (response.ok) {
+      localStorage.setItem('token', data.token); // Save the token to local storage
+      localStorage.setItem('user', data.user)
+      console.log(localStorage.getItem('data'))
+      setShowModal(false); // Close the login modal
+    } else {
+      setError(data.error);
+    }
+  };
 
-                </div>
-                <div className="footer">
-                    <p className='donthaveaccount'>Don't yet have an account? <span> <a href='#create' className='create'>Create Account</a></span></p>
-                </div>
+  if (!showModal) {
+    return null;
+  }
 
-            </div>
+  return (
+    <div className="modalBackground">
+      <div className="modalContainer">
+        <div className="titleClosedBtn">
+          <button onClick={() => setShowModal(false)}>X</button>
         </div>
-    )
-}
+        <div className="title"></div>
+        <div className="body-login">
+          <p className="bodytitle">LOGIN</p>
 
+          <form onSubmit={handleSubmit}>
+            <input type="text" placeholder="Enter Your Username" value={uname} onChange={handleuNameChange} />
+            <br />
+            <input type="password" placeholder="Enter Your Password" value={password} onChange={handlePasswordChange} />
+            {error && <p className="error">{error}</p>}
+            <button type="submit" className="loginbtn">
+              Login
+            </button>
+            <br />
+          </form>
+        </div>
+        <div className="footer">
+          <p className="donthaveaccount">
+            Don't yet have an account? <span> <a href="#create" className="create">Create Account</a></span>
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default LoginCandidate;

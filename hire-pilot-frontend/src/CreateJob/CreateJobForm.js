@@ -18,7 +18,7 @@ function CreateJobForm() {
         salary_range: "",
 
         submission_deadline: "",
-
+        company_name_id: localStorage.getItem('user').id,
 
         selection_step: "",
         
@@ -83,17 +83,24 @@ function CreateJobForm() {
         }}>
        {page=== FormTitles.length -1 ? "Submit": "Next"}</button> */}
        <button onClick={() => {
-    if (page === FormTitles.length -1) {
-        axios.post('http://127.0.0.1:8000/api/v1/job/', formData)
-            .then((response) => {
-                alert('Form submitted successfully!');
-                console.log(response);
-            })
-            .catch((error) => {
-                alert('Error submitting form: ' + error.message);
-                console.error(error);
-            });
-    } else {
+    if (page === FormTitles.length - 1) {
+        const config = {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('token')}` // replace with your actual token
+          }
+        };
+      
+        axios.post('http://127.0.0.1:8000/api/v1/job/', formData, config)
+          .then((response) => {
+            alert('Form submitted successfully!');
+            console.log(response);
+          })
+          .catch((error) => {
+            alert('Error submitting form: ' + error.message);
+            console.error(error);
+          });
+      } else {
         setPage((currentPage) => currentPage +1 );
     }
 }}>

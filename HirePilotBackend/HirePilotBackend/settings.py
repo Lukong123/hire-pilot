@@ -32,7 +32,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "crispy_forms",
     "authentication",
-    "rest_framework_simplejwt",
+    # "rest_framework_simplejwt",
     # 'rest_auth',
     # 'all_auth',
     # 'allauth.account',

@@ -132,7 +132,7 @@ class EmployerViewset(ModelViewSet):
     serializer_class = EmployerSerializer
 
 class JobViewset(ModelViewSet):
-    permission_classes = [AllowAny]
+    # permission_classes = [AllowAny]
     queryset = Job.objects.all()
     serializer_class = JobsSerializer
 
