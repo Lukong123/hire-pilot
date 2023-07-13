@@ -132,7 +132,7 @@ class EmployerViewset(ModelViewSet):
     serializer_class = EmployerSerializer
 
 class JobViewset(ModelViewSet):
-    # permission_classes = [AllowAny]
+    permission_classes = [AllowAny]
     queryset = Job.objects.all()
     serializer_class = JobsSerializer
 
@@ -141,7 +141,9 @@ class JobViewset(ModelViewSet):
 # Apply
 
 class ApplyViewset(ModelViewSet):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
+
     queryset = Apply.objects.all()
     serializer_class = ApplicationSerializer
 
@@ -186,9 +188,9 @@ class ApplyViewset(ModelViewSet):
             serializer.data, status=status.HTTP_201_CREATED, headers=headers
         )
     
-    def get_queryset(self):
-        if self.request.user.is_employer:
-            return super().get_queryset().filter(job_name__company_name__owner=self.request.user)
-        else:
-            return super().get_queryset().filter(candidate_name=self.request.user)
+    # def get_queryset(self):
+    #     if self.request.user.is_employer:
+    #         return super().get_queryset().filter(job_name__company_name__owner=self.request.user)
+    #     else:
+    #         return super().get_queryset().filter(candidate_name=self.request.user)
 

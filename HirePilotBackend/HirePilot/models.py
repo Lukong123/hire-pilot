@@ -130,7 +130,7 @@ class Apply(models.Model):
     resume = models.FileField(upload_to="Candidates/Documents", null=True, blank=True)
     candidate_extracted_data = models.JSONField(null=True, blank=True)
     status = models.CharField(
-        max_length=9, choices=status, default="Pending", blank=True, null=True
+        max_length=9, choices=status, default="Pending", blank=True
     )
     apply_date = models.DateField("apply date", default=timezone.now)
 

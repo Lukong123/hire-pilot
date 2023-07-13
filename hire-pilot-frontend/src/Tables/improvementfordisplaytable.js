@@ -110,13 +110,13 @@ function accessRow(originalRow, rowIndex, depth, parentIndex, rows) {
   });
 }
 
-const MyComponent = () => {
+const MyComponecnt = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/v1/apply/?limit=10&offset=10');
+        const response = await fetch('http://127.0.0.1:8000/api/v1/apply/');
         const jsonData = await response.json();
         if (Array.isArray(jsonData)) {
           setData(jsonData);
@@ -171,4 +171,4 @@ const MyComponent = () => {
   );
 };
 
-export default MyComponent;
+export default MyComponecnt;
