@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTable } from 'react-table';
+import axios from 'axios';
 
 const columns = [
   {
@@ -25,7 +26,7 @@ const columns = [
     id: 'skills',
     Header: 'Skills',
     accessor: 'candidate_extracted_data',
-    CCell: ({ value }) => {
+    Cell: ({ value }) => {
       if (!value) {
         return null;
       }
@@ -110,19 +111,20 @@ function accessRow(originalRow, rowIndex, depth, parentIndex, rows) {
   });
 }
 
+const config = {
+  headers: {
+    "Content-Type": "application/json",
+  }
+}
+
 const MyComponecnt = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/v1/apply/');
-        const jsonData = await response.json();
-        if (Array.isArray(jsonData)) {
-          setData(jsonData);
-        } else {
-          console.error('API response is not an array:', jsonData);
-        }
+        const response = await axios.get('http://127.0.0.1:8000/api/v1/apply/?limit=15&offset=10', config);
+        setData(response.data.results);
       } catch (error) {
         console.error(error);
       }
@@ -130,8 +132,6 @@ const MyComponecnt = () => {
 
     fetchData();
   }, []);
-
-  console.log(data);
 
   const {
     getTableProps,
