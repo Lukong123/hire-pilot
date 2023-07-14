@@ -13,12 +13,12 @@ function TablesJobs() {
     () => [
       {
         Header: "Candidate Name",
-        accessor: 'candidate_name'
+        accessor: 'candidate'
       },
 
       {
         Header: "Job Title",
-        accessor: 'job_name'
+        accessor: 'job'
       },
       {
         Header: "Extracts",

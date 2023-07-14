@@ -20,7 +20,7 @@ function TableJxobs() {
         axios.get("http://127.0.0.1:8000/HirePilot/alljobs/").then(
         (response) => {
             // console.log(response)
-            setJokes(response.data.title + "..." + response.data.company_name)
+            setJokes(response.data.title + "..." + response.data.company.company_name)
         }
     )
 

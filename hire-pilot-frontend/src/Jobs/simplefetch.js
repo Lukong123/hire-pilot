@@ -21,7 +21,7 @@ function Jobcontext() {
       {name.map((data) => {
         return(
           <div className='jobcontext'>
-           <div> <p> Img </p> <p class='companyname'> {data.company_name}</p> </div>
+           <div> <p> Img </p> <p class='companyname'> {data.company.company_name}</p> </div>
 
 <button  class ='applybtnn' href='/apply'><a href='/apply'>Apply</a></button>
 

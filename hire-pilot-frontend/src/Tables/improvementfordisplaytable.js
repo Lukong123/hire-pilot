@@ -5,11 +5,19 @@ import axios from 'axios';
 const columns = [
   {
     Header: 'Name',
-    accessor: 'candidate_name'
+    accessor: 'candidate',
+    Cell: ({ value }) => {
+      return (
+        <div >
+          {value.first_name}
+        </div>
+      );
+    }
+
   },
   {
     Header: 'Job Title',
-    accessor: 'job_name'
+    accessor: 'job'
   },
   {
     Header: 'Resume',
@@ -98,6 +106,7 @@ function accessRow(originalRow, rowIndex, depth, parentIndex, rows) {
   const rowData = {};
   columns.forEach(column => {
     const { accessor, id } = column;
+    
     rowData[id] = originalRow[accessor];
   });
 
@@ -121,9 +130,15 @@ const MyComponecnt = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}` // replace with your actual token
+      }
+    };
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/api/v1/apply/?limit=15&offset=10', config);
+        const response = await axios.get('http://127.0.0.1:8000/api/v1/apply/', config);
         setData(response.data.results);
       } catch (error) {
         console.error(error);

@@ -1,6 +1,8 @@
 from rest_framework.permissions import BasePermission
+from rest_framework import permissions
 
-class ApplicationModelPermissions(BasePermission):
+
+class IsEmployer(BasePermission):
     def has_permission(self, request, view):
         """
         Return `True` if permission is granted, `False` otherwise.
@@ -9,12 +11,21 @@ class ApplicationModelPermissions(BasePermission):
                 return True
         return False
 
-def has_object_permission(self, request, view, obj):
-        """
-        Return `True` if permission is granted, `False` otherwise.
-        """
 
-        if obj.job_title.company_name.owner == request.user:
+
+class IsApplicationJobOwner(BasePermission):
+      def has_object_permission(self, request, view, obj):
+        
+        if request.method in permissions.SAFE_METHODS:
+             return True
+
+        if obj.job.company.owner == request.user:
             return True
         return False
 
+class IsJobApplicant(BasePermission):
+      def has_object_permission(self, request, view, obj):
+
+        if obj.candidate == request.user:
+            return True
+        return False

@@ -31,7 +31,11 @@ function LoginCandidate(props) {
     const data = await response.json();
     if (response.ok) {
       localStorage.setItem('token', data.token); // Save the token to local storage
-      localStorage.setItem('user', data.user)
+      localStorage.setItem('user', JSON.stringify(data.user))
+      if (data.companyinfo) {
+      localStorage.setItem('companyinfo', JSON.stringify(data.companyinfo))
+      }
+
       console.log(localStorage.getItem('data'))
       setShowModal(false); // Close the login modal
     } else {

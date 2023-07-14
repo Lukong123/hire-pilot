@@ -6,7 +6,10 @@ import axios from 'axios';
 
 function CreateJobForm() {
     const [page, setPage] = useState(0);
+    const company = JSON.parse(localStorage.getItem('companyinfo'))
+
     const [formData, setFormData] = useState({
+
         title: "",
         category: "",
         location: "",
@@ -18,9 +21,9 @@ function CreateJobForm() {
         salary_range: "",
 
         submission_deadline: "",
-        company_name_id: localStorage.getItem('user').id,
 
         selection_step: "",
+        company: company.pk,
         
 
 
@@ -84,6 +87,12 @@ function CreateJobForm() {
        {page=== FormTitles.length -1 ? "Submit": "Next"}</button> */}
        <button onClick={() => {
     if (page === FormTitles.length - 1) {
+
+
+     
+      // console.log(formData)
+      console.log(company)
+
         const config = {
           headers: {
             'Content-Type': 'application/json',

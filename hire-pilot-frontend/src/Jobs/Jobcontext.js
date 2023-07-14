@@ -4,10 +4,12 @@ import ApplyJob from '../Modal/ApplyJob';
 
 
 
+
 function Jobcontext() {
-  const [name, setName] = useState([]);
+  const [jobs, setJobs] = useState([]);
   const [openModal, setOpenModal] = useState(false);
 
+  const user = JSON.parse(localStorage.getItem('user'))
 
   useEffect(() => {
     fetchData();
@@ -16,31 +18,42 @@ function Jobcontext() {
 
 const fetchData = async () => {
   try {
-    const response = await axios.get('http://127.0.0.1:8000/HirePilot/alljobs/');
-    setName(response.data);
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}` // replace with your actual token
+      }
+    };
+  
+
+    const response = await axios.get('http://127.0.0.1:8000/api/v1/job/',config);
+    console.log(response.data)
+    setJobs(response.data.results);
   } catch (error) {
     console.log(error);
   }
 };
 return (
   <div>
-    {name.map((data) => (
+    {jobs.map((job) => (
      <div className='jobcontext'>
-     <div> <p> Img </p> <p class='companyname'> {data.company_name}</p> </div>
+     <div> <p> Img </p> <p class='companyname'> {job.company.company_name}</p> </div>
 
 {/* <button  class ='applybtnn' href='/apply'><a href='/apply'>Apply</a></button> */}
+
+
 <div><button className="openModalBtn applybtn" onClick={() => {
       setOpenModal(true);
-    }}> Apply</button>
-    {openModal && <ApplyJob closeModal={setOpenModal}/>}
+    }}> {user.is_employer?'View':'Apply'}</button>
+    {user.is_candidate && openModal && <ApplyJob job={job} closeModal={setOpenModal}/>}
     </div>
 
-<div class='jobtitle'> {data.title} <span class='dot'>.</span> <span class='location'>{data.location}</span> </div> 
+<div class='jobtitle'> {job.title} <span class='dot'>.</span> <span class='location'>{job.location}</span> </div> 
 
-<div class='jobdescription'> {data.description} </div>
+<div class='jobdescription'> {job.description} </div>
 
-<button class='partorfull'>{data.fulltime_partime}</button>
-<div class='howlong'> {data.date_created}</div>
+<button class='partorfull'>{job.fulltime_partime}</button>
+<div class='howlong'> {job.date_created}</div>
   </div>
     ))}
   </div>

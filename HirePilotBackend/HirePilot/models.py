@@ -62,7 +62,7 @@ class Employer(models.Model):
         return self.company_name
 
 
-#  Job model
+#  Job modelcompany
 
 
 class Job(models.Model):
@@ -89,8 +89,8 @@ class Job(models.Model):
         (One, "One"),
         (Two, "Two")
     ]
-    company_name = models.ForeignKey(Employer, on_delete=models.CASCADE)
-    title = models.CharField(max_length=30, primary_key=True)
+    company = models.ForeignKey(Employer, on_delete=models.CASCADE)
+    title = models.CharField(max_length=30)
     category = models.CharField(max_length=30)
     location = models.CharField(max_length=30)
     fulltime_partime = models.CharField(
@@ -119,18 +119,18 @@ class Apply(models.Model):
     Approved = "Approved"
     Declined = "Decline"
 
-    status = [
+    status_choices = [
         (Pending, "Pending"),
         (Interview, "Interview"),
         (Approved, "Approved"),
         (Declined, "Declined"),
     ]
-    candidate_name = models.ForeignKey(User, on_delete=models.CASCADE)
-    job_name = models.ForeignKey(Job, on_delete=models.CASCADE)
+    candidate = models.ForeignKey(User, on_delete=models.CASCADE)
+    job = models.ForeignKey(Job, on_delete=models.CASCADE)
     resume = models.FileField(upload_to="Candidates/Documents", null=True, blank=True)
     candidate_extracted_data = models.JSONField(null=True, blank=True)
     status = models.CharField(
-        max_length=9, choices=status, default="Pending", blank=True
+        max_length=9, choices=status_choices, default="Pending", blank=True
     )
     apply_date = models.DateField("apply date", default=timezone.now)
 

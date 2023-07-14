@@ -11,7 +11,7 @@ from HirePilot.utils.degree_extraction import extract_degree
 from .forms import ResumeForm
 from .models import Job, Resume,  Employer, Apply
 from .serializers import *
-from rest_framework import serializers
+from rest_framework import serializers,request,permissions
 from rest_framework import status
 from django.shortcuts import get_object_or_404, redirect, render
 from pdfminer.high_level import extract_text
@@ -19,6 +19,7 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.conf import settings
 import json
+from .permissions import *
 
 
 @api_view(["GET"])
@@ -132,17 +133,38 @@ class EmployerViewset(ModelViewSet):
     serializer_class = EmployerSerializer
 
 class JobViewset(ModelViewSet):
-    permission_classes = [AllowAny]
+    # permission_classes = [IsAuthenticated]
     queryset = Job.objects.all()
     serializer_class = JobsSerializer
 
+    def get_queryset(self):
+        user = self.request.user
+        print(user)
+        if user is not None and user.is_employer:
+            print("done")
+            company = Employer.objects.get(owner=user)
+            queryset = Job.objects.filter(company_id=company.id)
+            return queryset
+        else:
+            return Job.objects.all()
+    
+    def get_permissions(self):
+        if self.request.method in permissions.SAFE_METHODS:
+            permission_classes = [permissions.AllowAny]
+        
+        elif self.action  == 'create':
+            permission_classes = [IsEmployer]
+        else:
+            permission_classes = [permissions.IsAuthenticated]
+        
+        return [permission() for permission in permission_classes]
     
 
 # Apply
 
 class ApplyViewset(ModelViewSet):
-    # permission_classes = [IsAuthenticated]
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
+    # permission_classes = [AllowAny]
 
     queryset = Apply.objects.all()
     serializer_class = ApplicationSerializer
@@ -169,8 +191,8 @@ class ApplyViewset(ModelViewSet):
         # print(skills)
         data = data.pop("resume")
         objs = Apply.objects.filter(
-            candidate_name=request.data.get("candidate_name"),
-            job_name=request.data.get("job_name"),
+            candidate=request.data.get("candidate"),
+            job=request.data.get("job"),
         )
         if objs.exists():
             obj = objs.first()
@@ -194,3 +216,30 @@ class ApplyViewset(ModelViewSet):
     #     else:
     #         return super().get_queryset().filter(candidate_name=self.request.user)
 
+    def get_queryset(self):
+        user = self.request.user
+      
+        if user is not None and user.is_employer:
+          
+            company = Employer.objects.get(owner=user)
+            print(company)
+            queryset = Apply.objects.filter(job__company_id=company.id)
+            
+            return queryset
+        else:
+            return Apply.objects.all()
+
+    def get_permissions(self):
+
+        if self.action in ('retrieve', 'list', 'delete'):
+            permission_classes = [IsJobApplicant | IsApplicationJobOwner]
+        
+        elif self.action  == 'create':
+            permission_classes = [permissions.IsAuthenticated]
+        elif self.action in ('update', 'patch'):
+            permission_classes = [IsApplicationJobOwner]
+    
+        else:
+            permission_classes = [permissions.IsAuthenticated]
+        
+        return [permission() for permission in permission_classes]

@@ -6,6 +6,9 @@ from .models import User
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.contrib.auth import get_user_model
+from HirePilot.models import Employer
+from HirePilot.serializers import EmployerSerializer
+
 
 class UserRegistrationView(generics.CreateAPIView):
     permission_classes = [AllowAny]
@@ -18,13 +21,34 @@ class UserLoginView(ObtainAuthToken):
     def post(self, request, *args, **kwargs):
         response = super(UserLoginView, self).post(request, *args, **kwargs)
         token = Token.objects.get(key=response.data['token'])
+
         user = get_user_model().objects.get(id=token.user_id)
+        if user.is_employer:
+            emp = Employer.objects.get(owner=user)
+            employer_serializer = EmployerSerializer(emp)
+
+            return Response({
+                'token': token.key,
+            'user': {
+                'id': user.id,
+                'username': user.username,
+                "is_employer": user.is_employer,
+                "is_candidate": user.is_candidate
+                
+                # add other user fields as needed
+            },
+                'companyinfo': employer_serializer.data
+            })
+
         return Response({
             'token': token.key,
             'user': {
                 'id': user.id,
                 'username': user.username,
-                'email': user.email,
+                "is_employer": user.is_employer,
+                "is_candidate": user.is_candidate
+                
                 # add other user fields as needed
-            }
+            },
+            
         })

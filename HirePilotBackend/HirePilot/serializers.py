@@ -7,28 +7,22 @@ from .models import Job, Resume, Employer, Apply
 
 
 class JobsSerializer(serializers.ModelSerializer):
-    company_name_id = serializers.PrimaryKeyRelatedField(
-        queryset=Employer.objects.all(),
-    )
+    # company_name_id = serializers.PrimaryKeyRelatedField(
+    #     queryset=Employer.objects.all(),
+    # )
+
 
     class Meta:
         model = Job
-        fields = (
-            "company_name_id",
-            "title",
-            "category",
-            "location",
-            "fulltime_partime",
-            "offline_remote",
-            "submission_deadline",
-            "selection_step",
-            "salary_range",
-            "description",
-            "language",
-            "degree",
-            "skills",
-            "date_created",
-        )
+        fields = "__all__"
+
+    def to_representation(self, instance):
+        rep = super().to_representation(instance)
+        company = instance.company
+        rep["company"]={"id": company.id,
+                        "company_name": company.company_name}
+        return rep
+        
 class UploadSerializer(serializers.ModelSerializer):
     class Meta:
         model = Resume
@@ -81,9 +75,16 @@ class ApplicationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Apply
         fields = (
-            "candidate_name",
-            "job_name",
+            "candidate",
+            "job",
             "resume",
             "candidate_extracted_data",
             "status",
         )
+    
+    def to_representation(self, instance):
+        rep = super().to_representation(instance)
+        candidate = instance.candidate
+        rep["candidate"]={"id": candidate.id,
+                        "first_name": candidate.first_name}
+        return rep

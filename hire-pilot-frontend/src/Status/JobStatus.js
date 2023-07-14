@@ -9,8 +9,14 @@ function JobStatus() {
   }, []);
 
   const fetchData = async () => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}` // replace with your actual token
+      }
+    };
     try {
-      const response = await axios.get('http://127.0.0.1:8000/api/v1/apply/?limit=5&offset=10');
+      const response = await axios.get('http://127.0.0.1:8000/api/v1/apply/', config);
       setJobs(response.data.results); // set the jobs state to the data extracted from the "results" field of the API response
     } catch (error) {
       console.log(error);
@@ -45,7 +51,7 @@ function JobStatus() {
               <button className={getButtonClassName(job.status)}>
               {job.status}
               </button>
-            <div className='jobtitle'>{job.job_name} </div>
+            <div className='jobtitle'>{job.job} </div>
           
           </div>
         ))
