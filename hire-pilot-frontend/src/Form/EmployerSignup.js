@@ -154,8 +154,6 @@ export default function EmployerSignupForm() {
 			</div>
 
 			<form>
-				{/* Labels and inputs for form data */}
-				{/* <label className="label">Name</label> */}
 
 				{/* username */}
 				<input onChange={handleuName} className="input" placeholder='Enter User Name'

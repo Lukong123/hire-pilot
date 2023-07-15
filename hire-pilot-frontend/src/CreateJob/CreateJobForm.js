@@ -73,18 +73,7 @@ function CreateJobForm() {
         onClick={() => {setPage((currentPage) => currentPage
              - 1)}}
         >Previous</button>
-        {/* <button
-        onClick={() => {
-            if (page === FormTitles.length -1) {
-                alert("form sumbitted")
-                console.log(formData)
-                // send data to api around here
-
-            }
-            else {
-            setPage((currentPage) => currentPage +1 );}
-        }}>
-       {page=== FormTitles.length -1 ? "Submit": "Next"}</button> */}
+      
        <button onClick={() => {
     if (page === FormTitles.length - 1) {
 

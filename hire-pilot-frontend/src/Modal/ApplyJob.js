@@ -5,16 +5,18 @@ import './ApplyJob.css';
 function ApplyJob({ closeModal, job }) {
   const [fullName, setFullName] = useState("");
   const [resume, setResume] = useState(null);
+  const user = JSON.parse(localStorage.getItem('user'))
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const formData = new FormData();
     formData.append("job", job.id);
-    // formData.append('candidate', job.candidate.id);
-    if (job && job.candidate && job.candidate.id) {
-      formData.append('candidate', job.candidate.id);
-    }
+    formData.append('candidate', user.id);
+    // if (job && job.candidate && job.candidate.id) {
+    //   formData.append('candidate', job.candidate.id);
+    // }
     formData.append('company', job.company.id);
     formData.append("resume", resume);
 
