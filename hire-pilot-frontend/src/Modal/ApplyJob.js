@@ -11,13 +11,18 @@ function ApplyJob({ closeModal, job }) {
 
     const formData = new FormData();
     formData.append("job", job.id);
-    formData.append('company', job.company.id)
+    // formData.append('candidate', job.candidate.id);
+    if (job && job.candidate && job.candidate.id) {
+      formData.append('candidate', job.candidate.id);
+    }
+    formData.append('company', job.company.id);
     formData.append("resume", resume);
 
     try {
         const config = {
             headers: {
-              'Content-Type': 'application/json',
+              // 'Content-Type': 'application/json',
+              'Content-Type': 'multipart/form-data',
               Authorization: `Bearer ${localStorage.getItem('token')}` // replace with your actual token
             }
           };
@@ -40,7 +45,8 @@ function ApplyJob({ closeModal, job }) {
           <h2>Apply to Job</h2>
         </div>
         <div className="body-login">
-          <form onSubmit={handleSubmit}>
+          {/* <form onSubmit={handleSubmit}> */}
+          <form onSubmit={handleSubmit} encType="multipart/form-data">
             <p className="bodytitle">Apply</p>
             {/* <input
               type="text"
