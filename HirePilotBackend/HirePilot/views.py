@@ -171,24 +171,29 @@ class ApplyViewset(ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
-        # print(request.data)
-        # file = request.data.get('resume')
 
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         data = serializer.data
         filename = data.get("resume").split("/")[-1]
-        # print(filename)
-        file_path = f"{settings.MEDIA_ROOT}Candidates/Documents/{filename}"
+        if filename.split(".")[-1] != 'pdf':
+            print("error loading")
+            return Response({"error": "wrong file format", "status": "400"})
+        else:
+            file_path = f"{settings.MEDIA_ROOT}Candidates/Documents/{filename}"
         text = extract_text_from_pdf(file_path)
-        # if text:
-        #     print('text has been extracted')
-        # else:
-        #     print('text not ')
+       
         skills = extract_skills(text)
         languages = extract_language(text)
         degree = extract_degree(text)
-        # print(skills)
+
+        keys = ['degree', 'language', 'skills']
+        candidate_values = [degree, languages, skills]
+
+
+        candidate_vector = {keys[i]: candidate_values[i] for i in range(len(keys))}
+        print(candidate_vector)
+
         data = data.pop("resume")
         objs = Apply.objects.filter(
             candidate=request.data.get("candidate"),
@@ -209,13 +214,7 @@ class ApplyViewset(ModelViewSet):
         return Response(
             serializer.data, status=status.HTTP_201_CREATED, headers=headers
         )
-    
-    # def get_queryset(self):
-    #     if self.request.user.is_employer:
-    #         return super().get_queryset().filter(job_name__company_name__owner=self.request.user)
-    #     else:
-    #         return super().get_queryset().filter(candidate_name=self.request.user)
-
+        
     def get_queryset(self):
         user = self.request.user
       
