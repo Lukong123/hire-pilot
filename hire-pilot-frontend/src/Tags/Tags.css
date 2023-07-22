@@ -1,0 +1,137 @@
+/* .profile_tags {
+    display: flex;
+    flex-wrap: wrap;
+}
+.profile_tags .tag {
+    width: auto;
+    background-color: rgba(0, 140, 255, 0.151);
+    border-radius: 4px;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline-start: 1rem;
+    overflow: hidden;
+    text-transform: capitalize;
+    margin: 0.4rem;
+    font-size: calc(var(--fs-st) - 0.1rem);
+}
+.tag_remove_btn {
+    width: 2rem;
+    height: 100%;
+    background-color: rgba(0, 0, 255, 0.096);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 1rem;
+}
+
+.profile_tags .tag {
+    height: 2.3rem;
+    margin: 0.6rem;
+    font-size: calc(var(--fs-st) - 0rem);
+} */
+/* Tag styles */
+/*  */
+
+/* Tag styles */
+.tag {
+    display: inline-flex;
+    align-items: center;
+    margin: 0.25rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 0.25rem;
+    background-color: #e2e8f0;
+    color: #2d3748;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+  .tag-text {
+    margin-right: 0.5rem;
+  }
+  .tag-delete {
+    display: inline-block;
+    margin-left: 0.5rem;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    color: #a0aec0;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    cursor: pointer;
+  }
+  .tag-delete:hover {
+    color: #2d3748;
+  }
+
+  
+  /* ReactTags styles */
+.ReactTags {
+    display: inline-block;
+    width: 100%;
+    height: auto;
+    margin-bottom: 0rem;
+  }
+
+  .ReactTags__tags {
+     /* display: flex; */
+    flex-wrap: wrap;
+    align-items: center ; 
+    margin: 0;
+    width: 280px;
+    height: 70px;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+    background-color: #edf2f7;
+    overflow: hidden; 
+  }
+  
+
+
+  .ReactTags__selected {
+    display: inline-flex;
+  }
+  
+  .ReactTags__suggestions {
+    position: absolute;
+    top: 30%;
+    left: 3%;
+    z-index: 1;
+    display: block;
+    width: 20%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background-color:  #edf2f7;;
+    border-radius: 0.25rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+  }
+
+  .ReactTags__suggestions li {
+    padding: 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    cursor: pointer;
+  }
+
+  .ReactTags__suggestions li:hover {
+    background-color: #e2e8f0;
+  }
+  .ReactTags__suggestions--active li {
+    background-color: #e2e8f0;
+  }
+  
+  .ReactTags__suggestions--hidden {
+    display: none;
+  }
+
+  .react-tagsinput-input {
+    width: 50px; /* modify this value to adjust the width */
+    height: 20px; /* modify this value to adjust the height */
+  }
+
+  .skills-tags .react-tagsinput-input {
+    width: 50px; /* modify this value to adjust the width */
+    height: 20px; /* modify this value to adjust the height */
+  }

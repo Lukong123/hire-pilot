@@ -16,6 +16,7 @@ import TablesJobs from './Tables/TablesJobs';
 import MyComponent from './Tables/testtable';
 import MyTest from './Tables/seetest';
 import MyComponecnt from './Tables/improvementfordisplaytable';
+import Tags from './Tags/Tags';
 
 
 
@@ -39,6 +40,8 @@ export default function Appp() {
         <Route path='ohh' element={<MyComponent/>}/>
         <Route paht='manytest' element= {<MyTest/>}/>
         <Route path='noo' element={<MyComponecnt />}/>
+        <Route path='tag' element={<Tags />}/>
+
 
         
       </Route>
