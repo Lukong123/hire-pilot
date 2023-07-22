@@ -1,7 +1,5 @@
 import React from 'react';
 import './Jobstatus.css';
-import Jobcontext from './Jobcontext';
-import Jobstats from './Jobstats';
 import JobStatus from '../Status/JobStatus';
 
 function Jobstatus() {

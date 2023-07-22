@@ -75,6 +75,7 @@ class ApplicationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Apply
         fields = (
+            "id",
             "candidate",
             "job",
             "resume",
@@ -87,4 +88,7 @@ class ApplicationSerializer(serializers.ModelSerializer):
         candidate = instance.candidate
         rep["candidate"]={"id": candidate.id,
                         "first_name": candidate.first_name}
+        job = instance.job
+        rep["job"] = {"id": job.id,
+                      "title": job.title}
         return rep

@@ -12,11 +12,9 @@ import CandidateSignupForm from './Form/CandidateSignupForm';
 import EmployerSignupForm from './Form/EmployerSignup';
 import LoginEmployer from './Login/LoginEmployer';
 import LoginCandidate from './Login/LoginCandidate';
-import TableJxobs from './Jobs/JobDisplay';
 import TablesJobs from './Tables/TablesJobs';
 import MyComponent from './Tables/testtable';
 import MyTest from './Tables/seetest';
-import Test2 from './Tables/test2';
 import MyComponecnt from './Tables/improvementfordisplaytable';
 
 
@@ -37,11 +35,9 @@ export default function Appp() {
 
         <Route path='loginemployer' element={<LoginEmployer/>} />
         <Route path='logincandidate' element={<LoginCandidate/>} />
-        <Route path='test' element={<TableJxobs/>} />
         <Route path='tables' element={<TablesJobs/>} />
         <Route path='ohh' element={<MyComponent/>}/>
         <Route paht='manytest' element= {<MyTest/>}/>
-        <Route path='test2' element={<Test2 />}/>
         <Route path='noo' element={<MyComponecnt />}/>
 
         

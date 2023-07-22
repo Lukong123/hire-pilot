@@ -67,4 +67,5 @@ def extract_degree(text):
                 )
             )
 
-    return degree_entities
+    return set(degree_entities
+    )

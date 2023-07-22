@@ -11,7 +11,6 @@ export default function Table({ columns, data }) {
       headerGroups, // headerGroups, if your table has groupings
       rows, // rows for the table based on the data passed
       prepareRow, // Prepare the row (this function needs to be called for each row before getting the row props)
-      setFilter,
     } = useTable({
       columns,
       data

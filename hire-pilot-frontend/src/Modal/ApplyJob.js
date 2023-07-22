@@ -3,7 +3,6 @@ import axios from "axios";
 import './ApplyJob.css';
 
 function ApplyJob({ closeModal, job }) {
-  const [fullName, setFullName] = useState("");
   const [resume, setResume] = useState(null);
   const user = JSON.parse(localStorage.getItem('user'))
 

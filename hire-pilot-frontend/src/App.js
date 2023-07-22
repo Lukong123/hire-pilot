@@ -1,10 +1,8 @@
 import React from 'react';
 import './App.css';
-import Header from './Header/Header';
 import Footer from './Footer/Footer';
 import Sidebar from './Sidebar/Sidebar';
 import Rightbar  from './Right-Sidebar/Rightbar';
-import SignupChoice from './Modal/SignupChoice';
 import Jobcontext from './Jobs/Jobcontext';
 
 

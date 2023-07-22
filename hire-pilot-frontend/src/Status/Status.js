@@ -2,7 +2,6 @@ import React from 'react';
 import Sidebar from '../Sidebar/Sidebar';
 import Rightbar from '../Right-Sidebar/Rightbar';
 import '../App.css';
-import JobStatus from './JobStatus';
 import Jobstatus from '../Jobs/Jobstatus';
 
 function Status() {

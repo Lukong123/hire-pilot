@@ -1,11 +1,11 @@
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
 from rest_framework import viewsets
 from django.http import JsonResponse
 from rest_framework.views import APIView
 
-from HirePilot.utils.skill_extraction import extract_skills, extract_text_from_pdf
+from HirePilot.utils.skill_extraction import extract_skills, extract_text_from_pdf, skills_database
 from HirePilot.utils.language_extraction import extract_language
 from HirePilot.utils.degree_extraction import extract_degree
 from .forms import ResumeForm
@@ -242,3 +242,25 @@ class ApplyViewset(ModelViewSet):
             permission_classes = [permissions.IsAuthenticated]
         
         return [permission() for permission in permission_classes]
+
+@api_view(['GET'])
+@permission_classes([permissions.IsAuthenticated])
+def rank_application(request, pk):
+    if request.method == 'GET':
+        job = get_object_or_404(Job, pk=pk)
+        job_applications = Apply.objects.filter(pk=pk)
+        application_vector_list = []
+
+        for applications in job_applications:
+            application_dict = {"skills": set(applications.candidate_extracted_data["skills"]), "degree": set(applications.candidate_extracted_data["degree"]), "languages": set(applications.candidate_extracted_data["language"])}
+            application_vector_list.append(application_dict)
+        
+        
+@api_view(['GET'])
+def skill_seeder(request):
+    for skill in skills_database:
+        s = Skills(name=skill)
+        s.save()
+    return Response("success")
+
+            

@@ -1,16 +1,13 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './DashboardEmployer.css';
 import Footer from '../Footer/Footer';
-import Jobs from '../Jobs/Jobs';
-import AddJob from '../Modal/ApplyJob';
 import SidebarEmployer from '../Sidebar/SidebarEmployer';
 import TotalCard from '../TotalCard/TotalCard'
-import HeaderEmployer from '../Header/HeaderEmployer';
 import Jobcontext from '../Jobs/Jobcontext';
 
 
 function DashboardEmployer() {
-  const [openModal, setOpenModal] = useState(false);
+  // const [openModal, setOpenModal] = useState(false);
   return (
     <React.Fragment>
       <div className="App">

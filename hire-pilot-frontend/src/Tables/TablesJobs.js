@@ -42,21 +42,16 @@ function TablesJobs() {
     })();
    }, []);
 
-   const [filterInput, setFilterInput] = useState("");
+  //  const [ setFilterInput] = useState("");
 
 // Update the state when input changes
-const handleFilterChange = e => {
-  const value = e.target.value || undefined;
+// const handleFilterChange = e => {
+  // const value = e.target.value || undefined;
   // setFilter("id", value); // Update the show.name filter. Now our table will filter and show only the rows which have a matching value
-  setFilterInput(value);
-};
+  // setFilterInput(value);
+// };
 
-// Input element
-{/* <input
-  value={filterInput}
-  onChange={handleFilterChange}
-  placeholder={"Search name"}
-/> */}
+
 
   return (
    

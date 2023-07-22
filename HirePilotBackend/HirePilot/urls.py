@@ -19,6 +19,8 @@ urlpatterns = [
     path("job/<int:pk>/delete/", views.delete_jobs, name="delete-jobs"),
     path("model/form/upload", views.model_form_upload, name="model"),
     path("upload/", views.UploadViewSet.as_view, name="upload"),
+    path("skillseed/", views.skill_seeder, name="skill"),
+
    
     # Status
     

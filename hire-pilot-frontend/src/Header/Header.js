@@ -3,9 +3,7 @@ import React, { useState } from "react";
 import './Header.css';
 import '../Jobs/Jobs';
 import SignupChoice from '../Modal/SignupChoice';
-import Login from '../Login/Login';
 import LoginChoice from "../Modal/LoginChoice";
-import LoginCandidate from "../Login/LoginCandidate";
 
 
 function Header() {

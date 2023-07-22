@@ -35,11 +35,11 @@ function CreateJobForm() {
 
     const FormTitles = ["First", "Second", "Third"];
     const PageDisplay = () => {
-        if (page == 0) {
+        if (page === 0) {
     
             return <FirstSlide formData={formData} setFormData = {setFormData} />;
         }
-        else if (page == 1) {
+        else if (page === 1) {
             return <SecondSlide formData={formData} setFormData = {setFormData} />
         }
         else{
@@ -59,7 +59,7 @@ function CreateJobForm() {
         <div className='body'>
         <div className='progressbar'>
             <div id='progress'
-            style={{width: page === 0 ? '33.3%': page == 1 ? "66.6%": "100%"}}></div>
+            style={{width: page === 0 ? '33.3%': page === 1 ? "66.6%": "100%"}}></div>
          <div className="step-col"><small>Step 1</small></div>
                 <div className="step-col"><small>Step 2</small></div>
                 <div className="step-col"><small>Step 3</small></div>
@@ -69,7 +69,7 @@ function CreateJobForm() {
         </div>
         <div className='footer'>
         <button
-        disabled = {page == 0}
+        disabled = {page === 0}
         onClick={() => {setPage((currentPage) => currentPage
              - 1)}}
         >Previous</button>

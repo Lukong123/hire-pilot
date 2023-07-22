@@ -3,8 +3,6 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.utils import timezone
 from pdfminer.high_level import extract_text
-import re
-import nltk
 from account.models import User
 
 
@@ -60,7 +58,11 @@ class Employer(models.Model):
 
     def __str__(self):
         return self.company_name
+# Skills
 
+class Skills(models.Model):
+    name = models.CharField(max_length=20)
+    text = models.CharField(max_length=2)
 
 #  Job modelcompany
 
@@ -85,6 +87,7 @@ class Job(models.Model):
     One = 'One'
     Two = 'Two'
 
+#   Applying authtoken.0003_tokenproxy... OK
     selectionstep = [
         (One, "One"),
         (Two, "Two")
@@ -105,11 +108,12 @@ class Job(models.Model):
     description = models.CharField(max_length=256)
     degree = models.CharField(max_length=100, null=True)
     language = models.CharField(max_length=100, null=True)
-    skills = models.CharField(max_length=100, null=True)
+    skills = models.ManyToManyField(Skills, related_name="jobs")
     date_created = models.DateField("date created", default=datetime.date.today)
 
     def __str__(self):
         return self.title
+
 
 
 # Application model
@@ -134,6 +138,9 @@ class Apply(models.Model):
     )
     apply_date = models.DateField("apply date", default=timezone.now)
 
+    def __str__(self):
+        return self.candidate.username
+
 
 # Selection
 class Selection(models.Model):
@@ -143,9 +150,5 @@ class Selection(models.Model):
     experience = models.CharField(max_length=200)
     language = models.CharField(max_length=200)
     age = models.CharField(max_length=200)
-
-
-#  adding number of people needed in job to be nullable
-
 
 

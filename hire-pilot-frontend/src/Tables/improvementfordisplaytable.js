@@ -1,14 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useTable } from 'react-table';
+// import Select from 
+import Select from 'react-select';
 import axios from 'axios';
+import './improve.css';
 
+const statusOptions = [
+  { value: 'Pending', label: 'Pending' },
+  { value: 'Approved', label: 'Approved' },
+  { value: 'Declined', label: 'Declined' },
+];
 const columns = [
   {
     Header: 'Name',
     accessor: 'candidate',
     Cell: ({ value }) => {
       return (
-        <div >
+        <div>
           {value.first_name}
         </div>
       );
@@ -17,7 +25,14 @@ const columns = [
   },
   {
     Header: 'Job Title',
-    accessor: 'job'
+    accessor: 'job',
+    Cell: ({ value }) => {
+      return (
+        <div>
+          {value.title}
+        </div>
+      );
+    }
   },
   {
     Header: 'Resume',
@@ -87,55 +102,80 @@ const columns = [
       );
     }
   },
-  {
-    id: 'location',
-    Header: 'Location',
-    accessor: 'candidate_extracted_data',
-    Cell: ({ value }) => {
-      if (!value) {
-        return null;
-      }
-      const candidateData = JSON.parse(value);
-      const { location } = candidateData;
-      return <div>{location || '-'}</div>;
+    {
+    Header: 'Status',
+    accessor: 'status', // default to 'pending'
+    Cell: ({ row }) => {
+      const [status, setStatus] = useState(row.original.status);
+      console.log(row.original)
+
+      const updateStatus = async () => {
+        try {
+          const response = await axios.patch(`http://127.0.0.1:8000/api/v1/apply/${row.original.id}/`, { status }, config);
+
+          if (response.status === 200) {
+            setStatus(status);
+            alert('Status updated successfully');
+          } else {
+            alert('Failed to update status');
+          }
+        } catch (error) {
+          console.error(error);
+          alert('Failed to update status');
+        }
+      };
+
+      const handleStatusChange = (selectedOption) => {
+        setStatus(selectedOption.value);
+      };
+
+      return (
+        <div>
+          <Select
+            options={statusOptions}
+            value={statusOptions.find(option => option.value === status)}
+            onChange={handleStatusChange}
+            styles={{
+              control: (provided) => ({
+                ...provided,
+                width: 150,
+                minHeight: 30,
+                borderRadius: 5,
+                borderColor: '#ccc',
+                boxShadow: 'none',
+              }),
+              option: (provided, state) => ({
+                ...provided,
+                backgroundColor: state.isSelected ? '#007bff' : 'white',
+                color: state.isSelected ? 'white' : 'black',
+                ':active': {
+                  backgroundColor: state.isSelected ? '#007bff' : '#f8f9fa',
+                },
+              }),
+              singleValue: (provided, state) => ({
+                ...provided,
+                color: state.isSelected ? 'white' : 'black',
+              }),
+            }}
+          />
+          <button onClick={updateStatus}>Update</button>
+        </div>
+      );
     }
-  }
+  },
 ];
-
-function accessRow(originalRow, rowIndex, depth, parentIndex, rows) {
-  const rowData = {};
-  columns.forEach(column => {
-    const { accessor, id } = column;
-    
-    rowData[id] = originalRow[accessor];
-  });
-
-  rows.push({
-    data: rowData,
-    depth,
-    parentIndex,
-    index: rows.length,
-    original: originalRow,
-    subRows: []
-  });
-}
 
 const config = {
   headers: {
     "Content-Type": "application/json",
+    Authorization: `Bearer ${localStorage.getItem('token')}` // replace with your actual token
   }
-}
+};
 
 const MyComponecnt = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('token')}` // replace with your actual token
-      }
-    };
     const fetchData = async () => {
       try {
         const response = await axios.get('http://127.0.0.1:8000/api/v1/apply/', config);
