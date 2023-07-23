@@ -13,7 +13,7 @@ const statusOptions = [
 const columns = [
   {
     Header: 'Name',
-    accessor: 'candidate',
+    accessor: 'candidate', 
     Cell: ({ value }) => {
       return (
         <div>

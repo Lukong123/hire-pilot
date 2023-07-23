@@ -51,7 +51,7 @@ function JobStatus() {
               <button className={getButtonClassName(job.status)}>
               {job.status}
               </button>
-            <div className='jobtitle'>{job.job} </div>
+            <div className='jobtitle'>{job.title} </div>
           
           </div>
         ))
