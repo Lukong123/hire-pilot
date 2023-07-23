@@ -29,4 +29,4 @@ def calculate_similarity(candidates, recruiter):
 
         scores.append((candidate['application_id'], similarity_score))
 
-    return sorted(scores, key=lambda score:score[1])
+    return sorted(scores, key=lambda score:score[1], reverse=True)

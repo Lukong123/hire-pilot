@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import axios from 'axios';
 import ApplyJob from '../Modal/ApplyJob';
-
+import './jobcontext.css';
 
 
 
@@ -39,14 +39,17 @@ return (
      <div className='jobcontext'>
      <div> <p> Img </p> <p class='companyname'> {job.company.company_name}</p> </div>
 
-{/* <button  class ='applybtnn' href='/apply'><a href='/apply'>Apply</a></button> */}
 
 
 <div><button className="openModalBtn applybtn" onClick={() => {
       setOpenModal(true);
     }}> {user.is_employer?'View':'Apply'}</button>
     {user.is_candidate && openModal && <ApplyJob job={job} closeModal={setOpenModal}/>}
+
+
+   {user.is_employer? (<a href={`rank/${job.id}`}>View Applications</a>):(<div></div>)}
     </div>
+
 
 <div class='jobtitle'> {job.title} <span class='dot'>.</span> <span class='location'>{job.location}</span> </div> 
 

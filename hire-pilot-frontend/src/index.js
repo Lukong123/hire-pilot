@@ -18,6 +18,7 @@ import MyTest from './Tables/seetest';
 import MyComponecnt from './Tables/improvementfordisplaytable';
 import Tags from './Tags/Tags';
 import SignupChoice from './Modal/SignupChoice';
+import Ranked from './Ranked/Ranked';
 
 
 export default function Appp() {
@@ -31,7 +32,6 @@ export default function Appp() {
         <Route path='status' element={<Status />} />
         <Route path='alljobs' element={<AllJobs />} />
         <Route path='signupcandidate' element={<CandidateSignupForm />} />
-        {/* <Route path='signupemployers' element={<EmployerSignupForm />} /> */}
         <Route path='signupemployer' element={<EmployerSignupForm />} />
 
         <Route path='loginemployer' element={<LoginEmployer/>} />
@@ -42,6 +42,8 @@ export default function Appp() {
         <Route path='noo' element={<MyComponecnt />}/>
         <Route path='tag' element={<Tags />}/>
         <Route path='/signupchoice' element={<SignupChoice />}/>
+        <Route path='/rank/:jobId' element={<Ranked />}/>
+
 
 
 

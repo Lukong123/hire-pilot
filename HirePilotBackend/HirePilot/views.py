@@ -222,10 +222,13 @@ class ApplyViewset(ModelViewSet):
         user = self.request.user
       
         if user is not None and user.is_employer:
-          
-            company = Employer.objects.get(owner=user)
-            print(company)
-            queryset = Apply.objects.filter(job__company_id=company.id)
+              
+            if 'job' in self.request.GET.keys():
+                job_id = self.request.GET.get('job')
+                queryset = Apply.objects.filter(job_id=int(job_id))
+            else:
+                company = Employer.objects.get(owner=user)
+                queryset = Apply.objects.filter(job__company_id=company.id)
             
             return queryset
         else:
@@ -247,7 +250,7 @@ class ApplyViewset(ModelViewSet):
         return [permission() for permission in permission_classes]
 
 @api_view(['GET'])
-# @permission_classes([permissions.IsAuthenticated])
+@permission_classes([permissions.IsAuthenticated])
 def rank_application(request, pk):
 
     def get_name(val):
@@ -260,6 +263,7 @@ def rank_application(request, pk):
         application_vector_list = []
 
         for applications in job_applications:
+            print(type(applications.candidate_extracted_data))
             extracted_data = json.loads(applications.candidate_extracted_data)
 
             application_dict = {"application_id":applications.id, "skills": set(extracted_data["skills"]),"language": set(extracted_data["language"]), "degree": set(extracted_data["degree"]),}
@@ -267,10 +271,18 @@ def rank_application(request, pk):
             application_vector_list.append(application_dict)
         
         recruiter_vector = {"degree":set(map(get_name, job.degree.values())),"skills":set(map(get_name, job.skills.values())), "language":set(map(get_name, job.language.values()))}
-        print(len(application_vector_list))
         scores = calculate_similarity(application_vector_list, recruiter_vector)
-        print(scores)
-        return Response("done")
+        sorted_scores = sorted(scores, key=lambda x: x[1], reverse=True)
+        
+        result = []
+        for score in sorted_scores:
+            application_id = score[0]
+            # applicant_name = Apply.objects.get(id=application_id).candidate_name
+            applicant_name = Apply.objects.get(id=application_id).candidate.username
+            similarity_score = score[1]
+            result.append({"application_id": application_id, "applicant_name": applicant_name,"similarity_score": similarity_score})
+        
+        return Response(result)
         
 @api_view(['GET'])
 def skill_seeder(request):

@@ -1,0 +1,119 @@
+.job-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    background-color: #fff;
+    margin-bottom: 16px;
+  }
+  
+  .job-card .company-name {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+    color: #555;
+  }
+  
+  .job-card .job-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 16px 0;
+    color: #333;
+  }
+  
+  .job-card .location {
+    font-size: 16px;
+    font-weight: 400;
+    color: #555;
+  }
+  
+  .job-card .dot {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0 8px;
+    color: #ccc;
+  }
+  
+  .job-card .job-description {
+    font-size: 16px;
+    font-weight: 400;
+    margin: 16px 0;
+    color: #555;
+  }
+  
+  .job-card .partorfull {
+    font-size: 16px;
+    font-weight: 500;
+    background-color: #f6f6f6;
+    color: #555;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    margin-right: 16px;
+  }
+  
+  .job-card .howlong {
+    font-size: 14px;
+    font-weight: 400;
+    color: #999;
+    margin-top: 8px;
+  }
+  
+  .job-card .apply-btn {
+    font-size: 16px;
+    font-weight: 600;
+    background-color: #3f51b5;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .job-card .apply-btn:hover {
+    background-color: #2c3e50;
+  }
+  
+  .job-card .job-image {
+    width: 100px;
+    height: 100px;
+    background-color: #f6f6f6;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 16px;
+  }
+  
+  .job-card .job-image img {
+    max-width: 60%;
+    max-height: 60%;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .job-card {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .job-card .job-image {
+      margin-right: 0;
+      margin-bottom: 16px;
+    }
+    
+    .job-card .job-title {
+      font-size: 20px;
+      text-align: center;
+    }
+    
+    .job-card .location {
+      text-align: center;
+    }
+    
+    .job-card .apply-btn {
+      margin-top: 16px;
+    }
+}

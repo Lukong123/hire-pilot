@@ -200,7 +200,9 @@ const MyComponecnt = () => {
   });
 
   return (
-    <table {...getTableProps()}>
+   <div>
+    <button><a href='/rank'>Ranked</a></button>
+     <table {...getTableProps()}>
       <thead>
         {headerGroups.map(headerGroup => (
           <tr {...headerGroup.getHeaderGroupProps()}>
@@ -223,6 +225,7 @@ const MyComponecnt = () => {
         })}
       </tbody>
     </table>
+   </div>
   );
 };
 
