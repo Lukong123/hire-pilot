@@ -64,6 +64,11 @@ class Skills(models.Model):
     name = models.CharField(max_length=20)
     text = models.CharField(max_length=2)
 
+class Language(models.Model):
+    name = models.CharField(max_length=20)
+
+class Degree(models.Model):
+    name = models.CharField(max_length=20)
 #  Job modelcompany
 
 
@@ -106,8 +111,8 @@ class Job(models.Model):
     selection_step = models.CharField(choices=selectionstep, default=One, max_length=15)
     salary_range = models.CharField(max_length=30)
     description = models.CharField(max_length=256)
-    degree = models.CharField(max_length=100, null=True)
-    language = models.CharField(max_length=100, null=True)
+    degree = models.ManyToManyField(Degree, related_name="jobs")
+    language = models.ManyToManyField(Language, related_name="jobs")
     skills = models.ManyToManyField(Skills, related_name="jobs")
     date_created = models.DateField("date created", default=datetime.date.today)
 
@@ -123,7 +128,7 @@ class Apply(models.Model):
     Approved = "Approved"
     Declined = "Decline"
 
-    status_choices = [
+    status_choices = [  
         (Pending, "Pending"),
         (Interview, "Interview"),
         (Approved, "Approved"),

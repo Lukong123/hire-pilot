@@ -4,27 +4,11 @@ import { WithContext as ReactTags } from 'react-tag-input';
 import { SKILLS } from './skills';
 import { DEGREES } from './degree';
 import { LANGUAGES } from './languages';
+import axios from 'axios';
 
-const suggestions_skills = SKILLS.map(skills => {
-  return {
-    id: skills,
-    text: skills
-  };
-});
 
-const suggestions_degrees = DEGREES.map(degree => {
-  return {
-    id: degree,
-    text: degree
-  };
-});
+// const suggestions_skills = 
 
-const suggestions_languages = LANGUAGES.map(language => {
-  return {
-    id: language,
-    text: language
-  };
-});
 
 const KeyCodes = {
   comma: 188,
@@ -37,21 +21,90 @@ function ThirdSlide({ formData, setFormData }) {
   const [tagsSkills, setTagsSkills] = useState([]);
   const [tagsDegrees, setTagsDegrees] = useState([]);
   const [tagsLanguages, setTagsLanguages] = useState([]);
-  const [tagList, setTagList] = useState([]);
+  const [skillSuggestion, setSkillSuggestion] = useState([]);
+  const [languageSuggestion, setLanguageSuggestion] = useState([]);
+  const [degreeSuggestion, setDegreeSuggestion] = useState([]);
+
+  
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}` // replace with your actual token
+    }
+  };
+
+  const fetchSkills = (searchword) => {
+   
+  
+    axios.get(`http://localhost:8000/HirePilot/skills/?searchkey=${searchword}`,config)
+      .then((response) => {
+       setSkillSuggestion(response.data.map((skill)=>{
+        return{id: skill.id.toString(),
+        text: skill.name}
+        
+       }) )
+        // console.log(response);
+      })
+      .catch((error) => {
+        alert('Error submitting form: ' + error.message);
+        console.error(error);
+      });
+
+  }
+  const fetchLanguages = (searchword) => {
+   
+  
+  
+    axios.get(`http://localhost:8000/HirePilot/languages/?searchkey=${searchword}`,config)
+      .then((response) => {
+       setLanguageSuggestion(response.data.map((language)=>{
+        return{id: language.id.toString(),
+        text: language.name}
+        
+       }) )
+        // console.log(response);
+      })
+      .catch((error) => {
+        alert('Error submitting form: ' + error.message);
+        console.error(error);
+      });
+
+  }
+
+  const fetchDegrees = (searchword) => {
+   
+  
+  
+    axios.get(`http://localhost:8000/HirePilot/degrees/?searchkey=${searchword}`,config)
+      .then((response) => {
+       setDegreeSuggestion(response.data.map((degree)=>{
+        return{id: degree.id.toString(),
+        text: degree.name}
+        
+       }) )
+        // console.log(response);
+      })
+      .catch((error) => {
+        alert('Error submitting form: ' + error.message);
+        console.error(error);
+      });
+
+  }
 
   const handleAddition = (tag, type) => {
     if (type === 'skill') {
       const newTags = [...tagsSkills, tag];
       setTagsSkills(newTags);
-      setFormData({ ...formData, skills: newTags.map(tag => tag.text) });
+      setFormData({ ...formData, skills: newTags.map(tag => parseInt(tag.id)) });
     } else if (type === 'degree') {
       const newTags = [...tagsDegrees, tag];
+      console.log(newTags)
       setTagsDegrees(newTags);
-      setFormData({ ...formData, degrees: newTags.map(tag => tag.text) });
+      setFormData({ ...formData, degree: newTags.map(tag => parseInt(tag.id)) });
     } else if (type === 'language') {
       const newTags = [...tagsLanguages, tag];
       setTagsLanguages(newTags);
-      setFormData({ ...formData, language: newTags.map(tag => tag.text) });
+      setFormData({ ...formData, language: newTags.map(tag => parseInt(tag.id)) });
     }
   };
   
@@ -86,6 +139,7 @@ function ThirdSlide({ formData, setFormData }) {
       newTags = tagsDegrees.slice();
       newTags.splice(currPos, 1);
       newTags.splice(newPos, 0, tag);
+      console.log(newTags)
       setTagsDegrees(newTags);
     } else if (tag.type === 'language') {
       newTags = tagsLanguages.slice();
@@ -109,7 +163,7 @@ function ThirdSlide({ formData, setFormData }) {
         <h3>System Information</h3>
         <ReactTags
           tags={tagsSkills}
-          suggestions={suggestions_skills}
+          suggestions={skillSuggestion}
           delimiters={delimiters}
           placeholder='Add skills...'
           handleDelete={i => handleDelete(i, 'skill')}
@@ -120,15 +174,13 @@ function ThirdSlide({ formData, setFormData }) {
           suggestionsPortalHost={CustomInput}
           inputComponent={CustomInput}
           suggestionsPortalZIndex={10}
+          handleInputChange={fetchSkills}
           autocomplete
-          value={formData.skills}
-          onChange={event =>
-            setFormData({ ...formData, skills: event.target.value })
-          }
+          
         />
-        {/* <ReactTags
+        <ReactTags
           tags={tagsDegrees}
-          suggestions={suggestions_degrees}
+          suggestions={degreeSuggestion}
           delimiters={delimiters}
           placeholder='Add degrees...'
           handleDelete={i => handleDelete(i, 'degree')}
@@ -138,17 +190,16 @@ function ThirdSlide({ formData, setFormData }) {
           inputFieldPosition='bottom'
           suggestionsPortalHost={CustomInput}
           inputComponent={CustomInput}
+          handleInputChange={fetchDegrees}
+
           suggestionsPortalZIndex={10}
           autocomplete
-          value={formData.degree}
-          onChange={event =>
-            setFormData({ ...formData, degree: event.target.value })
-          }
+        
           
         />
         <ReactTags
           tags={tagsLanguages}
-          suggestions={suggestions_languages}
+          suggestions={languageSuggestion}
           delimiters={delimiters}
           placeholder='Add languages...'
           handleDelete={i => handleDelete(i, 'language')}
@@ -158,12 +209,13 @@ function ThirdSlide({ formData, setFormData }) {
           inputFieldPosition='bottom'
           suggestionsPortalHost={CustomInput}
           inputComponent={CustomInput}
+          handleInputChange={fetchLanguages}
           suggestionsPortalZIndex={10}
           autocomplete
           value={formData.language}
           onChange={event =>
             setFormData({ ...formData, language: event.target.value })}
-        /> */}
+        />
 
         <select
           className='selectJob'
@@ -192,24 +244,7 @@ function ThirdSlide({ formData, setFormData }) {
             setFormData({ ...formData, skills: event.target.value })
           }
         /> */}
-        <input
-          className='newst'
-          type='text'
-          placeholder='Required Degree'
-          value={formData.degree}
-          onChange={event =>
-            setFormData({ ...formData, degree: event.target.value })
-          }
-        />
-        <input
-          className='newst'
-          type='text'
-          placeholder='Required Language'
-          value={formData.language}
-          onChange={event =>
-            setFormData({ ...formData, language: event.target.value })
-          }
-        />
+       
         <div className='btn-box'></div>
       </form>
     </div>

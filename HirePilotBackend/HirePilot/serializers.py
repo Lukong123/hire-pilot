@@ -92,3 +92,22 @@ class ApplicationSerializer(serializers.ModelSerializer):
         rep["job"] = {"id": job.id,
                       "title": job.title}
         return rep
+    
+class SkillSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Skills
+        fields = ('id', 'name')
+    
+
+class LanguageSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Language
+        fields = ('id', 'name')
+
+class DegreeSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Degree
+        fields = ('id', 'name')

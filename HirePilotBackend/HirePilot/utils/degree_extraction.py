@@ -4,14 +4,8 @@ import re
 from pdfminer.high_level import extract_text
 
 
-def extract_text_from_pdf(pdf_path):
-    return extract_text(pdf_path)
 
-
-def extract_degree(text):
-    nlp = spacy.load("en_core_web_sm")
-    text = text.replace("\n\nFinal", "").replace("\n\n", "").replace("\n", "")
-    education_degrees = [
+education_degrees = [
         "BS",
         "BSc",
         "BA",
@@ -38,6 +32,15 @@ def extract_degree(text):
         "Phd",
     ]
 
+
+def extract_text_from_pdf(pdf_path):
+    return extract_text(pdf_path)
+
+
+def extract_degree(text):
+    nlp = spacy.load("en_core_web_sm")
+    text = text.replace("\n\nFinal", "").replace("\n\n", "").replace("\n", "")
+    
     # defines a pattern for education degrees using regular expressions
     degree_pattern = re.compile(
         r"(?i)\b("

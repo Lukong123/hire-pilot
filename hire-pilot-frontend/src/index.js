@@ -17,7 +17,7 @@ import MyComponent from './Tables/testtable';
 import MyTest from './Tables/seetest';
 import MyComponecnt from './Tables/improvementfordisplaytable';
 import Tags from './Tags/Tags';
-
+import SignupChoice from './Modal/SignupChoice';
 
 
 export default function Appp() {
@@ -41,6 +41,8 @@ export default function Appp() {
         <Route paht='manytest' element= {<MyTest/>}/>
         <Route path='noo' element={<MyComponecnt />}/>
         <Route path='tag' element={<Tags />}/>
+        <Route path='/signupchoice' element={<SignupChoice />}/>
+
 
 
         

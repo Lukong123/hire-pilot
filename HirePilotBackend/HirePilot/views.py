@@ -1,13 +1,16 @@
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
-from rest_framework import viewsets
+from rest_framework import viewsets, generics
 from django.http import JsonResponse
 from rest_framework.views import APIView
+import json
 
 from HirePilot.utils.skill_extraction import extract_skills, extract_text_from_pdf, skills_database
-from HirePilot.utils.language_extraction import extract_language
-from HirePilot.utils.degree_extraction import extract_degree
+from HirePilot.utils.language_extraction import extract_language, known_languages
+from HirePilot.utils.degree_extraction import extract_degree, education_degrees
+from HirePilot.utils.ranking import calculate_similarity
+
 from .forms import ResumeForm
 from .models import Job, Resume,  Employer, Apply
 from .serializers import *
@@ -244,17 +247,30 @@ class ApplyViewset(ModelViewSet):
         return [permission() for permission in permission_classes]
 
 @api_view(['GET'])
-@permission_classes([permissions.IsAuthenticated])
+# @permission_classes([permissions.IsAuthenticated])
 def rank_application(request, pk):
+
+    def get_name(val):
+        return val['name']
+    
+
     if request.method == 'GET':
         job = get_object_or_404(Job, pk=pk)
-        job_applications = Apply.objects.filter(pk=pk)
+        job_applications = Apply.objects.filter(job=pk)
         application_vector_list = []
 
         for applications in job_applications:
-            application_dict = {"skills": set(applications.candidate_extracted_data["skills"]), "degree": set(applications.candidate_extracted_data["degree"]), "languages": set(applications.candidate_extracted_data["language"])}
+            extracted_data = json.loads(applications.candidate_extracted_data)
+
+            application_dict = {"application_id":applications.id, "skills": set(extracted_data["skills"]),"language": set(extracted_data["language"]), "degree": set(extracted_data["degree"]),}
+          
             application_vector_list.append(application_dict)
         
+        recruiter_vector = {"degree":set(map(get_name, job.degree.values())),"skills":set(map(get_name, job.skills.values())), "language":set(map(get_name, job.language.values()))}
+        print(len(application_vector_list))
+        scores = calculate_similarity(application_vector_list, recruiter_vector)
+        print(scores)
+        return Response("done")
         
 @api_view(['GET'])
 def skill_seeder(request):
@@ -262,5 +278,75 @@ def skill_seeder(request):
         s = Skills(name=skill)
         s.save()
     return Response("success")
+
+@api_view(['GET'])
+def language_seeder(request):
+    for language in known_languages:
+        l = Language(name=language)
+        l.save()
+    return Response("success")
+
+@api_view(['GET'])
+def degree_seeder(request):
+    for degree in education_degrees:
+        s = Degree(name=degree)
+        s.save()
+    return Response("success")
+
+@api_view(['GET','POST'])
+def skill_list(request):
+    if request.method == 'GET':
+        
+        search_key = request.GET.get("searchkey")
+        if search_key is None or len(search_key.rstrip()) == 0:
+            return Response([])
+        else:
+          filtered_skills =  Skills.objects.filter(name__icontains=search_key) 
+          serializer = SkillSerializer(filtered_skills, many=True)
+          return Response(serializer.data) 
+    
+    elif request.method == 'POST':
+        data = request.data
+        serializer = SkillSerializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+    
+@api_view(['GET','POST'])
+def degree_list(request):
+    if request.method == 'GET':
+        
+        search_key = request.GET.get("searchkey")
+        if search_key is None or len(search_key.rstrip()) == 0:
+            return Response([])
+        else:
+          filtered_degree =  Degree.objects.filter(name__icontains=search_key) 
+          serializer = DegreeSerializer(filtered_degree, many=True)
+          return Response(serializer.data) 
+    
+    elif request.method == 'POST':
+        data = request.data
+        serializer = DegreeSerializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+@api_view(['GET','POST'])
+def language_list(request):
+    if request.method == 'GET':
+        
+        search_key = request.GET.get("searchkey")
+        if search_key is None or len(search_key.rstrip()) == 0:
+            return Response([])
+        else:
+          filtered_language =  Language.objects.filter(name__icontains=search_key) 
+          serializer = LanguageSerializer(filtered_language, many=True)
+          return Response(serializer.data) 
+    
+    elif request.method == 'POST':
+        data = request.data
+        serializer = LanguageSerializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
 
             

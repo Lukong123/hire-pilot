@@ -70,7 +70,7 @@ function LoginCandidate(props) {
         </div>
         <div className="footer">
           <p className="donthaveaccount">
-            Don't yet have an account? <span> <a href="#create" className="create">Create Account</a></span>
+            Don't yet have an account? <span> <a href="/signupchoice" className="create">Create Account</a></span>
           </p>
         </div>
       </div>

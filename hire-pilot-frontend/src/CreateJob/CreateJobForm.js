@@ -29,7 +29,7 @@ function CreateJobForm() {
 
         skills:"",
         language:"",
-        degree:""
+        degree:[]
 
     });
 

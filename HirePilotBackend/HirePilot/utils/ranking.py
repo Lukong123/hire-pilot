@@ -3,6 +3,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 def calculate_similarity(candidates, recruiter):
 
     scores = []
+    len(candidates)
     for candidate in candidates:
     # candidate's feature vector
         candidate_vector = [
@@ -28,4 +29,4 @@ def calculate_similarity(candidates, recruiter):
 
         scores.append((candidate['application_id'], similarity_score))
 
-    return scores
+    return sorted(scores, key=lambda score:score[1])

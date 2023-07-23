@@ -13,4 +13,8 @@ admin.site.register(Job)
 admin.site.register(Apply)
 admin.site.register(Selection)
 admin.site.register(Skills)
+admin.site.register(Degree)
+admin.site.register(Language)
+
+
 

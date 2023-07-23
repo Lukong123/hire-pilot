@@ -32,16 +32,9 @@ INSTALLED_APPS = [
     "rest_framework",
     "crispy_forms",
     "authentication",
-    # "rest_framework_simplejwt",
-    # 'rest_auth',
-    # 'all_auth',
-    # 'allauth.account',
-    # 'allauth.socialaccount',
-    # 'rest_auth.registration',
+
     "rest_framework.authtoken",
-    # 'djoser',
-    # "users",
-    # 'HirePilot.apps.'
+ 
     'account',
 ]
 
