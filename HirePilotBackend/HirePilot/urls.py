@@ -28,6 +28,8 @@ urlpatterns = [
     path("languages/", views.language_list, name="language_list"),
     path("degrees/", views.degree_list, name="degree_list"),
     path("rank_application/<int:pk>/", views.rank_application, name="rank_application"),
+    path("plot/", views.get_similarity_scores, name="plot"),
+
 
 
 

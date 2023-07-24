@@ -19,6 +19,7 @@ import MyComponecnt from './Tables/improvementfordisplaytable';
 import Tags from './Tags/Tags';
 import SignupChoice from './Modal/SignupChoice';
 import Ranked from './Ranked/Ranked';
+import SimilarityScores from './Ranked/Similarity_Plot';
 
 
 export default function Appp() {
@@ -43,6 +44,8 @@ export default function Appp() {
         <Route path='tag' element={<Tags />}/>
         <Route path='/signupchoice' element={<SignupChoice />}/>
         <Route path='/rank/:jobId' element={<Ranked />}/>
+        <Route path='/plot' element={<SimilarityScores />}/>
+
 
 
 

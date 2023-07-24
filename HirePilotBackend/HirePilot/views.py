@@ -10,6 +10,15 @@ from HirePilot.utils.skill_extraction import extract_skills, extract_text_from_p
 from HirePilot.utils.language_extraction import extract_language, known_languages
 from HirePilot.utils.degree_extraction import extract_degree, education_degrees
 from HirePilot.utils.ranking import calculate_similarity
+from HirePilot.utils.phone_number_extraction import extract_mobile_number
+from HirePilot.utils.email_extraction import extract_emails 
+from HirePilot.utils.bar_chart import plot_similarity_scores
+import base64
+import io
+from django.http import HttpResponse
+
+
+
 
 from .forms import ResumeForm
 from .models import Job, Resume,  Employer, Apply
@@ -23,6 +32,8 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.conf import settings
 import json
 from .permissions import *
+import matplotlib.pyplot as plt
+
 
 
 @api_view(["GET"])
@@ -189,6 +200,8 @@ class ApplyViewset(ModelViewSet):
         skills = extract_skills(text)
         languages = extract_language(text)
         degree = extract_degree(text)
+        emails = extract_emails(text)
+        phone = extract_mobile_number(text)
 
         keys = ['degree', 'language', 'skills']
         candidate_values = [degree, languages, skills]
@@ -209,6 +222,9 @@ class ApplyViewset(ModelViewSet):
                     "skills": list(skills),
                     "language": list(languages),
                     "degree": list(degree),
+                    "emails": list(emails),
+                    # "phone": list(phone),
+                    "phone": list(phone) if phone is not None else None,
                     "location": None,
                 }
             )
@@ -255,7 +271,6 @@ def rank_application(request, pk):
 
     def get_name(val):
         return val['name']
-    
 
     if request.method == 'GET':
         job = get_object_or_404(Job, pk=pk)
@@ -264,26 +279,31 @@ def rank_application(request, pk):
 
         for applications in job_applications:
             print(type(applications.candidate_extracted_data))
-            extracted_data = json.loads(applications.candidate_extracted_data)
+            if applications.candidate_extracted_data is not None:
+                extracted_data = json.loads(applications.candidate_extracted_data)
 
-            application_dict = {"application_id":applications.id, "skills": set(extracted_data["skills"]),"language": set(extracted_data["language"]), "degree": set(extracted_data["degree"]),}
-          
-            application_vector_list.append(application_dict)
+                application_dict = {"application_id":applications.id, "skills": set(extracted_data["skills"]),"language": set(extracted_data["language"]), "degree": set(extracted_data["degree"]),}
+              
+                application_vector_list.append(application_dict)
         
         recruiter_vector = {"degree":set(map(get_name, job.degree.values())),"skills":set(map(get_name, job.skills.values())), "language":set(map(get_name, job.language.values()))}
         scores = calculate_similarity(application_vector_list, recruiter_vector)
         sorted_scores = sorted(scores, key=lambda x: x[1], reverse=True)
         
         result = []
-        for score in sorted_scores:
+        rank = 1
+        prev_score = None
+        for i, score in enumerate(sorted_scores):
             application_id = score[0]
-            # applicant_name = Apply.objects.get(id=application_id).candidate_name
+            phone = extracted_data["phone"]
+            emails = extracted_data["emails"]
             applicant_name = Apply.objects.get(id=application_id).candidate.username
             similarity_score = score[1]
-            result.append({"application_id": application_id, "applicant_name": applicant_name,"similarity_score": similarity_score})
+            rank = rank if prev_score == similarity_score else i + 1
+            prev_score = similarity_score
+            result.append({"rank": rank, "application_id": application_id, "applicant_name": applicant_name, "emails":emails,"phone":phone, "similarity_score": similarity_score})
         
-        return Response(result)
-        
+        return Response(result)        
 @api_view(['GET'])
 def skill_seeder(request):
     for skill in skills_database:
@@ -362,3 +382,30 @@ def language_list(request):
 
 
             
+@api_view(['GET'])
+def get_similarity_scores(request):
+
+  # get results
+  results = [
+      {'applicant_name': 'John Doe', 'similarity_score': 0.85},
+    {'applicant_name': 'Jane Smith', 'similarity_score': 0.65},
+    {'applicant_name': 'Bob Johnson', 'similarity_score': 0.55}
+  ] # populate this
+  
+  similarity_scores = []
+  candidate_names = []
+
+  for result in results:
+    candidate_names.append(result['applicant_name']) 
+    similarity_scores.append(result['similarity_score'])
+
+  # generate plot
+  fig = plot_similarity_scores(candidate_names, similarity_scores)
+  
+  # save plot as image
+  img_file = io.BytesIO()
+  fig.savefig(img_file, format='png')
+  img_file.seek(0)
+  img_data = base64.b64encode(img_file.read())
+
+  return HttpResponse(img_data, content_type='image/png')

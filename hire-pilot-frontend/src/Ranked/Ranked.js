@@ -6,9 +6,15 @@ function Ranked(props) {
   const [applications, setApplications] = useState([]);
   const { jobId } = useParams();
 
+const config = {
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${localStorage.getItem('token')}` // replace with your actual token
+  }
+};
   useEffect(() => {
     // http://localhost:8000/HirePilot/rank_application/1/
-    axios.get(`http://localhost:8000/HirePilot/rank_application/${ jobId }/`)
+    axios.get(`http://localhost:8000/HirePilot/rank_application/${ jobId }/`,config)
       .then(response => {
         setApplications(response.data);
       })
@@ -24,7 +30,12 @@ function Ranked(props) {
         <thead>
           <tr>
             <th>Application ID</th>
+            <th>Rank</th>
+
             <th>Applicant Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+
             <th>Similarity Score</th>
           </tr>
         </thead>
@@ -32,7 +43,11 @@ function Ranked(props) {
           {applications.map(application => (
             <tr key={application.application_id}>
               <td>{application.application_id}</td>
+              <td>{application.rank}</td>
+
               <td>{application.applicant_name}</td>
+              <td>{application.emails.join(", ")}</td>
+              <td>{application.phone ? application.phone : "-"}</td>
               <td>{application.similarity_score}</td>
             </tr>
           ))}
