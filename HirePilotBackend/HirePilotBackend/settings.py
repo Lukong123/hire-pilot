@@ -27,7 +27,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "HirePilot",
     "corsheaders",
     "rest_framework",
     "crispy_forms",
@@ -36,6 +35,7 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
  
     'account',
+    "HirePilot",
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"

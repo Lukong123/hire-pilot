@@ -5,6 +5,7 @@ from rest_framework import viewsets, generics
 from django.http import JsonResponse
 from rest_framework.views import APIView
 import json
+from rest_framework.request import Request
 
 from HirePilot.utils.skill_extraction import extract_skills, extract_text_from_pdf, skills_database
 from HirePilot.utils.language_extraction import extract_language, known_languages
@@ -16,6 +17,7 @@ from HirePilot.utils.bar_chart import plot_similarity_scores
 import base64
 import io
 from django.http import HttpResponse
+from django.http import HttpRequest
 
 
 
@@ -172,6 +174,58 @@ class JobViewset(ModelViewSet):
             permission_classes = [permissions.IsAuthenticated]
         
         return [permission() for permission in permission_classes]
+    
+
+    def create(self, request:Request, *args, **kwargs):
+        
+        data = request.data
+
+        skills = data.pop('skills')
+        languages= data.pop('language')
+        degrees = data.pop('degree')
+
+        # extract skills, languages and degrees which
+        # have are not in db and save them in db
+
+        unregistered_skills = {skill for skill in skills if not str(skill).isnumeric()}
+        unregistered_languages = {language for language in languages if not str(language).isnumeric()}
+        unregistered_degrees = {degree for degree in degrees if not str(degree).isnumeric()}
+
+        registered_skills = list(set(skills).difference(unregistered_skills))
+        registered_languages = list (set(languages).difference(unregistered_languages))
+        registered_degrees =  list(set(degrees).difference(unregistered_degrees))
+
+
+        for skill in unregistered_skills:
+           new_skill = Skills(name=skill)
+           new_skill.save()
+           registered_skills.append(new_skill.id)
+        
+        for language in unregistered_languages:
+           new_language = Language(name=language)
+           new_language.save()
+           registered_languages.append(new_language.id)
+        
+        for degree in unregistered_degrees:
+            new_degree = Degree(name=degree)
+            new_degree.save()
+            registered_degrees.append(new_degree.id)
+        
+        # set updated skills, degrees and languages in post data before passing to serializer
+
+        data['skills'] = sorted(registered_skills)
+        data['degree'] = sorted(registered_degrees)
+        data['language'] = sorted(registered_languages)
+
+        serializer = JobsSerializer(data=data)
+
+        serializer.is_valid(raise_exception=True)
+
+        serializer.save()
+
+        return Response(serializer.data, status=201)
+
+
     
 
 # Apply
