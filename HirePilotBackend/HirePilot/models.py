@@ -64,11 +64,20 @@ class Skills(models.Model):
     name = models.CharField(max_length=20)
     text = models.CharField(max_length=2)
 
+    def __str__(self) -> str:
+        return self.name
+
 class Language(models.Model):
     name = models.CharField(max_length=20)
 
+    def __str__(self) -> str:
+        return self.name
+
 class Degree(models.Model):
     name = models.CharField(max_length=20)
+
+    def __str__(self) -> str:
+        return self.name
 #  Job modelcompany
 
 
@@ -155,5 +164,3 @@ class Selection(models.Model):
     experience = models.CharField(max_length=200)
     language = models.CharField(max_length=200)
     age = models.CharField(max_length=200)
-
-
